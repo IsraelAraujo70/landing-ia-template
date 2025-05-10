@@ -1,0 +1,1075 @@
+[04/06/2024, 10:47:32] Amanda - AVANT: ‎As mensagens e ligações são protegidas com a criptografia de ponta a ponta. Somente as pessoas que fazem parte da conversa podem ler, ouvir e compartilhar esse conteúdo.
+[04/06/2024, 10:47:31] Amanda - AVANT: Oi Karen, boa tardr
+[04/06/2024, 10:47:36] Amanda - AVANT: Ops bom dia
+[04/06/2024, 10:47:42] Ada Sistemas: Ola, bom dia
+[04/06/2024, 10:47:55] Amanda - AVANT: Qdo faço a liberaçao de um pedido errado
+[04/06/2024, 10:48:04] Amanda - AVANT: Como faço p desliberar
+[04/06/2024, 10:48:14] Amanda - AVANT: E voltar p liberaçao
+[04/06/2024, 10:49:08] Ada Sistemas: infelizmente não existe uma forma de desliberar um pedido
+[04/06/2024, 10:49:45] Ada Sistemas: mas pode cancelar o pedido e realizar uma cópia desse pedido, altera-lo e então liberar ele de forma correta
+[04/06/2024, 10:50:22] Amanda - AVANT: Entendi
+[04/06/2024, 10:52:13] Ada Sistemas: gostaria de ajuda para realizar o processo ?
+[04/06/2024, 10:55:12] Amanda - AVANT: Eu programei a entrega com o rapaz q monta as rotas
+[04/06/2024, 10:55:23] Amanda - AVANT: Ai ele ja sabe q pode liberar só na quinta
+[04/06/2024, 10:55:27] Amanda - AVANT: Obrogadaa
+[04/06/2024, 10:55:44] Ada Sistemas: Por nada!
+[05/06/2024, 09:36:09] Amanda - AVANT: Oi Karen bom dia
+[05/06/2024, 09:36:16] Ada Sistemas: ola, bom dia
+[05/06/2024, 09:36:19] Ada Sistemas: tudo bem?
+[05/06/2024, 09:36:29] Amanda - AVANT: poderia confirmar se realmente foi retirados as instruçoes de protestos dos boletos?
+[05/06/2024, 09:36:36] Amanda - AVANT: ta protestndo tudo mesu clientes
+[05/06/2024, 09:36:55] Amanda - AVANT: os dos mês 4 tudo bem...agora boleto emitido no m~ES 05
+[05/06/2024, 09:37:01] Amanda - AVANT: TA INDO P PROTESTO
+[05/06/2024, 09:37:05] Amanda - AVANT: ta me ferrando
+[05/06/2024, 09:38:42] Ada Sistemas: estamos verificando aqui, precisamos colocar um limite de dias para protesto, quanto voce recomenda ?
+[05/06/2024, 09:39:08] Amanda - AVANT: eu não protetso nenhum cliente
+[05/06/2024, 09:39:19] Amanda - AVANT: eu preciso que tire isso ugentemente
+[05/06/2024, 09:39:23] Amanda - AVANT: eu ja pedi faz tempo
+[05/06/2024, 09:39:34] Amanda - AVANT: ‎Mensagem apagada
+[05/06/2024, 09:39:45] Amanda - AVANT: EU NÃO PROTESTO CLIENTE AUTOMATICAMENTEEE
+[05/06/2024, 09:40:40] Amanda - AVANT: Confere se foi retirado por favor
+[05/06/2024, 09:41:48] Ada Sistemas: a negativação no banco, voces fazem ?
+[05/06/2024, 09:43:08] Amanda - AVANT: como assim?
+[05/06/2024, 09:43:27] Ada Sistemas: manda para o serasa ?
+[05/06/2024, 09:43:34] Amanda - AVANT: eu faço
+[05/06/2024, 09:43:46] Amanda - AVANT: não mando p serasa
+[05/06/2024, 09:44:05] Amanda - AVANT: eu mando protestar cliente em ultimo caso manualmente
+[05/06/2024, 09:46:09] Ada Sistemas: alteramos os parametros para não negativar nem protestar, poderia conferir em algum boleto se está indo a observação  de sujeito a protesto
+[05/06/2024, 09:47:01] Amanda - AVANT: pq não fizeram qdo eu pedi?
+[05/06/2024, 09:47:16] Amanda - AVANT: na minha cabeça ja estava tudo certo
+[05/06/2024, 09:47:22] Amanda - AVANT: um monte de cliente protestado
+[05/06/2024, 09:47:27] Amanda - AVANT: oq eu faço?
+[05/06/2024, 09:47:39] Amanda - AVANT: eu pedi p tirarem dia 15/05 tenho as msg solicitando
+[05/06/2024, 09:47:44] Amanda - AVANT: pq não fizeram?
+[05/06/2024, 09:47:50] Amanda - AVANT: vc me respondeu que tinha tirado
+[05/06/2024, 09:48:01] Amanda - AVANT: eu quero uma explicação
+[05/06/2024, 09:49:03] Amanda - AVANT: isso é muito grave
+[05/06/2024, 09:53:13] Ada Sistemas: eu peço desculpas, foi um erro meu eu alterei uma parte mas deixei um ponto de alteração sem, de hoje em diante não irá acontecer
+[10/06/2024, 09:11:08] Ada Sistemas: Bom dia, tudo bem? o vendedor 4704 (ARIOVALDO FERNANDO SECCO) está tentando enviar um pedido que tem o item 2138 que está com o valor de venda zerado, e está dando erro aqui pra gente, ele não está conseguindo enviar por conta desse item
+[12/06/2024, 10:07:22] Amanda - AVANT: Oi Kaen, bom dia
+[12/06/2024, 10:07:34] Amanda - AVANT: eu consigo bloquear um cliente financeiramente?
+[12/06/2024, 10:07:36] Ada Sistemas: Bom dia!
+[12/06/2024, 10:08:18] Ada Sistemas: poderia me passar o codigo do cliente ou cnpj ?
+[12/06/2024, 10:08:43] Amanda - AVANT: SIM
+[12/06/2024, 10:08:50] Amanda - AVANT: 2511
+[12/06/2024, 10:09:09] Amanda - AVANT: ele ta devendo no sistema antigo, ai queria bloquear ele p eu não liberar pedido
+[12/06/2024, 10:13:27] Ada Sistemas: modifique o limite de crédito para 0,01, mantenha o modo de pagamento em BOLETO, e toda vez que ele fizer um pedido, vai passar pela liberação de pedido, e voce consegue bloquear
+‎[12/06/2024, 10:14:39] Ada Sistemas: ‎imagem ocultada
+[12/06/2024, 10:14:43] Amanda - AVANT: e se eu não quiser q o vendedor passe nem pedido.....tem jeito?
+‎[12/06/2024, 10:15:46] Ada Sistemas: ‎imagem ocultada
+[12/06/2024, 10:16:12] Ada Sistemas: que ai o vendedor nem vai ver esse cliente
+[12/06/2024, 10:26:03] Ada Sistemas: deu certo?
+[12/06/2024, 10:27:03] Amanda - AVANT: Ahh ta bom......eu vou pensar oq fazer...obrigada
+[12/06/2024, 10:27:13] Ada Sistemas: por nada
+‎[21/06/2024, 13:37:16] Ada Sistemas: ‎imagem ocultada
+[25/06/2024, 15:45:40] Amanda - AVANT: Oi Karen boa tarde
+[25/06/2024, 15:45:56] Amanda - AVANT: Qual o caminho para eu puxar um relatório de valor de estoque?
+[25/06/2024, 16:06:50] Ada Sistemas: Oi, tudo bem e voce?
+[26/06/2024, 08:40:14] Amanda - AVANT: Oi Karen bom dia
+[26/06/2024, 08:40:27] Amanda - AVANT: te um retorno do banco Itau que o sistema não liquida os boletos
+‎[26/06/2024, 08:40:29] Amanda - AVANT: ‎imagem ocultada
+[26/06/2024, 08:40:42] Ada Sistemas: Bom dia!
+[26/06/2024, 08:41:06] Amanda - AVANT: ‎Mensagem apagada
+‎[26/06/2024, 08:41:56] Amanda - AVANT: ‎imagem ocultada
+‎[26/06/2024, 08:50:43] Ada Sistemas: ‎imagem ocultada
+‎[26/06/2024, 08:53:28] Ada Sistemas: ‎imagem ocultada
+[26/06/2024, 08:54:07] Amanda - AVANT: mas isso seria liquidação manual
+[26/06/2024, 08:54:15] Amanda - AVANT: eu faço o retorno do aruivo todo sto dia
+[26/06/2024, 08:54:24] Amanda - AVANT: o Marcelo pediu p eu mandar o arquivo p ele ver
+[26/06/2024, 08:55:33] Ada Sistemas: poderia enviar esse arquivo por favor
+[28/06/2024, 12:51:16] Amanda - AVANT: Oi Karen, boa tarde
+[28/06/2024, 13:04:28] Ada Sistemas: Boa tarde!
+[28/06/2024, 13:04:31] Ada Sistemas: Tudo bem ?
+[28/06/2024, 13:28:48] Amanda - AVANT: Oiiii
+[28/06/2024, 13:29:04] Amanda - AVANT: to tentando fazer uma nota de simples remessa mas não to conseguindo
+[28/06/2024, 13:29:20] Amanda - AVANT: eu preciso puxar uma nota de entrada p fazer a de simples?
+[28/06/2024, 13:31:32] Ada Sistemas: poderia me informar qual o produto e em que tela voce está fazendo a nota por favor
+‎[28/06/2024, 13:31:56] Amanda - AVANT: ‎imagem ocultada
+‎[28/06/2024, 13:32:10] Amanda - AVANT: ‎imagem ocultada
+[28/06/2024, 13:32:15] Amanda - AVANT: esse é o produto
+[28/06/2024, 13:36:29] Amanda - AVANT: ?
+‎[28/06/2024, 13:36:40] Ada Sistemas: ‎imagem ocultada
+[28/06/2024, 13:36:57] Ada Sistemas: é isso que voce precisa ?
+[28/06/2024, 13:36:59] Amanda - AVANT: a noat ta saindo com data do dia 06/06
+[28/06/2024, 13:37:08] Amanda - AVANT: e a quantidade seria 111 e não 135
+‎[28/06/2024, 13:38:02] Ada Sistemas: ‎imagem ocultada
+[28/06/2024, 13:38:31] Amanda - AVANT: num teria q sair com a data de hj?
+[28/06/2024, 13:38:58] Amanda - AVANT: eu preciso devolver esses pallets p empresa
+[28/06/2024, 13:39:20] Ada Sistemas: então teria que excluir essa nota e refaze-la
+[28/06/2024, 13:39:32] Amanda - AVANT: não ta excluindo
+[28/06/2024, 13:39:56] Ada Sistemas: apareceu algum alerta de erro ?
+‎[28/06/2024, 13:39:58] Amanda - AVANT: ‎imagem ocultada
+[28/06/2024, 13:41:17] Amanda - AVANT: pq a quantidade não saiu correta?
+[28/06/2024, 13:43:29] Ada Sistemas: estamos verificando já retornamos
+[28/06/2024, 13:46:54] Amanda - AVANT: ta bom
+[08/07/2024, 09:08:47] Amanda - AVANT: Oi Karen, bom dia
+[08/07/2024, 09:09:18] Amanda - AVANT: qual relatório posso consultar para verificar o preço unitario que o vendedor colocou no pedido
+[08/07/2024, 09:10:29] Ada Sistemas: Oi, bom dia! Tudo bem ?
+[08/07/2024, 09:11:06] Ada Sistemas: poderia me passar o número do pedido ?
+[08/07/2024, 09:11:46] Amanda - AVANT: 5868
+[08/07/2024, 09:13:55] Amanda - AVANT: queria ver o valor por item
+‎[08/07/2024, 09:15:32] Ada Sistemas: ‎imagem ocultada
+‎[08/07/2024, 09:17:18] Ada Sistemas: ‎imagem ocultada
+[08/07/2024, 09:18:01] Amanda - AVANT: eu fui nesse relatorio
+[08/07/2024, 09:18:08] Amanda - AVANT: mas aparece o valor do item sem o desconto
+[08/07/2024, 09:21:00] Amanda - AVANT: preciso saber o valor de venda do item
+‎[08/07/2024, 09:33:32] Ada Sistemas: ‎imagem ocultada
+[08/07/2024, 09:38:22] Ada Sistemas: estamos com um problema no relatorio quando vai para o excel, poderia aguardar um momento enquanto corrigimos por favor
+[08/07/2024, 09:38:57] Amanda - AVANT: posso sim
+[08/07/2024, 09:54:40] Ada Sistemas: Corrigimos o problema, pode baixar o relatorio para excel
+[08/07/2024, 09:55:25] Ada Sistemas: Poderia dar um F5 para atualizar a pagina também por favor
+[08/07/2024, 10:09:33] Ada Sistemas: conseguiu ?
+[08/07/2024, 10:10:20] Amanda - AVANT: vou fazer daqui a pouco e te aviso
+[08/07/2024, 10:10:30] Ada Sistemas: Perfeito!
+‎[08/07/2024, 11:26:19] Ada Sistemas: ‎imagem ocultada
+[08/07/2024, 16:22:26] Amanda - AVANT: Karen
+[08/07/2024, 16:22:28] Amanda - AVANT: Boa tarde
+[08/07/2024, 16:22:35] Amanda - AVANT: eu to tentando fazer uma nota de venda
+[08/07/2024, 16:22:40] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:22:44] Amanda - AVANT: de um ativo imobilizado
+[08/07/2024, 16:22:50] Amanda - AVANT: mas eu não to conseguindo gerar
+‎[08/07/2024, 16:23:01] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:23:11] Amanda - AVANT: eu salvei a nota
+[08/07/2024, 16:24:30] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:24:41] Amanda - AVANT: não
+‎[08/07/2024, 16:25:12] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:28:06] Amanda - AVANT: num ta dando p imprimir a nota né
+‎[08/07/2024, 16:28:24] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:28:29] Amanda - AVANT: pq a chave ja gerou
+[08/07/2024, 16:30:47] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:30:52] Amanda - AVANT: ta
+[08/07/2024, 16:31:43] Amanda - AVANT: feito
+[08/07/2024, 16:32:30] Amanda - AVANT: e agora?
+[08/07/2024, 16:32:37] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:32:43] Amanda - AVANT: isso
+[08/07/2024, 16:33:23] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:33:38] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:34:03] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:34:21] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+‎[08/07/2024, 16:34:27] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:34:34] Amanda - AVANT: deu esse erro
+[08/07/2024, 16:34:58] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:35:08] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:35:24] Amanda - AVANT: enviar NFe
+[08/07/2024, 16:35:29] Amanda - AVANT: ai aparece esse erro
+[08/07/2024, 16:36:08] Amanda - AVANT: vou cancelar então
+[08/07/2024, 16:36:39] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:37:07] Amanda - AVANT: achei estraho q puxou numeração da nota 1
+[08/07/2024, 16:37:29] Amanda - AVANT: eu tava fazendo no local certo?
+[08/07/2024, 16:38:03] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:38:14] Amanda - AVANT: vou fazer novamente
+[08/07/2024, 16:39:48] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:40:14] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:41:09] Amanda - AVANT: Eu preciso fazer essa nota urgente
+[08/07/2024, 16:41:17] Amanda - AVANT: vai ficar com essa natureza mesmo
+[08/07/2024, 16:41:27] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:42:08] Amanda - AVANT: ja preenchi tudo novamente
+[08/07/2024, 16:42:17] Amanda - AVANT: agora clico em enviar nfe
+[08/07/2024, 16:42:20] Amanda - AVANT: né?
+[08/07/2024, 16:42:32] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+‎[08/07/2024, 16:42:44] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:42:44] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:43:26] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:44:52] Amanda - AVANT: não ta dando certo
+[08/07/2024, 16:45:18] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+‎[08/07/2024, 16:49:45] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 16:49:47] Amanda - AVANT: DEU O MESMO ERRO
+[08/07/2024, 16:52:15] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:52:27] Amanda - AVANT: ta bom
+[08/07/2024, 16:57:06] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 16:59:07] Amanda - AVANT: não sei onde cria
+[08/07/2024, 16:59:55] Amanda - AVANT: a Marcella ja foi embora
+[08/07/2024, 17:00:37] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:02:16] Amanda - AVANT: vou fazer
+[08/07/2024, 17:03:05] Amanda - AVANT: FEITO
+[08/07/2024, 17:03:32] Amanda - AVANT: E AGORA
+[08/07/2024, 17:04:17] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:04:37] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+‎[08/07/2024, 17:05:25] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:05:31] Amanda - AVANT: não ta aparecendo na operação
+‎[08/07/2024, 17:05:59] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:06:04] Amanda - AVANT: eu fiz e salvei
+[08/07/2024, 17:06:20] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:06:29] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:07:06] Amanda - AVANT: coloquei
+[08/07/2024, 17:07:16] Amanda - AVANT: agora eu vou no mesmo lugar e faço o processo?
+[08/07/2024, 17:07:56] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:08:04] Amanda - AVANT: ta
+[08/07/2024, 17:10:55] Amanda - AVANT: pronto
+[08/07/2024, 17:11:33] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:11:43] Amanda - AVANT: PREENCHI TUDO
+[08/07/2024, 17:12:01] Amanda - AVANT: 34770
+[08/07/2024, 17:12:08] Amanda - AVANT: SALVEI A NOTA
+[08/07/2024, 17:12:23] Amanda - AVANT: AGORA EU LANÇO OS MOVIMENTOS?
+[08/07/2024, 17:12:33] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:12:37] Amanda - AVANT: ta
+[08/07/2024, 17:12:58] Amanda - AVANT: agora eu valido?
+[08/07/2024, 17:13:50] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:13:59] Amanda - AVANT: ta
+‎[08/07/2024, 17:14:26] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:14:34] Amanda - AVANT: ta dando esse erro de pagamento
+[08/07/2024, 17:14:53] Amanda - AVANT: é a vista
+[08/07/2024, 17:17:43] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:17:56] Amanda - AVANT: ta
+[08/07/2024, 17:18:05] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:19:00] Amanda - AVANT: ok
+[08/07/2024, 17:20:52] Amanda - AVANT: eu preencho o titulo ou deixo em branco?
+[08/07/2024, 17:21:05] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:21:17] Amanda - AVANT: coloco a data de hj mesmo né?
+[08/07/2024, 17:22:06] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:22:10] Amanda - AVANT: ta
+[08/07/2024, 17:23:43] Amanda - AVANT: 34771
+[08/07/2024, 17:23:53] Amanda - AVANT: PODE CONTINUAR?
+[08/07/2024, 17:24:06] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:24:13] Amanda - AVANT: TA
+[08/07/2024, 17:25:58] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:26:12] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:26:28] Amanda - AVANT: EU COOQUEI A CHAVE
+[08/07/2024, 17:26:35] Amanda - AVANT: da nota referenciada
+[08/07/2024, 17:26:45] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:26:59] Amanda - AVANT: 305.116
+[08/07/2024, 17:27:02] Amanda - AVANT: a entrada
+[08/07/2024, 17:27:38] Amanda - AVANT: excluo e adiciono novamente?
+[08/07/2024, 17:29:24] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:29:35] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:29:43] Amanda - AVANT: não entendi
+[08/07/2024, 17:29:53] Amanda - AVANT: eu preciso fazer um titulo avulso?
+[08/07/2024, 17:30:51] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:30:55] Amanda - AVANT: ta
+[08/07/2024, 17:32:10] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:32:13] Amanda - AVANT: precisa cadastrar um tipo financeiro?
+‎[08/07/2024, 17:32:24] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:32:31] Amanda - AVANT: ou posso colocar venda de produto?
+[08/07/2024, 17:32:46] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:33:19] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:33:27] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:34:12] Amanda - AVANT: ok
+[08/07/2024, 17:35:56] Amanda - AVANT: não tem esse botao
+‎[08/07/2024, 17:36:06] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:36:52] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+‎[08/07/2024, 17:37:07] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:37:39] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:37:59] Amanda - AVANT: ahh sim
+[08/07/2024, 17:38:35] Amanda - AVANT: consegui
+‎[08/07/2024, 17:38:47] Amanda - AVANT: ‎imagem ocultada
+[08/07/2024, 17:39:02] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:39:20] Amanda - AVANT: agora faço o processo de validação e envio?
+[08/07/2024, 17:39:52] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:39:56] Amanda - AVANT: ta
+[08/07/2024, 17:40:07] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:40:16] Amanda - AVANT: que alegria
+[08/07/2024, 17:40:25] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:40:25] Amanda - AVANT: muito obrigada Karen, desculpa o trabalho
+[08/07/2024, 17:40:38] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:41:21] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[08/07/2024, 17:41:26] Amanda - AVANT: P vc tb
+[11/07/2024, 12:05:09] Amanda - AVANT: Oi Karen bom dia
+‎[11/07/2024, 12:05:13] Amanda - AVANT: ‎imagem ocultada
+[11/07/2024, 12:05:22] Amanda - AVANT: consigo colocar a opção de pix na quitação?
+[11/07/2024, 12:59:06] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 12:59:24] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 13:03:32] Amanda - AVANT: mas eu tenho as duas entradas
+[11/07/2024, 13:03:36] Amanda - AVANT: vai ficar errado
+[11/07/2024, 13:03:42] Amanda - AVANT: quero colocar certo
+[11/07/2024, 13:03:49] Amanda - AVANT: pix é pix e dinheiro é dinheiro
+[11/07/2024, 13:04:00] Amanda - AVANT: um entra no banco e o outro no caixinha
+[11/07/2024, 13:04:43] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 13:06:10] Amanda - AVANT: sistema engessado demais
+[11/07/2024, 13:06:30] Amanda - AVANT: tudo bem eu coloco observação
+[11/07/2024, 13:06:53] Amanda - AVANT: não dá p cadastrar uma forma de quitação
+[11/07/2024, 13:07:14] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 13:07:45] Amanda - AVANT: ok
+[11/07/2024, 13:08:03] Amanda - AVANT: ‎Mensagem apagada
+[11/07/2024, 13:08:08] Amanda - AVANT: 👍
+[11/07/2024, 14:41:07] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 14:42:59] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[11/07/2024, 14:43:21] Ada Sistemas: ‎Aguardando mensagem. Essa ação pode levar alguns instantes.
+[22/07/2024, 11:39:18] Amanda - AVANT: Oi Karen bom dia
+[22/07/2024, 11:39:36] Amanda - AVANT: como faço para fazer conciliação bancaria pelo sistema?
+[22/07/2024, 11:39:45] Ada Sistemas: Oi, bom dia!
+[22/07/2024, 11:40:03] Ada Sistemas: pode me dar mais detalhes por favor
+‎[22/07/2024, 11:40:20] Amanda - AVANT: ‎imagem ocultada
+[22/07/2024, 11:40:33] Amanda - AVANT: aqui em conta corrente tem a opção do extrato
+[22/07/2024, 11:40:43] Amanda - AVANT: como faço p importar as informações?
+[22/07/2024, 11:43:34] Ada Sistemas: então voce deseja pegar as informações anteriores e trazer para o nosso sistema ?
+[22/07/2024, 11:44:11] Amanda - AVANT: Não
+[22/07/2024, 11:44:23] Amanda - AVANT: eu queroa começar de agora
+[22/07/2024, 11:44:47] Amanda - AVANT: não tem como fazer conciliação bancaria pelo sistema?
+[22/07/2024, 11:45:50] Ada Sistemas: vou verificar para voce e te retorno
+[22/07/2024, 11:46:42] Amanda - AVANT: ta bom...obrigada
+[22/07/2024, 11:48:01] Ada Sistemas: poderia adicionar uma data nos campos de Data Inicial e Final e clicar no botão de play para verificar se está proximo do que voce precisa por favor
+[22/07/2024, 11:49:25] Amanda - AVANT: vou ver
+[22/07/2024, 14:42:27] Ada Sistemas: deu certo ?
+[23/07/2024, 10:53:27] Ada Sistemas: Bom dia Amanda!
+[23/07/2024, 10:53:52] Ada Sistemas: O relatorio de extrato te ajudou ?
+[24/07/2024, 15:59:51] Amanda - AVANT: Oi Karen, bom dia
+[24/07/2024, 15:59:55] Amanda - AVANT: opa boa tarde
+‎[24/07/2024, 16:00:05] Amanda - AVANT: ‎imagem ocultada
+[24/07/2024, 16:00:09] Ada Sistemas: Boa tarde!
+[24/07/2024, 16:00:20] Amanda - AVANT: onde q eu faço os lançamentos de cheques p q apareçam nessa tela?
+[24/07/2024, 16:05:39] Ada Sistemas: nas tela de titulos, quando o titulo é a pagar, a forma de pagamento na quitação do titulo seria por cheque
+[24/07/2024, 16:06:06] Ada Sistemas: em que apareceria nesse relatorio pois foi um cheque emitido pela empresa para pagar algo
+[24/07/2024, 16:12:48] Amanda - AVANT: ahh ta bom
+[24/07/2024, 16:12:50] Amanda - AVANT: obrigada
+[24/07/2024, 16:13:38] Ada Sistemas: Por nada!
+[24/07/2024, 16:13:44] Ada Sistemas: tenha uma boa tarde!
+[07/08/2024, 15:02:16] Amanda - AVANT: Oi Dilan, boa tarde
+[07/08/2024, 15:02:21] Amanda - AVANT: Amanda da Avant
+[07/08/2024, 15:02:34] Ada Sistemas: Oi Amanda, boa tarde!
+[07/08/2024, 15:02:36] Amanda - AVANT: eu consigo fazer conciliação bancaria pelo sistema?
+[07/08/2024, 15:12:47] Ada Sistemas: não consegue
+[07/08/2024, 15:14:01] Amanda - AVANT: tem q lançar tudo manual?
+[07/08/2024, 15:17:51] Ada Sistemas: é so verificar o saldo na conta corrente no sistema com o do banco, porque a liquidação de um título lança direto no banco, então quando voce faz a liquidação de um título, realiza a transação no banco direto
+[07/08/2024, 15:18:52] Amanda - AVANT: onde eu entro p colocar o saldo da conta?
+‎[07/08/2024, 15:24:23] Ada Sistemas: ‎imagem ocultada
+[07/08/2024, 15:25:29] Amanda - AVANT: vou ver
+[07/08/2024, 15:25:36] Ada Sistemas: perfeito!
+[07/08/2024, 15:29:21] Ada Sistemas: qualquer dúvida pode entrar em contato!
+[16/08/2024, 14:38:44] Amanda - AVANT: Boa tarde
+[16/08/2024, 14:39:04] Amanda - AVANT: esse cliente está devendo, mas na liberação de pedido estão como não estivesse
+‎[16/08/2024, 14:39:08] Amanda - AVANT: ‎imagem ocultada
+‎[16/08/2024, 14:39:14] Amanda - AVANT: ‎imagem ocultada
+[16/08/2024, 14:41:31] Ada Sistemas: Boa tarde!
+[16/08/2024, 14:42:15] Ada Sistemas: Vou verificar e te retorno
+[16/08/2024, 14:54:27] Amanda - AVANT: ta ok
+[16/08/2024, 15:27:31] Ada Sistemas: verifiquei aqui e ontem foi feriado na cidade Jundiai, então ele tem até hoje para pagar
+[16/08/2024, 15:28:11] Ada Sistemas: mas se ele não pagar hoje, ele vai ficar com dívida somente segunda
+[16/08/2024, 15:29:21] Amanda - AVANT: Ahh entendi
+[16/08/2024, 15:29:23] Amanda - AVANT: obrigada
+[16/08/2024, 15:29:31] Ada Sistemas: Por nada!
+[16/08/2024, 15:29:47] Ada Sistemas: Tenha um bom dia e um ótimo final de semana!
+[12/09/2024, 14:47:29] Amanda - AVANT: Oi Dilan
+[12/09/2024, 14:47:32] Amanda - AVANT: Boa tarde
+[12/09/2024, 14:47:47] Ada Sistemas: Oi Amanda, boa tarde!
+[12/09/2024, 14:47:51] Ada Sistemas: Tudo bem ?
+[12/09/2024, 14:47:54] Amanda - AVANT: teria a possibilidade de não agrupar o contas a receber das redes?
+[12/09/2024, 14:48:07] Amanda - AVANT: eu acesso uma loja e aparece de todas
+[12/09/2024, 14:48:16] Amanda - AVANT: ta me confundindo demais
+[12/09/2024, 14:48:42] Ada Sistemas: poderia me dar um exemplo por favor
+‎[12/09/2024, 14:48:47] Amanda - AVANT: ‎imagem ocultada
+[12/09/2024, 14:49:04] Ada Sistemas: qual o cliente ?
+‎[12/09/2024, 14:49:11] Amanda - AVANT: ‎imagem ocultada
+[12/09/2024, 14:49:16] Amanda - AVANT: Essas lojas sao de uma rede
+[12/09/2024, 14:49:43] Amanda - AVANT: Por exemplo se eu acessar a loja 5570 aparece tudo oq esta em aberto de todas as outras nao só a dela
+‎[12/09/2024, 14:54:36] Ada Sistemas: ‎imagem ocultada
+[12/09/2024, 14:54:52] Amanda - AVANT: hummmm....otimo
+‎[12/09/2024, 14:55:04] Ada Sistemas: ‎imagem ocultada
+[12/09/2024, 14:55:10] Amanda - AVANT: vou conseguir conferir os PIX, pq eles juntam tudo
+[12/09/2024, 14:55:21] Amanda - AVANT: obrigada
+[12/09/2024, 14:56:06] Ada Sistemas: Eu que agradeço!
+[12/09/2024, 14:56:17] Ada Sistemas: Qualquer dúvida, estou á disposição!
+[12/09/2024, 14:56:25] Ada Sistemas: Tenha uma ótima tarde!
+[16/09/2024, 14:52:16] Amanda - AVANT: Boa tarde
+‎[16/09/2024, 14:52:17] Amanda - AVANT: ‎imagem ocultada
+[16/09/2024, 14:52:28] Amanda - AVANT: esse cliente não está aparecendo o campo de limite de crédito
+[16/09/2024, 14:52:41] Amanda - AVANT: não estou conseguindo identificar o probllema
+[16/09/2024, 14:53:51] Ada Sistemas: Boa tarde, o limite de crédito é apenas liberado para boleto, os modos de pagamento não tem limite de crédito
+[16/09/2024, 14:54:01] Ada Sistemas: por isso não aparece esse campo
+[16/09/2024, 14:54:34] Amanda - AVANT: ahhh entendi
+[16/09/2024, 14:54:46] Amanda - AVANT: porem não estão conseguindo colocar o pedido em lote
+‎[16/09/2024, 14:54:53] Amanda - AVANT: ‎imagem ocultada
+[16/09/2024, 14:54:59] Amanda - AVANT: pq fala q não tem limite
+[16/09/2024, 14:55:52] Amanda - AVANT: antes esse cliente estava cadastrado como boleto
+[16/09/2024, 14:55:55] Amanda - AVANT: e eu alterei
+[16/09/2024, 14:57:02] Ada Sistemas: pode ser isso
+[16/09/2024, 14:57:41] Ada Sistemas: poderia me informar o lote que o pedido deveria ter sido adicionado por favor
+[16/09/2024, 14:58:41] Ada Sistemas: ou voce pode adicionar o pedido manualmente no lote
+[16/09/2024, 14:59:25] Amanda - AVANT: vou falar aqui p rapax q monta os lotes
+[16/09/2024, 15:03:22] Ada Sistemas: perfeito
+[16/09/2024, 15:04:13] Amanda - AVANT: eu alterei o pedido para boleto 10 dias
+[16/09/2024, 15:04:20] Amanda - AVANT: voltei o cadastro como boleto
+[16/09/2024, 15:04:24] Amanda - AVANT: mesmo assim não vai
+[16/09/2024, 15:05:37] Amanda - AVANT: consegui
+[16/09/2024, 15:05:45] Amanda - AVANT: depois eu arrumo depois q faturar
+[16/09/2024, 15:05:47] Amanda - AVANT: obrigada
+[16/09/2024, 15:07:28] Ada Sistemas: eu que agradeço!
+[16/09/2024, 15:07:46] Ada Sistemas: qualquer dúvida, estou a disposição!
+[16/09/2024, 15:07:58] Ada Sistemas: Tenha uma boa tarde e uma ótima semana!
+[22/10/2024, 14:52:19] Amanda - AVANT: Oi Dilan, boa tarde
+[22/10/2024, 14:52:23] Amanda - AVANT: preciso de uma ajudinha
+[22/10/2024, 14:52:33] Ada Sistemas: Boa tarde Amanda
+[22/10/2024, 14:52:39] Ada Sistemas: claro, em que posso ajudar ?
+[22/10/2024, 14:52:50] Amanda - AVANT: eu cuido da parte financeira
+[22/10/2024, 14:53:08] Amanda - AVANT: e quem faz a liberação dos pedidos sou eu
+[22/10/2024, 14:53:51] Amanda - AVANT: porem tem funcionarios de outros departamentos fazendo essa liberação sem eu ver
+[22/10/2024, 14:54:18] Amanda - AVANT: como faço p bloquear essa parte dos usuarios?
+‎[22/10/2024, 15:09:33] Ada Sistemas: ‎imagem ocultada
+[22/10/2024, 15:09:49] Amanda - AVANT: certo
+‎[22/10/2024, 15:10:57] Ada Sistemas: ‎imagem ocultada
+[22/10/2024, 15:11:52] Amanda - AVANT: deixa eu ver
+[22/10/2024, 15:14:55] Amanda - AVANT: Eu nao achei essa opçao
+[22/10/2024, 15:16:20] Ada Sistemas: poderia me enviar uma foto da página por favor
+[22/10/2024, 15:17:19] Amanda - AVANT: Achei
+[22/10/2024, 15:25:05] Ada Sistemas: conseguiu alterar ?
+[22/10/2024, 15:27:01] Amanda - AVANT: Consegui.....muito obrigada
+[22/10/2024, 15:30:42] Ada Sistemas: Eu que agradeço
+[22/10/2024, 15:30:56] Ada Sistemas: Qualquer dúvida, estou a disposição
+[22/10/2024, 15:31:06] Ada Sistemas: Tenha uma ótima tarde 😁
+[22/10/2024, 15:31:32] Amanda - AVANT: Obrigada
+‎[22/10/2024, 16:49:01] Amanda - AVANT: ‎imagem ocultada
+[24/10/2024, 17:08:47] Amanda - AVANT: Oiiiiii
+[24/10/2024, 17:08:48] Amanda - AVANT: Boa tarde
+‎[24/10/2024, 17:08:54] Amanda - AVANT: ‎imagem ocultada
+[24/10/2024, 17:09:10] Amanda - AVANT: está aparecendo essa msg porem todos os bancos estão preenchidos
+[24/10/2024, 17:09:43] Ada Sistemas: Boa tarde Amanda
+[24/10/2024, 17:09:51] Ada Sistemas: Pode me passar qual é o lote por favor
+[24/10/2024, 17:10:11] Amanda - AVANT: 7861
+[24/10/2024, 17:17:26] Ada Sistemas: esse erro está acontecendo quando tenta faturar o lote, isso ?
+[24/10/2024, 17:17:33] Amanda - AVANT: isso
+[24/10/2024, 17:24:27] Ada Sistemas: poderia dar um F5 na tela e tentar faturar novamente por favor
+[24/10/2024, 17:24:44] Amanda - AVANT: sim
+[24/10/2024, 17:25:30] Amanda - AVANT: deu o mesmo erro
+[24/10/2024, 17:30:08] Amanda - AVANT: ja coloquei tudo santander não foi
+[24/10/2024, 17:30:14] Amanda - AVANT: ja colouei tudo itau não foi
+[24/10/2024, 17:31:38] Ada Sistemas: poderia gerar o provisório novamente por favor
+[24/10/2024, 17:31:44] Ada Sistemas: sem retirar a reserva
+[24/10/2024, 17:31:52] Amanda - AVANT: ta
+[24/10/2024, 17:32:30] Amanda - AVANT: deu certo
+[24/10/2024, 17:32:31] Amanda - AVANT: rs
+[24/10/2024, 17:32:35] Amanda - AVANT: oq será q era?
+[24/10/2024, 17:33:25] Ada Sistemas: pelo que verificamos, como um pedido foi tirado após fazer o provisório e ele constava sem conta corrente
+[24/10/2024, 17:33:38] Ada Sistemas: estava dando esse problema por causa dele ainda ser considerado um pedido do lote
+[24/10/2024, 17:34:18] Amanda - AVANT: ahhhh entendi[
+[24/10/2024, 17:34:22] Amanda - AVANT: foi retirado mesmo
+[04/11/2024, 15:22:24] Amanda - AVANT: Oi.....boa tardeee
+[04/11/2024, 15:22:38] Ada Sistemas: Boa tarde Amanda, tudo joia ?
+[04/11/2024, 15:25:29] Amanda - AVANT: Tudo bem e com vc?
+[04/11/2024, 15:25:38] Ada Sistemas: tudo bem também
+[04/11/2024, 15:25:45] Ada Sistemas: em que posso ajudar ?
+[04/11/2024, 15:27:18] Amanda - AVANT: consigo programar no sistema para os boletos não cairem no sabado e domingo?
+[04/11/2024, 15:28:47] Ada Sistemas: no caso, seria o vencimento dos boletos não cairem nos sabados ou domingos, isso ?
+[04/11/2024, 15:29:27] Amanda - AVANT: Isso mesmo
+[04/11/2024, 15:30:08] Ada Sistemas: poderia me passar um boleto que isso ocorreu por favor
+[04/11/2024, 15:30:30] Amanda - AVANT: Eu queria fazer a programaçao
+[04/11/2024, 15:30:44] Amanda - AVANT: Para os vencimentos nao cairem no sabado e no domingo
+[04/11/2024, 15:30:48] Amanda - AVANT: Teria como?
+[04/11/2024, 15:31:36] Ada Sistemas: espere um momento que vou verificar e te retorno
+[04/11/2024, 15:39:59] Ada Sistemas: verifiquei aqui e infelizmente não teria como no momento, mas pode entrar em contato com o Marcelo para ver a possibilidade de desenvolver essa funcionalidade
+[04/11/2024, 15:41:23] Amanda - AVANT: Ta bom....muito obrigada
+[04/11/2024, 15:41:31] Ada Sistemas: Eu que agradeço
+[04/11/2024, 15:41:42] Ada Sistemas: Qualquer dúvida, estou a disposição
+[04/11/2024, 15:41:58] Ada Sistemas: Tenha uma ótima tarde e uma excelente semana 😁🙏🏼
+[04/11/2024, 15:43:48] Amanda - AVANT: p vc tb
+[05/11/2024, 11:46:21] Amanda - AVANT: Oiiii...bom diaaa
+[05/11/2024, 11:46:36] Amanda - AVANT: quero aumentar a porcentagem de multa e juros dos boletos
+[05/11/2024, 11:46:42] Amanda - AVANT: pode me ajudar?
+[05/11/2024, 11:48:23] Ada Sistemas: Bom dia, claro que posso
+‎[05/11/2024, 11:49:20] Ada Sistemas: ‎imagem ocultada
+‎[05/11/2024, 11:50:10] Ada Sistemas: ‎imagem ocultada
+[05/11/2024, 11:50:56] Amanda - AVANT: ahhhh blz
+[05/11/2024, 11:50:58] Amanda - AVANT: vou fazer
+‎[05/11/2024, 11:51:15] Ada Sistemas: ‎imagem ocultada
+[05/11/2024, 11:51:46] Amanda - AVANT: ta ok
+[05/11/2024, 11:51:54] Ada Sistemas: depois de alterar, teria que clicar no botão verde no parte final da página para salvar as alterações
+[08/11/2024, 09:16:05] Amanda - AVANT: Oi Dilan, bom diaaa
+‎[08/11/2024, 09:16:07] Amanda - AVANT: ‎imagem ocultada
+[08/11/2024, 09:16:20] Amanda - AVANT: esse titulo foi liquidado no banco, porem no sistema ficou em aberto
+‎[08/11/2024, 09:16:42] Amanda - AVANT: ‎imagem ocultada
+[08/11/2024, 09:17:08] Ada Sistemas: Bom dia Amanda, vou verificar e te retorno
+[08/11/2024, 09:17:13] Amanda - AVANT: ta bom
+[08/11/2024, 09:20:42] Ada Sistemas: poderia me enviar o aquivo de retorno que contem a liquidação desse titulo por favor
+[08/11/2024, 09:48:49] Ada Sistemas: pode ter sido que no arquivo de retorno não foi passado o valor da liquidação, ou foi passado como 0, logo o sistema considera que não foi quitado e teria que fazer a quitação manual na página do título ou pela página de pagamento de títulos
+[19/11/2024, 11:26:52] Amanda - AVANT: Oi...bom diaaaa
+[19/11/2024, 11:27:14] Ada Sistemas: Bom dia Amanda, tudo joia ?
+[19/11/2024, 11:27:21] Amanda - AVANT: Tuso e com vc?
+[19/11/2024, 11:27:30] Ada Sistemas: tudo também
+[19/11/2024, 11:27:50] Amanda - AVANT: como faço p exportar a tabela de preços dos produtos?
+‎[19/11/2024, 11:31:29] Ada Sistemas: ‎imagem ocultada
+‎[19/11/2024, 11:32:20] Ada Sistemas: ‎imagem ocultada
+[19/11/2024, 11:44:10] Amanda - AVANT: Obrigadaaaaa
+[19/11/2024, 13:04:42] Ada Sistemas: Eu que agradeço
+[19/11/2024, 13:04:50] Ada Sistemas: Qualquer dúvida, estou a disposição
+[19/11/2024, 13:05:00] Ada Sistemas: Tenha um ótimo dia 🙏🏼😁
+[03/12/2024, 14:48:07] Amanda - AVANT: Oi Dilan, boa tarde
+[03/12/2024, 14:49:16] Ada Sistemas: Boa tarde Amanda
+[03/12/2024, 14:50:17] Amanda - AVANT: Teria algum relatório do sistema que eu consigo puxar as vendas dos produtos de um fabricante agrupado?
+‎[03/12/2024, 14:54:57] Ada Sistemas: ‎imagem ocultada
+‎[03/12/2024, 14:55:41] Ada Sistemas: ‎imagem ocultada
+[03/12/2024, 14:57:32] Amanda - AVANT: Ótimo...muito obrigadaaa
+[03/12/2024, 14:57:37] Ada Sistemas: Eu que agradeço
+[03/12/2024, 14:57:53] Ada Sistemas: Qualquer dúvida, estou a disposição
+[03/12/2024, 14:58:03] Ada Sistemas: Tenha um ótimo dia 🙏🏼😁
+[12/12/2024, 10:51:22] Amanda - AVANT: Oi Dilan, bom dia.......como faço para cadastrar uma CFOP?
+[12/12/2024, 10:52:17] Ada Sistemas: Bom dia Amanda
+[12/12/2024, 10:52:36] Ada Sistemas: qual seria o CFOP ?
+[12/12/2024, 13:09:23] Ada Sistemas: verifiquei aqui Amanda e não tem como cadastrar um CFOP
+[16/12/2024, 10:49:02] Amanda - AVANT: Oi Dilan...bom diaaaa
+[16/12/2024, 10:49:05] Amanda - AVANT: tudo bem?
+‎[16/12/2024, 10:49:09] Amanda - AVANT: ‎imagem ocultada
+[16/12/2024, 10:49:16] Ada Sistemas: Bom dia Amanda, tudo bem e voce ?
+[16/12/2024, 10:49:23] Amanda - AVANT: meu arquivo de remessao para o banco ta dando rejeitado
+[16/12/2024, 10:49:31] Amanda - AVANT: seria algum problema no sistema?
+[16/12/2024, 10:49:37] Amanda - AVANT: tudo jóia
+[16/12/2024, 10:49:56] Amanda - AVANT: o Banco rejeitou 211 boletos hj
+[16/12/2024, 10:50:00] Ada Sistemas: vou verificar e te retorno
+[16/12/2024, 10:50:05] Amanda - AVANT: ta bom
+‎[16/12/2024, 10:50:13] Amanda - AVANT: B033161224.txt ‎documento omitido
+[16/12/2024, 11:27:32] Ada Sistemas: deu esse mesmo erro em todos os boletos do arquivo de remessa ?
+[16/12/2024, 11:28:29] Amanda - AVANT: SIM
+[16/12/2024, 11:28:33] Amanda - AVANT: Só do Santander
+[16/12/2024, 11:28:38] Amanda - AVANT: do Itau está normal
+[16/12/2024, 11:29:55] Ada Sistemas: certo, estamos verificando e quando tiver uma resposta, te retorno
+[16/12/2024, 11:31:01] Amanda - AVANT: TA BOM
+[16/12/2024, 11:31:17] Amanda - AVANT: só não pode demorar muito pq eu troco os titulos com o banco p eu pagar as contas
+[16/12/2024, 13:06:09] Amanda - AVANT: Conseguiu?
+[16/12/2024, 13:06:19] Ada Sistemas: ainda estamos verificando
+[16/12/2024, 13:17:05] Ada Sistemas: poderia gerar o arquivo de remessa novamente e enviar para o santander por favor
+[16/12/2024, 13:22:05] Amanda - AVANT: Claro
+[16/12/2024, 13:24:09] Amanda - AVANT: agora deu certo
+[16/12/2024, 13:24:13] Amanda - AVANT: 🥳🥳🥳🥳🥳
+[16/12/2024, 13:24:23] Ada Sistemas: perfeito 🥳🎉👏🏼
+[16/12/2024, 13:24:29] Ada Sistemas: algo mais que posso ajudar ?
+[16/12/2024, 13:24:40] Amanda - AVANT: era só isso mesmo...muito obrigadaaaa
+[16/12/2024, 13:24:48] Ada Sistemas: eu que agradeço
+[16/12/2024, 13:24:55] Ada Sistemas: qualquer dúvida, estou a disposição
+[16/12/2024, 13:25:07] Ada Sistemas: Tenha um ótimo dia e uma excelente semana 😁🙏🏼
+[17/12/2024, 07:01:07] Amanda - AVANT: Bom dia,
+[17/12/2024, 07:01:19] Amanda - AVANT: Hj todos os boletos do Santander foram rejeitados
+‎[17/12/2024, 07:01:23] Amanda - AVANT: ‎imagem ocultada
+‎[17/12/2024, 07:01:29] Amanda - AVANT: B033171224.txt ‎documento omitido
+[17/12/2024, 07:02:32] Amanda - AVANT: na ultima semana que vamos trabalhar começa dar problema
+[17/12/2024, 08:09:51] Ada Sistemas: Bom dia Amanda, tudo joia ?
+[17/12/2024, 08:10:09] Ada Sistemas: informou o motivo da rejeição ?
+[17/12/2024, 08:10:26] Amanda - AVANT: hj não
+[17/12/2024, 08:14:06] Ada Sistemas: poderia clicar na aba de consultar erros e verificar se informa algum motivo ?
+[17/12/2024, 08:16:18] Ada Sistemas: eles enviaram o arquivo de retorno ?
+‎[17/12/2024, 08:18:25] Amanda - AVANT: ‎imagem ocultada
+‎[17/12/2024, 08:19:13] Amanda - AVANT: comprovante (30).pdf • ‎2 páginas ‎documento omitido
+[17/12/2024, 08:19:22] Amanda - AVANT: 21 deu duplicidade
+[17/12/2024, 08:19:25] Amanda - AVANT: mas rejeito 244
+[17/12/2024, 08:20:35] Ada Sistemas: certo, teria como enviar o arquivo de retorno para verificarmos por favor
+[17/12/2024, 08:21:41] Amanda - AVANT: sim
+‎[17/12/2024, 08:24:18] Amanda - AVANT: COBST_K4MI_02_171224P_MOV.TXT ‎documento omitido
+[17/12/2024, 08:29:16] Ada Sistemas: ja estamos verificando
+[17/12/2024, 08:29:42] Amanda - AVANT: Ta bom
+[17/12/2024, 08:29:44] Amanda - AVANT: Obrigada
+‎[17/12/2024, 08:43:21] Ada Sistemas: ‎imagem ocultada
+[17/12/2024, 08:44:09] Amanda - AVANT: E oq eu faço?
+[17/12/2024, 08:44:23] Amanda - AVANT: pq não consigo selecionar os titulos q eu quero gerar
+[17/12/2024, 08:47:01] Ada Sistemas: pode dar entrada no arquivo de retorno porque vai aceitar as ocorrencias de ENTRADA DE BOLETO CONFIRMADA NO BANCO
+[17/12/2024, 08:47:21] Amanda - AVANT: TA BOM
+[17/12/2024, 08:47:24] Amanda - AVANT: VOU FAZER ISSO
+[17/12/2024, 08:47:56] Ada Sistemas: mas, depois, poderia verificar no banco se os boletos estão realmente lá por favor
+[17/12/2024, 08:48:13] Amanda - AVANT: Combinado
+‎[17/12/2024, 08:48:44] Ada Sistemas: ‎imagem ocultada
+[02/01/2025, 14:59:25] Amanda - AVANT: Boa tarde...esta trabalhando?
+[02/01/2025, 14:59:42] Ada Sistemas: Boa tarde Amanda, estou sim
+[02/01/2025, 14:59:47] Ada Sistemas: em que posso ajudar ?
+[02/01/2025, 14:59:49] Amanda - AVANT: ebaaa
+[02/01/2025, 14:59:54] Amanda - AVANT: Feliz Ano Novo!
+‎[02/01/2025, 15:00:03] Amanda - AVANT: ‎imagem ocultada
+[02/01/2025, 15:00:14] Ada Sistemas: Para voce também!
+[02/01/2025, 15:00:21] Amanda - AVANT: ta dando esse erro no APP de um vendedor
+[02/01/2025, 15:00:47] Ada Sistemas: poderia pedir para ele tentar entrar de novo por favor
+[02/01/2025, 15:00:55] Amanda - AVANT: ok
+[02/01/2025, 15:04:24] Ada Sistemas: ele conseguiu entrar ?
+[02/01/2025, 15:35:12] Amanda - AVANT: o erro parou
+[02/01/2025, 15:35:38] Amanda - AVANT: porem na hora d enviar o pedido fica só rodando e não envia
+[02/01/2025, 15:36:07] Ada Sistemas: poderia me informar o codigo do vendedor por favor
+[02/01/2025, 15:36:29] Amanda - AVANT: 4692
+‎[02/01/2025, 15:48:15] Amanda - AVANT: ‎imagem ocultada
+[02/01/2025, 15:49:18] Ada Sistemas: poderia pedir para ele atualizar o app para a versão 4.19.94 por favor
+‎[02/01/2025, 16:07:02] Amanda - AVANT: ‎imagem ocultada
+[02/01/2025, 16:07:07] Amanda - AVANT: nao esta dando certo
+[02/01/2025, 16:10:14] Ada Sistemas: ele atualizou o app?
+[02/01/2025, 16:11:20] Amanda - AVANT: Sim
+‎[02/01/2025, 16:11:55] Amanda - AVANT: ‎imagem ocultada
+[02/01/2025, 16:12:37] Ada Sistemas: poderia pedir para ele limpar a memória do app e tentar novamente por favor
+‎[02/01/2025, 16:16:05] Ada Sistemas: ‎vídeo omitido
+‎[02/01/2025, 16:16:05] Ada Sistemas: ‎vídeo omitido
+‎[03/01/2025, 08:01:30] Amanda - AVANT: ‎imagem ocultada
+[03/01/2025, 08:01:36] Amanda - AVANT: Bom dia
+[03/01/2025, 08:01:53] Amanda - AVANT: Vendedor nao consegue passar pedido
+[03/01/2025, 08:05:25] Ada Sistemas: Bom dia Amanda, tudo jóia ?
+[03/01/2025, 08:05:32] Ada Sistemas: Vou verificar e te retorno
+‎[03/01/2025, 08:14:24] Ada Sistemas: ‎imagem ocultada
+‎[03/01/2025, 08:16:47] Amanda - AVANT: ‎imagem ocultada
+[03/01/2025, 08:17:32] Amanda - AVANT: Faz oq?
+‎[03/01/2025, 08:18:50] Ada Sistemas: ‎imagem ocultada
+[03/01/2025, 08:18:57] Ada Sistemas: depois salvaria a alteração
+‎[03/01/2025, 08:21:04] Ada Sistemas: ‎imagem ocultada
+‎[03/01/2025, 08:22:35] Ada Sistemas: ‎imagem ocultada
+‎[03/01/2025, 08:23:16] Ada Sistemas: ‎imagem ocultada
+[03/01/2025, 08:25:20] Ada Sistemas: depois de salvar, poderia pedir para o Celio limpar a memória do app e tentar entrar de novo por favor
+[16/01/2025, 10:11:27] Amanda - AVANT: Oiiiiiii....bom diaaaaaa
+[16/01/2025, 10:11:30] Amanda - AVANT: tudo bem?
+[16/01/2025, 10:11:38] Ada Sistemas: Bom dia Amanda, tudo bem e voce ?
+[16/01/2025, 10:11:44] Amanda - AVANT: tudo jóiaaa
+[16/01/2025, 10:11:55] Amanda - AVANT: consigo dar baixa em varios titulos de uma vez só?
+[16/01/2025, 10:12:21] Ada Sistemas: os títulos são "a pagar" ?
+[16/01/2025, 10:12:37] Ada Sistemas: ou a receber ?
+[16/01/2025, 10:12:48] Amanda - AVANT: receber
+[16/01/2025, 10:14:21] Ada Sistemas: infelizmente não, quitar vários títulos a receber seria apenas pelo arquivo de retorno
+[16/01/2025, 10:14:45] Amanda - AVANT: entendi...ta ok...obrigada
+[16/01/2025, 10:15:14] Ada Sistemas: eu que agradeço
+[16/01/2025, 10:15:22] Ada Sistemas: qualquer dúvida, estou a disposição
+[16/01/2025, 10:15:32] Ada Sistemas: Tenha um ótimo dia 😁🙏🏼
+[20/01/2025, 15:59:56] Amanda - AVANT: Boa tardeee
+[20/01/2025, 16:00:10] Ada Sistemas: Boa tarde Amanda
+[20/01/2025, 16:00:13] Ada Sistemas: tudo joia ?
+[20/01/2025, 16:03:35] Amanda - AVANT: Umaperguntinha...rs
+[20/01/2025, 16:03:42] Ada Sistemas: claro kkkk
+[20/01/2025, 16:04:09] Amanda - AVANT: consigo salvar todos os boletos de um mesmo cliente de uma vez, ao invés de ter q abrir titulo por titulo?
+[20/01/2025, 16:04:41] Amanda - AVANT: eu tive que refazer os boletos de varias lojas de um cleinte
+[20/01/2025, 16:04:51] Amanda - AVANT: foram 35
+[20/01/2025, 16:05:11] Amanda - AVANT: e preciso mandar p eles, mas só de pensar de entrar em titulo por titulo ta med ando desespero
+[20/01/2025, 16:05:56] Ada Sistemas: então voce quer saber se consegue gerar os 35 boletos desse cliente de uma vez, isso ?
+[20/01/2025, 16:06:35] Amanda - AVANT: eu ja gerei todos...eu preciso salvar em PDF
+[20/01/2025, 16:07:03] Ada Sistemas: ah ta, voce quer juntar todos os boletos no mesmo PDF, isso ?
+[20/01/2025, 16:07:21] Amanda - AVANT: exatamente
+[20/01/2025, 16:08:12] Ada Sistemas: no nosso sistema não consegue fazer isso, mas se voce pesquisar por juntar pdf no google, deve aparecer alguns sites
+[20/01/2025, 16:08:48] Amanda - AVANT: mas eu vou ter q abrir titulo por titulo p salvar os boletos né
+[20/01/2025, 16:08:52] Amanda - AVANT: isso q mata
+‎[20/01/2025, 16:09:53] Ada Sistemas: ‎vídeo omitido
+[20/01/2025, 16:12:51] Ada Sistemas: esses boletos estão relacionados a alguma nota ou lote, em que pode gerar mais de uma vez só com FINANCEIRO -> RELATÓRIOS -> IMPRESSÃO DE BOLETOS -> informa o lote ou nota e gera o PDF dos boletos
+‎[20/01/2025, 16:13:05] Ada Sistemas: ‎imagem ocultada
+[20/01/2025, 16:16:53] Amanda - AVANT: pior q não estão...eu fiz manual
+[20/01/2025, 16:17:09] Amanda - AVANT: Olha que legal....muito obrigada oela dica
+[20/01/2025, 16:19:38] Ada Sistemas: Eu que agradeço
+[20/01/2025, 16:19:47] Ada Sistemas: Qualquer dúvida, estou a disposição
+[20/01/2025, 16:20:10] Amanda - AVANT: muito obrigada
+[20/01/2025, 16:21:12] Ada Sistemas: Eu que agradeço 😁
+[20/01/2025, 16:21:19] Ada Sistemas: Tenha um ótimo dia 🙏🏼🤝🏻
+‎[07/02/2025, 10:26:07] Amanda - AVANT: ‎imagem ocultada
+[07/02/2025, 10:26:13] Amanda - AVANT: Oiiii....bom diaaaa
+[07/02/2025, 10:26:22] Amanda - AVANT: Recebemos essa msg do Banco Santander
+[07/02/2025, 10:27:25] Ada Sistemas: Bom dia Amanda, vou verificar com o desenvolvimento se eles atendem essa regra e te retorno
+[07/02/2025, 10:27:45] Ada Sistemas: Obrigado por nos avisar Amanda 😁
+[07/02/2025, 10:59:08] Ada Sistemas: verifiquei aqui Amanda, e o nosso sistema atende essas regras
+[07/02/2025, 10:59:47] Amanda - AVANT: Ufaaaaa
+[07/02/2025, 10:59:51] Amanda - AVANT: tava preocupada
+[07/02/2025, 11:01:31] Ada Sistemas: Pode ficar tranquila kkkk
+[07/02/2025, 11:01:36] Ada Sistemas: algo mais que posso ajudar ?
+[07/02/2025, 11:02:03] Amanda - AVANT: só isso mesmo
+[07/02/2025, 11:02:05] Amanda - AVANT: muito obrigadaaa
+[07/02/2025, 11:02:39] Ada Sistemas: Eu que agradeço!
+[07/02/2025, 11:02:50] Ada Sistemas: Qualquer dúvida, estou a disposição
+[07/02/2025, 11:02:59] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼
+[18/02/2025, 12:46:20] Amanda - AVANT: Oiiii Dilan, boa tarde!
+[18/02/2025, 12:46:40] Ada Sistemas: Boa tarde Amanda !
+[18/02/2025, 12:48:06] Amanda - AVANT: Eu fiz uns boletos manuais
+[18/02/2025, 12:48:21] Amanda - AVANT: e eles não entraram na remessa bancaria
+‎[18/02/2025, 12:49:06] Amanda - AVANT: ‎imagem ocultada
+[18/02/2025, 12:49:09] Amanda - AVANT: oq será q ouve?
+[18/02/2025, 12:54:30] Ada Sistemas: que dia que esses boletos forma feitos ?
+[18/02/2025, 12:54:52] Amanda - AVANT: 16/01
+[18/02/2025, 12:55:20] Ada Sistemas: poderia me enviar o arquivo de remessa desse dia e do dia 17/01 também por favor
+‎[18/02/2025, 12:56:52] Amanda - AVANT: B033170125.txt ‎documento omitido
+‎[18/02/2025, 12:57:02] Amanda - AVANT: B033160125.txt ‎documento omitido
+[18/02/2025, 12:57:29] Ada Sistemas: Obrigado Amanda, vou verificar e te retorno
+[18/02/2025, 12:57:33] Amanda - AVANT: Ta bom
+[18/02/2025, 13:49:46] Ada Sistemas: verifiquei aqui Amanda e não entraram no arquivo de remessa porque os boletos não tem o NOSSO NUMERO
+‎[18/02/2025, 13:50:32] Ada Sistemas: ‎imagem ocultada
+[18/02/2025, 13:50:36] Amanda - AVANT: eu pensei q o sistema gerasse automatico
+[18/02/2025, 13:50:46] Amanda - AVANT: eu tenho q colocar?
+[18/02/2025, 13:51:11] Ada Sistemas: ele gera para boletos vindos de pedidos faturados
+[18/02/2025, 13:51:34] Ada Sistemas: não, voce só teria que gerar o boleto do titulo que já vai criar o nosso numero
+‎[18/02/2025, 13:52:50] Ada Sistemas: ‎vídeo omitido
+[18/02/2025, 13:59:39] Amanda - AVANT: Entendi
+[18/02/2025, 13:59:43] Amanda - AVANT: muito obrigada
+[18/02/2025, 13:59:50] Ada Sistemas: Eu que agradeço
+[18/02/2025, 13:59:56] Ada Sistemas: Qualquer dúvida, estou a disposição
+[18/02/2025, 14:00:04] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼
+[18/02/2025, 14:01:15] Amanda - AVANT: p vc tb
+[19/02/2025, 10:53:56] Amanda - AVANT: Oi Dilan, bom diaaa
+[19/02/2025, 10:54:13] Ada Sistemas: Bom dia Amanda
+[19/02/2025, 10:54:32] Amanda - AVANT: Mes que vem vamos começar a faturar pela filial
+[19/02/2025, 10:54:50] Amanda - AVANT: precisamos deixar os boletos parametrizados né?
+[19/02/2025, 11:04:21] Ada Sistemas: seria as mesmas contas tanto para a principal quanto para a filial
+[19/02/2025, 11:04:40] Amanda - AVANT: são contas diferentes
+[19/02/2025, 11:05:23] Ada Sistemas: então teria que cadastrar as novas contas e fazer um boleto de teste nessas contas
+[26/02/2025, 13:28:52] Amanda - AVANT: Oiii Dilan, boa tarde
+[26/02/2025, 13:29:03] Amanda - AVANT: Eu to tentando cadastrar o Banco da Filial
+[26/02/2025, 13:29:07] Amanda - AVANT: mas esá dando erro
+[26/02/2025, 13:29:17] Ada Sistemas: Boa tarde Amanda
+[26/02/2025, 13:29:21] Ada Sistemas: qual erro que esta dando ?
+‎[26/02/2025, 13:29:29] Amanda - AVANT: ‎imagem ocultada
+[26/02/2025, 13:30:05] Ada Sistemas: qual banco voce esta tentando adicionar ?
+[26/02/2025, 13:30:10] Amanda - AVANT: santander
+[26/02/2025, 13:30:18] Amanda - AVANT: coloquei o codigo dele que é 33
+[26/02/2025, 13:30:29] Amanda - AVANT: e na descrição eu coloquei SANTANDER FILIAL
+[26/02/2025, 13:31:37] Ada Sistemas: não precisa colocar um novo banco santander, so precisaria colocar uma nova conta so que no mesmo banco
+[26/02/2025, 13:31:47] Amanda - AVANT: AHH TA
+[26/02/2025, 13:36:17] Ada Sistemas: algo mais que posso ajudar ?
+[26/02/2025, 13:43:39] Amanda - AVANT: Eu to cadastrando as contas novas
+[26/02/2025, 13:43:47] Amanda - AVANT: e eu não quero que deixe protestos automatico
+[26/02/2025, 13:44:06] Amanda - AVANT: o paramentro tem q ser iguais os que ja temos
+‎[26/02/2025, 13:45:48] Ada Sistemas: ‎imagem ocultada
+[26/02/2025, 13:46:34] Ada Sistemas: e como os titulos das novas contas não teriam protesto automatico, então não precisa alterar o parametro
+[26/02/2025, 13:46:51] Amanda - AVANT: ta ok
+[26/02/2025, 13:51:31] Ada Sistemas: mais alguma ajuda ?
+[26/02/2025, 13:55:06] Amanda - AVANT: somente isso
+[26/02/2025, 13:55:09] Amanda - AVANT: muito obrigada
+[26/02/2025, 13:55:19] Ada Sistemas: Eu que agradeço Amanda!
+[26/02/2025, 13:55:25] Ada Sistemas: Qualquer dúvida, pode chamar
+[26/02/2025, 13:55:36] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼
+[03/03/2025, 10:26:44] Amanda - AVANT: Bom dia
+[03/03/2025, 10:27:00] Ada Sistemas: Bom dia Amanda
+[03/03/2025, 10:27:07] Amanda - AVANT: Ufaaaaaa
+[03/03/2025, 10:27:10] Amanda - AVANT: ta trabalhando hj
+[03/03/2025, 10:27:15] Amanda - AVANT: 🥳🥳🥳🥳🥳🥳
+[03/03/2025, 10:27:22] Ada Sistemas: sim kkkk
+[03/03/2025, 10:27:24] Amanda - AVANT: rs
+[03/03/2025, 10:27:26] Amanda - AVANT: Nota fiscal numero:1: Este XML não é válido. Element '{http://www.portalfiscal.inf.br/nfe}fone': [facet 'pattern'] The value '' is not accepted by the pattern '[0-9]{6,14}'.
+[03/03/2025, 10:27:36] Amanda - AVANT: ja viu esse erro?
+[03/03/2025, 10:28:04] Ada Sistemas: esse erro pode ser que o numero de telefone do cliente esta vazio
+[03/03/2025, 10:28:17] Amanda - AVANT: humm
+[03/03/2025, 10:28:18] Amanda - AVANT: vou ver
+[03/03/2025, 10:29:52] Amanda - AVANT: pior q está com numero
+[03/03/2025, 10:30:22] Ada Sistemas: qual é a nota ?
+[03/03/2025, 10:30:35] Amanda - AVANT: é a numero 1 fa filial
+[03/03/2025, 10:31:45] Ada Sistemas: certo, vou verificar e te retorno
+[03/03/2025, 10:32:06] Amanda - AVANT: ta
+‎[03/03/2025, 10:35:43] Ada Sistemas: ‎imagem ocultada
+[03/03/2025, 10:36:06] Amanda - AVANT: mais fácild q eu pensei então
+[03/03/2025, 10:36:07] Amanda - AVANT: rsrsrs
+[03/03/2025, 10:36:48] Amanda - AVANT: Aeee deu certo
+[03/03/2025, 10:36:53] Amanda - AVANT: Muito obrigadaaaa
+[03/03/2025, 10:37:04] Ada Sistemas: perfeitoooo 👍🏼😁
+[03/03/2025, 10:37:09] Ada Sistemas: Eu que agradeço
+[03/03/2025, 10:37:20] Ada Sistemas: Qualquer dúvida, pode chamar
+[03/03/2025, 10:37:31] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼
+[03/03/2025, 10:39:26] Amanda - AVANT: Dilan
+[03/03/2025, 10:39:30] Amanda - AVANT: uma dúvida
+[03/03/2025, 10:39:55] Ada Sistemas: claro, qual seria ?
+[03/03/2025, 10:40:19] Amanda - AVANT: eu cadastrei o banco para emissão dos boletos da Filial
+[03/03/2025, 10:40:49] Ada Sistemas: certo
+‎[03/03/2025, 10:41:17] Amanda - AVANT: ‎imagem ocultada
+[03/03/2025, 10:41:26] Amanda - AVANT: esse numero do boleto o sistema preenche sozinho?
+[03/03/2025, 10:42:08] Ada Sistemas: sim
+[03/03/2025, 10:42:28] Amanda - AVANT: Blz
+[03/03/2025, 10:42:54] Ada Sistemas: o numero do boleto seria o valor do ultimo Nosso Numero gerado para um boleto daquela conta, então gera automaticamente
+[03/03/2025, 10:43:23] Amanda - AVANT: no caso é uma conta nova
+[03/03/2025, 10:43:33] Amanda - AVANT: nunca emitimos boleto p essa empresa
+[03/03/2025, 10:43:50] Ada Sistemas: isso, por isso o valor esta com 0
+[03/03/2025, 10:44:19] Amanda - AVANT: blz
+‎[05/03/2025, 13:34:37] Amanda - AVANT: ‎imagem ocultada
+[05/03/2025, 13:34:44] Amanda - AVANT: Oiii Dilannn....boa tarde
+[05/03/2025, 13:34:55] Amanda - AVANT: Eu nao entendi oq eu tenho q fazer
+[05/03/2025, 13:35:09] Amanda - AVANT: Preciso cadastrar um tipo financeiro novo?
+‎[05/03/2025, 13:35:23] Amanda - AVANT: ‎imagem ocultada
+‎[05/03/2025, 13:35:23] Amanda - AVANT: ‎imagem ocultada
+[05/03/2025, 13:35:41] Ada Sistemas: Boa tarde Amanda, não precisa cadastrar um tipo financeiro novo
+‎[05/03/2025, 13:35:57] Ada Sistemas: ‎imagem ocultada
+[05/03/2025, 13:36:55] Ada Sistemas: voce procura por esse parametro: "Tipo Financeiro de venda = 2" e colocar o seguinte na frente do 2: "/2"
+[05/03/2025, 13:37:00] Ada Sistemas: e depois salva
+‎[05/03/2025, 13:37:31] Ada Sistemas: ‎imagem ocultada
+[05/03/2025, 13:37:32] Amanda - AVANT: Só isso?
+[05/03/2025, 13:37:41] Ada Sistemas: sim kkk
+[05/03/2025, 13:37:47] Amanda - AVANT: Rs....blz
+[05/03/2025, 13:37:51] Amanda - AVANT: Ja fiz entao
+[05/03/2025, 13:38:25] Ada Sistemas: perfeito 👍🏼, agora consegue faturar normalmente os lotes
+[05/03/2025, 13:38:34] Ada Sistemas: algo mais que posso ajudar ?
+[05/03/2025, 13:38:42] Amanda - AVANT: Só isso
+[05/03/2025, 13:38:46] Amanda - AVANT: Muito obrigadaaa
+[05/03/2025, 13:38:58] Ada Sistemas: Eu que agradeço Amanda 😁
+[05/03/2025, 13:39:07] Ada Sistemas: Tenha um ótimo dia 🤝🏻🙏🏼
+[05/03/2025, 13:39:18] Amanda - AVANT: P vc tb
+[07/03/2025, 08:05:29] Amanda - AVANT: Dillan
+[07/03/2025, 08:05:33] Amanda - AVANT: Bom diaaa
+[07/03/2025, 08:06:33] Ada Sistemas: Bom dia Amanda 😁
+‎[07/03/2025, 08:07:05] Amanda - AVANT: ‎imagem ocultada
+[07/03/2025, 08:07:14] Amanda - AVANT: consigo saber qual é o item?
+[07/03/2025, 08:11:27] Ada Sistemas: Deu esse erro quando clicou em qual botão ?
+[07/03/2025, 08:11:48] Amanda - AVANT: Buscar Notas
+[07/03/2025, 08:12:10] Amanda - AVANT: eu ja olhei o NCM de todos os itens
+[07/03/2025, 08:12:17] Amanda - AVANT: não consegui ver erro
+‎[07/03/2025, 08:15:32] Amanda - AVANT: ‎imagem ocultada
+[07/03/2025, 08:17:09] Ada Sistemas: Certo, vou verificar e te retorno
+[07/03/2025, 08:17:43] Amanda - AVANT: achei o erro
+[07/03/2025, 08:17:45] Amanda - AVANT: ja arrumei
+[07/03/2025, 08:17:50] Amanda - AVANT: mas não ta gerando a nota
+[07/03/2025, 08:22:09] Ada Sistemas: que erro que esta dando que não esta gerando a nota ?
+[07/03/2025, 08:26:45] Ada Sistemas: Amanda, eu mandei buscar a nota aqui e buscou tanto o XML da nota quanto a DANFE, poderia verificar por favor
+[07/03/2025, 08:27:21] Amanda - AVANT: Vou ver
+[07/03/2025, 08:29:55] Ada Sistemas: perfeito
+[07/03/2025, 11:01:17] Amanda - AVANT: Oi Dilan
+[07/03/2025, 11:01:20] Amanda - AVANT: eu novamente
+[07/03/2025, 11:02:02] Ada Sistemas: Oi Amanda
+[07/03/2025, 11:02:47] Amanda - AVANT: eu to tentando fazer um boleto p filial
+[07/03/2025, 11:02:51] Amanda - AVANT: mas não to conseguindo
+[07/03/2025, 11:03:10] Ada Sistemas: qual erro que esta dando ?
+[07/03/2025, 11:03:47] Amanda - AVANT: agora foi
+[07/03/2025, 11:03:50] Amanda - AVANT: parece uma coisa
+[07/03/2025, 11:04:24] Ada Sistemas: perfeito
+[07/03/2025, 11:04:29] Ada Sistemas: que coisa ?
+[07/03/2025, 11:05:36] Amanda - AVANT: É SÓ TE CHAMAR QUE O NEGOCIO DA CERTO
+[07/03/2025, 11:05:37] Amanda - AVANT: KKKK
+[07/03/2025, 11:05:59] Ada Sistemas: Kkkkkkkk
+[07/03/2025, 15:50:21] Amanda - AVANT: Oi Dilan Boa tarde
+‎[07/03/2025, 15:50:41] Amanda - AVANT: ‎imagem ocultada
+[07/03/2025, 15:51:29] Amanda - AVANT: essa usuária está tentando acessar o sistema
+[07/03/2025, 15:51:32] Ada Sistemas: Boa tarde Amanda
+[07/03/2025, 15:51:37] Amanda - AVANT: porem está aparecendo essa msg
+‎[07/03/2025, 15:51:57] Amanda - AVANT: ‎imagem ocultada
+[07/03/2025, 15:52:21] Amanda - AVANT: mas esse numero de celular não bate
+[07/03/2025, 15:52:53] Ada Sistemas: vou verificar e te retorno
+[07/03/2025, 16:04:29] Ada Sistemas: poderia verificar se chegou algum SMS com a nova senha de acesso no telefone 19999201206 por favor
+[07/03/2025, 16:04:59] Amanda - AVANT: recebeu
+[07/03/2025, 16:08:16] Ada Sistemas: perfeito, poderia verificar dela tentar esquecer a senha no computador dela e verificar se manda para o telefone correto por favor
+[11/03/2025, 08:40:32] Amanda - AVANT: Oiii Dilan, bomm diaaaaa
+[11/03/2025, 08:40:35] Amanda - AVANT: preciso da sua ajuda
+[11/03/2025, 08:40:45] Ada Sistemas: Bom dia Amanda, claro
+[11/03/2025, 08:40:49] Ada Sistemas: em que seria ?
+[11/03/2025, 08:41:15] Amanda - AVANT: eu fiz uma remessa teste de boletos da filial
+[11/03/2025, 08:41:22] Amanda - AVANT: o banco me retornou com vários erros
+[11/03/2025, 08:41:29] Amanda - AVANT: mas eu não faço idéia como q arruma
+[11/03/2025, 08:44:08] Ada Sistemas: quais erros que ocorreram ?
+[11/03/2025, 08:44:18] Amanda - AVANT: posso te encaminhar o e-mail?
+[11/03/2025, 08:44:21] Ada Sistemas: teria como me enviar o arquivo remessa também por favor
+[11/03/2025, 08:44:26] Amanda - AVANT: p vc dar uma olhada
+[11/03/2025, 08:44:26] Ada Sistemas: pode sim
+[11/03/2025, 08:44:31] Amanda - AVANT: qual é?
+[11/03/2025, 08:45:31] Ada Sistemas: contato@adasistemas.com.br
+[11/03/2025, 08:46:50] Amanda - AVANT: enviei
+[11/03/2025, 08:46:59] Ada Sistemas: perfeito, vou verificar e te retorno
+[11/03/2025, 08:47:07] Amanda - AVANT: ta bom
+[11/03/2025, 08:52:46] Ada Sistemas: poderia me informar os boletos de teste que voces fizeram por favor
+[11/03/2025, 08:53:45] Amanda - AVANT: NA REALIDADE EU FIZ UM...VOU TE MANDAR
+‎[11/03/2025, 08:54:31] Amanda - AVANT: mpdf (3).pdf • ‎1 página ‎documento omitido
+[11/03/2025, 08:54:43] Amanda - AVANT: esse é o que eu fiz p teste
+[11/03/2025, 08:54:50] Amanda - AVANT: mas sairam vários boletos errados
+[11/03/2025, 08:54:58] Ada Sistemas: perfeito, vou verificar e te retorno
+‎[11/03/2025, 09:24:23] Ada Sistemas: ‎imagem ocultada
+[11/03/2025, 09:24:39] Ada Sistemas: e então gerar o arquivo remessa novamente e verificar se esta tudo certinho por favor
+[11/03/2025, 09:24:47] Amanda - AVANT: Uhuuuuuuuuuu
+[11/03/2025, 09:24:52] Amanda - AVANT: vc é demais
+[11/03/2025, 09:25:02] Amanda - AVANT: Vou arrumar
+[11/03/2025, 09:25:47] Ada Sistemas: Obrigado kkkk
+[11/03/2025, 09:26:07] Ada Sistemas: perfeito
+[11/03/2025, 09:26:16] Ada Sistemas: se ainda der algum erro, pode entrar em contato novamente
+[11/03/2025, 09:27:21] Amanda - AVANT: Muito obrigada
+[11/03/2025, 09:28:57] Ada Sistemas: Eu que agradeço Amanda 😁
+[11/03/2025, 09:29:06] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼☀️
+[11/03/2025, 16:51:01] Amanda - AVANT: Oi Dilan, boa tarde
+[11/03/2025, 16:51:20] Amanda - AVANT: Eu cadastrei um imposto de bonificação incorretamente
+[11/03/2025, 16:51:28] Amanda - AVANT: eu consigo excluir tudo de uma vez?
+[11/03/2025, 16:53:02] Ada Sistemas: Boa tarde Amanda, é o mesmo imposto de bonificação para vários produtos ?
+[11/03/2025, 16:53:35] Amanda - AVANT: sim.....ficou duplicado
+[11/03/2025, 16:53:42] Amanda - AVANT: eles estão com o certo e o errado
+‎[11/03/2025, 16:54:38] Amanda - AVANT: ‎imagem ocultada
+[11/03/2025, 16:54:43] Amanda - AVANT: o CST 41 ta errado
+[11/03/2025, 16:55:47] Ada Sistemas: verifiquei aqui Amanda e teria que excluir um a um mesmo
+[11/03/2025, 17:00:01] Amanda - AVANT: eita
+[12/03/2025, 16:01:42] Amanda - AVANT: Oi Dilan, boa tarde
+[12/03/2025, 16:01:57] Ada Sistemas: Boa tarde Amanda
+[12/03/2025, 16:02:41] Amanda - AVANT: eu consigo gerar um arquivo remessa só de um boleto?
+[12/03/2025, 16:02:49] Amanda - AVANT: ta dando BO no banco
+[12/03/2025, 16:03:03] Amanda - AVANT: pq to gerando o arquivo dos boletos que eu ja emiti errado
+[12/03/2025, 16:03:11] Amanda - AVANT: e a validação não ta dando certo
+[12/03/2025, 16:03:23] Ada Sistemas: esse boleto veio de algum pedido ou foi feito manual ?
+[12/03/2025, 16:03:34] Amanda - AVANT: eu fiz manual
+[12/03/2025, 16:04:13] Ada Sistemas: então não consegue gerar um arquivo remessa apenas desse boleto
+[12/03/2025, 16:04:26] Amanda - AVANT: se for de um pedido consegue?
+‎[12/03/2025, 16:06:16] Ada Sistemas: ‎imagem ocultada
+[12/03/2025, 16:06:46] Amanda - AVANT: Que ótimo...vou fazer
+[12/03/2025, 16:07:29] Ada Sistemas: perfeito 👍🏼
+[12/03/2025, 16:08:27] Ada Sistemas: qualquer dúvida, pode chamar
+[12/03/2025, 16:08:46] Amanda - AVANT: ta
+[12/03/2025, 16:08:49] Amanda - AVANT: to fazendo aqui
+‎[12/03/2025, 16:10:44] Amanda - AVANT: ‎imagem ocultada
+[12/03/2025, 16:10:49] Amanda - AVANT: oerro q ta dando agora é esse
+[12/03/2025, 16:11:14] Amanda - AVANT: tá tão estressante isso
+[12/03/2025, 16:11:56] Ada Sistemas: pode me passar o arquivo remessa para verificarmos e corrigirmos por favor
+[12/03/2025, 16:15:40] Amanda - AVANT: enviei por e-mail
+[12/03/2025, 16:27:30] Ada Sistemas: verifiquei aqui Amanda e ambas as datas de desconto são a data de vencimento, em que sempre foi assim e possivelmente o Santander alterou a politica deles e começou a dar esse erro
+[12/03/2025, 16:27:54] Ada Sistemas: o que podemos fazer é colocar a data do desconto 2 como 000000 em vez da data de vencimento
+[12/03/2025, 16:28:06] Ada Sistemas: pode ser ?
+[12/03/2025, 16:28:13] Amanda - AVANT: pode sim
+[12/03/2025, 16:28:18] Amanda - AVANT: se não for dar nenhum problema
+[12/03/2025, 16:30:36] Ada Sistemas: isso que teriamos que verificar, vamos alterar aqui a data para 000000, então te aviso para gerar novamente o arquivo remessa e voce manda para o banco
+[12/03/2025, 16:35:03] Amanda - AVANT: eu ja fiz o boleto antes da alteração
+[12/03/2025, 16:35:10] Amanda - AVANT: vc acha q preciso fazer um novo?
+[12/03/2025, 16:35:20] Amanda - AVANT: ou pode ser o arquivo desse mesmo?
+[12/03/2025, 16:36:31] Ada Sistemas: não precisa fazer um novo não, seria so gerar o arquivo de remessa novamente
+[12/03/2025, 16:36:51] Amanda - AVANT: Ta bon
+[12/03/2025, 16:37:03] Amanda - AVANT: Qdo eu puder gerar vc me avisa
+[12/03/2025, 16:37:04] Ada Sistemas: já alteramos aqui Amanda, poderia gerar o arquivo de remessa novamente e enviar para o banco por favor
+[12/03/2025, 16:37:11] Amanda - AVANT: Ta
+‎[12/03/2025, 16:38:55] Amanda - AVANT: ‎imagem ocultada
+[12/03/2025, 16:39:17] Amanda - AVANT: apareceu o lote
+[12/03/2025, 16:39:37] Ada Sistemas: teria que informar o banco, que seria o 033
+[12/03/2025, 16:39:39] Amanda - AVANT: E para gerar?
+[12/03/2025, 16:39:41] Amanda - AVANT: Ahh ta
+[12/03/2025, 16:40:14] Ada Sistemas: gerou certinho ?
+‎[12/03/2025, 16:40:40] Ada Sistemas: ‎imagem ocultada
+‎[12/03/2025, 16:40:49] Amanda - AVANT: ‎imagem ocultada
+[12/03/2025, 16:40:59] Amanda - AVANT: eu fiz, porem clico na setinha não faz nada
+‎[12/03/2025, 16:41:47] Amanda - AVANT: ‎vídeo omitido
+[12/03/2025, 16:43:27] Amanda - AVANT: Não ta gerando
+[12/03/2025, 16:43:36] Ada Sistemas: verifiquei aqui Amanda com o desenvolvimento e acabaram de me avisar que essa tela não esta funcionando
+[12/03/2025, 16:43:44] Amanda - AVANT: putz
+[12/03/2025, 16:44:26] Ada Sistemas: mas estou verificando com eles se consegue voltar a funcionar
+[12/03/2025, 16:44:31] Amanda - AVANT: ta
+[12/03/2025, 16:44:36] Amanda - AVANT: qq coisa eu gero de tudo
+[12/03/2025, 16:45:04] Ada Sistemas: certo, por enquanto, teria que usar a outra tela para gerar tudo mesmo
+[12/03/2025, 16:45:11] Amanda - AVANT: ta bom
+[12/03/2025, 16:50:44] Amanda - AVANT: Mandei
+[12/03/2025, 16:50:49] Amanda - AVANT: vamos ver se agora vai
+[12/03/2025, 16:53:03] Ada Sistemas: perfeito
+[12/03/2025, 17:02:01] Ada Sistemas: Deu certo o envio do arquivo remessa Amanda ?
+[12/03/2025, 17:06:47] Amanda - AVANT: enviei para a pessoa responsavel no banco
+[12/03/2025, 17:06:52] Amanda - AVANT: eles demoram p responder
+[12/03/2025, 17:06:57] Amanda - AVANT: agora tenho q esperar
+[12/03/2025, 17:11:21] Ada Sistemas: beleza
+[12/03/2025, 17:11:23] Ada Sistemas: quando eles derem um retorno, pode me avisar se deu certo ou não
+[12/03/2025, 17:11:35] Amanda - AVANT: Aviso sim
+[12/03/2025, 17:11:38] Amanda - AVANT: pode deixar
+[12/03/2025, 17:11:46] Ada Sistemas: algo mais que posso ajudar ?
+[13/03/2025, 17:19:58] Amanda - AVANT: Oi Dilan
+[13/03/2025, 17:19:58] Amanda - AVANT: Boa tarde
+[13/03/2025, 17:20:03] Amanda - AVANT: cada hora da um erro
+[13/03/2025, 17:20:20] Amanda - AVANT: vc não consegue ver todos os erros de uma vez só?
+[13/03/2025, 17:21:31] Ada Sistemas: Boa tarde Amanda
+[13/03/2025, 17:22:01] Amanda - AVANT: não vou conseguir validar esse arquivo nunca
+[13/03/2025, 17:22:07] Amanda - AVANT: os boletos vão começar a vencer
+[13/03/2025, 17:22:35] Ada Sistemas: eu não consigo, eu preciso das respostas do banco e dos arquivos de remessa para verificar
+[13/03/2025, 17:22:40] Ada Sistemas: qual é o erro dessa vez ?
+[13/03/2025, 17:22:46] Amanda - AVANT: te mandei no e-mail
+[13/03/2025, 17:23:33] Ada Sistemas: ok, vou verificar e te retorno
+[13/03/2025, 17:23:40] Amanda - AVANT: ta
+[13/03/2025, 17:43:02] Ada Sistemas: verifiquei aqui Amanda e deu erro porque deu uma diferença de 0,03 na soma total dos titulos, vou verificar com o desenvolvimento para corrigir
+[13/03/2025, 17:46:26] Ada Sistemas: ‎Mensagem apagada
+[13/03/2025, 17:57:23] Ada Sistemas: corrigimos Amanda, vou te enviar o arquivo remessa da conta do SANTANDER FILIAL
+‎[13/03/2025, 17:57:35] Ada Sistemas: B033130325.txt ‎documento omitido
+[14/03/2025, 14:12:32] Amanda - AVANT: Oi Dilan boa tarde
+[14/03/2025, 14:13:26] Amanda - AVANT: Tem uns tiulos a pargar da Filial que não estão aparecendo no relatório de contas a pagar
+‎[14/03/2025, 14:13:42] Amanda - AVANT: ‎imagem ocultada
+‎[14/03/2025, 14:14:04] Amanda - AVANT: ‎imagem ocultada
+[14/03/2025, 14:15:01] Ada Sistemas: Boa tarde Amanda, tudo joia ?
+[14/03/2025, 14:15:18] Ada Sistemas: vou verificar e te retorno
+[14/03/2025, 14:15:47] Amanda - AVANT: ok
+[14/03/2025, 14:23:34] Ada Sistemas: essas notas foram dadas entradas nelas pela página de NOTA FISCAL DE ENTRADA ?
+[14/03/2025, 14:23:58] Ada Sistemas: ou foram feitas manualmente no sistema ?
+‎[14/03/2025, 14:28:27] Ada Sistemas: ‎imagem ocultada
+[14/03/2025, 14:29:01] Amanda - AVANT: Nota fiscal Dilan
+[14/03/2025, 14:29:05] Amanda - AVANT: Pelo XML
+[14/03/2025, 14:45:28] Ada Sistemas: vou verificar o porque não foi criado os titulos, mas por enquanto, teria que criar os titulos e vincular eles as notas que voce me informou
+‎[14/03/2025, 14:45:49] Ada Sistemas: ‎imagem ocultada
+[14/03/2025, 14:45:53] Amanda - AVANT: mas qdo da entrada com XML tinha q fazer isso automatico né
+[14/03/2025, 14:46:05] Ada Sistemas: sim, isso que está estranho
+[14/03/2025, 14:46:15] Ada Sistemas: e vamos verificar
+[14/03/2025, 14:46:18] Amanda - AVANT: blz
+‎[14/03/2025, 14:46:50] Ada Sistemas: ‎imagem ocultada
+‎[14/03/2025, 14:47:05] Ada Sistemas: ‎imagem ocultada
+[14/03/2025, 14:47:26] Amanda - AVANT: ok
+[07/04/2025, 15:55:30] Amanda - AVANT: Oi Dilan, boa tarde
+[07/04/2025, 15:56:05] Ada Sistemas: Boa tarde Amanda, tudo bem ?
+[07/04/2025, 15:56:18] Amanda - AVANT: Tudo jóia e com vc?
+[07/04/2025, 15:56:37] Ada Sistemas: tudo joia também
+[07/04/2025, 15:58:16] Amanda - AVANT: eu preciso mandar os XMLS para o contador
+[07/04/2025, 15:58:30] Amanda - AVANT: mas não tem a opção de puxar o XML por almoxarifado
+[07/04/2025, 15:58:43] Amanda - AVANT: puxa tudo junto?
+[07/04/2025, 16:00:32] Ada Sistemas: puxa tudo junto
+[07/04/2025, 16:01:41] Amanda - AVANT: ahh ta bom
+‎[07/04/2025, 16:02:33] Ada Sistemas: ‎imagem ocultada
+[07/04/2025, 16:03:04] Amanda - AVANT: Ahhh ta bom...obrigada
+[07/04/2025, 16:17:13] Ada Sistemas: Eu que agradeço
+[07/04/2025, 16:17:27] Ada Sistemas: Tenha um ótimo dia e uma excelente semana 😁☀️🤝🏻🙏🏼
+[09/04/2025, 11:04:19] Amanda - AVANT: Bom diaaaa
+‎[09/04/2025, 11:04:23] Amanda - AVANT: ‎imagem ocultada
+[09/04/2025, 11:04:30] Amanda - AVANT: como que eu faço p fazer a liberação?
+[09/04/2025, 11:04:34] Ada Sistemas: Bom dia Amanda, tudo joia ?
+[09/04/2025, 11:04:42] Amanda - AVANT: eu alterei a forma de pagamento do cliente
+‎[09/04/2025, 11:05:48] Ada Sistemas: ‎imagem ocultada
+‎[09/04/2025, 11:06:54] Ada Sistemas: ‎imagem ocultada
+[09/04/2025, 11:07:09] Ada Sistemas: ai o pedido vai estar liberado para ser colocado em um lote pela roterização
+[09/04/2025, 11:07:26] Amanda - AVANT: deu certo...obrigadaaa
+[09/04/2025, 11:07:42] Ada Sistemas: Perfeito Amanda 👍🏼
+[09/04/2025, 11:07:47] Ada Sistemas: Eu que agradeço!
+[09/04/2025, 11:07:55] Ada Sistemas: Qualquer dúvida, pode chamar
+[09/04/2025, 11:08:05] Amanda - AVANT: Obrigadaaa
+[14/04/2025, 07:48:52] Amanda - AVANT: Oiii Dilan...bom diaaa
+‎[14/04/2025, 07:49:00] Amanda - AVANT: ‎imagem ocultada
+[14/04/2025, 07:49:09] Amanda - AVANT: A Remessa do Itau esta com problema
+‎[14/04/2025, 07:49:25] Amanda - AVANT: B3411404.txt ‎documento omitido
+[14/04/2025, 08:05:09] Ada Sistemas: Bom dia Amanda, tudo bem ?
+[14/04/2025, 08:05:35] Ada Sistemas: Está com problemas na hora de processar ela aqui no sistema ?
+[14/04/2025, 08:06:22] Amanda - AVANT: PROCESSA NO BANCO
+[14/04/2025, 08:06:39] Amanda - AVANT: eu gerei a remessa e qdo vou mandar para o banco ta dando esse problema
+[14/04/2025, 08:08:17] Ada Sistemas: vou verificar e te retorno
+[14/04/2025, 08:08:45] Amanda - AVANT: Ta bom
+[14/04/2025, 08:11:16] Ada Sistemas: em qual das contas do ITAU é a que esta dando problema, a principal ou da filial ?
+[14/04/2025, 08:11:37] Amanda - AVANT: PRINCIPAL
+[14/04/2025, 08:12:28] Ada Sistemas: a filial esta normal ou voces não testaram ainda ?
+[14/04/2025, 08:16:13] Amanda - AVANT: Filial gerou normal
+‎[14/04/2025, 08:18:15] Ada Sistemas: ‎imagem ocultada
+[14/04/2025, 08:18:50] Amanda - AVANT: Ahhh vou arrumar
+[14/04/2025, 08:20:12] Ada Sistemas: perfeito 👍🏼
+‎[14/04/2025, 08:21:29] Ada Sistemas: ‎imagem ocultada
+[14/04/2025, 08:27:58] Ada Sistemas: deu certo te enviar para o banco a remessa ?
+[14/04/2025, 09:02:35] Amanda - AVANT: Deu certo
+[14/04/2025, 09:02:41] Amanda - AVANT: era o cadastro mesmo
+[14/04/2025, 09:02:50] Amanda - AVANT: ja conseguir envira o arquivo
+[14/04/2025, 09:02:53] Amanda - AVANT: muito obrigada
+[14/04/2025, 09:03:34] Ada Sistemas: perfeito 👍🏼
+[14/04/2025, 09:03:46] Ada Sistemas: Eu que agradeço Amanda !
+[14/04/2025, 09:03:52] Ada Sistemas: Qualquer dúvida, pode chamar
+[14/04/2025, 09:04:44] Ada Sistemas: Tenha um ótimo dia e uma excelente semana 😁🤝🏻☀️🙏🏼
+[23/04/2025, 10:43:58] Amanda - AVANT: Oiii Dilan Bom diaaaa
+[23/04/2025, 10:44:20] Ada Sistemas: Bom dia Amanda, tudo otimo ?
+[23/04/2025, 10:44:23] Amanda - AVANT: la vem eu com BO
+[23/04/2025, 10:44:25] Amanda - AVANT: rsrsrsrs
+‎[23/04/2025, 10:45:03] Amanda - AVANT: ‎imagem ocultada
+[23/04/2025, 10:45:16] Amanda - AVANT: pq será q esse boleto não entrou na remessa
+[23/04/2025, 10:45:33] Ada Sistemas: Esse boleto tem o Nosso Numero ?
+‎[23/04/2025, 10:46:03] Amanda - AVANT: ‎imagem ocultada
+[23/04/2025, 10:46:04] Amanda - AVANT: tem sim
+[23/04/2025, 10:47:11] Ada Sistemas: voce teria o arquivo de remessa que era para ele ter entrado ?
+‎[23/04/2025, 10:50:19] Ada Sistemas: ‎imagem ocultada
+[23/04/2025, 10:50:58] Ada Sistemas: em que esse foi um dos titulos que deu aquele problema de um titulo sobrescrever o outro, tendo o mesmo numero de nota fiscal - o 10307
+[23/04/2025, 10:51:39] Ada Sistemas: em que esse titulo esta vinculado a nota 10307 de serie 1 do almox 2, mas esta com as informações da nota 10307 de serie 99 do almox 2
+[23/04/2025, 10:51:56] Amanda - AVANT: Vou pedir pro cliente fazer PIX então
+[23/04/2025, 10:52:38] Ada Sistemas: então teria que voltar as informações deste titulo a como estava antes, que nem no historico na imagem e então o boleto iria para o arquivo de remessa corretamente
+[23/04/2025, 10:54:17] Ada Sistemas: certo, então teria que voltar as informações anteriores do titulo e trocar o modo de pagamento e apagar o Nosso Numero do titulo, senão ele pode ir para o arquivo de remessa de hoje
+[23/04/2025, 11:00:52] Amanda - AVANT: Ta bom
+[23/04/2025, 11:01:11] Amanda - AVANT: Muito obrigadaaa
+[23/04/2025, 11:01:27] Ada Sistemas: Eu que agradeço Amanda 😁
+[23/04/2025, 11:01:34] Ada Sistemas: Qualquer dúvida, so chamar
+[23/04/2025, 11:01:47] Ada Sistemas: Tenha um ótimo dia 😁🤝🏻🙏🏼☀️
+[28/04/2025, 16:01:19] Amanda - AVANT: Oii Dilan, boa tarde
+[28/04/2025, 16:01:32] Ada Sistemas: Boa tarde Amanda, tudo joia ?
+[28/04/2025, 16:01:38] Amanda - AVANT: tudo sim e com vc?
+[28/04/2025, 16:01:47] Ada Sistemas: tudo joia tambem
+[28/04/2025, 16:02:14] Amanda - AVANT: eu fiz uma planilha p impostar uns impostos
+[28/04/2025, 16:02:24] Amanda - AVANT: mas ta ficando tudo vermelho qdo importo
+[28/04/2025, 16:02:49] Ada Sistemas: pode me mandar uma foto da tela e também me enviar a planilha por favor
+‎[28/04/2025, 16:02:51] Amanda - AVANT: ‎imagem ocultada
+‎[28/04/2025, 16:03:15] Amanda - AVANT: CadastroImpostos_28_04_2025_14_17_55.xlsx ‎documento omitido
+[28/04/2025, 16:04:30] Ada Sistemas: verifiquei aqui Amanda e esta faltando o UF de origem e destino
+[28/04/2025, 16:04:38] Ada Sistemas: por isso esta ficando tudo vermelho
+[28/04/2025, 16:14:39] Amanda - AVANT: Ahhh ta
+[28/04/2025, 16:14:50] Amanda - AVANT: Vou preencher
+[28/04/2025, 16:15:02] Ada Sistemas: perfeito Amanda 👍🏼
+‎[28/04/2025, 16:17:19] Ada Sistemas: ‎imagem ocultada
+‎[28/04/2025, 16:17:41] Ada Sistemas: ‎imagem ocultada
+[28/04/2025, 16:20:31] Amanda - AVANT: ta bom...vou revisar ela toda
+[28/04/2025, 16:21:27] Ada Sistemas: pelo que verifiquei, seria apenas essas duas linhas que não seriam importadas após colocar o UF de origem e destino
+[28/04/2025, 16:22:02] Ada Sistemas: então imagino que seria necessário revisar apenas essas duas linhas
+[06/05/2025, 09:44:52] Amanda - AVANT: Oiii Dilan, bom diaaa...tudo bem?
+[06/05/2025, 09:45:08] Ada Sistemas: Bom dia Amanda, tudo bem e voce ?
+[06/05/2025, 09:45:15] Amanda - AVANT: Tudo jóia
+[06/05/2025, 09:45:22] Ada Sistemas: Maravilha
+[06/05/2025, 09:45:27] Ada Sistemas: em que posso te ajudar ?
+[06/05/2025, 09:45:47] Amanda - AVANT: Teria algum relatorio no sistema que eu consigo puxar que me mostre a comissao por cidade?
+[06/05/2025, 09:46:44] Ada Sistemas: vou verificar e te retorno
+[06/05/2025, 09:47:49] Amanda - AVANT: Ta
+[06/05/2025, 09:52:27] Ada Sistemas: verifiquei aqui Amanda e não encontrei um relatório que mostre a comissão de vendedor por cidade que esteja funcionando
+[06/05/2025, 09:57:47] Amanda - AVANT: Teria algum que mostra a cidade nas vendas?
+‎[06/05/2025, 10:00:27] Amanda - AVANT: ‎<anexado: 00000011-PHOTO-2025-05-06-10-00-27.jpg>
+[06/05/2025, 10:00:37] Amanda - AVANT: ESSE SERIA PERFEITO MAS NÃO DA P PESQUISAR
+[06/05/2025, 10:00:48] Ada Sistemas: tem sim, seria o CUBO DE VENDAS, o caminho seria VENDAS -> RELATORIOS A - M -> CUBO DE VENDAS
+[06/05/2025, 10:01:16] Ada Sistemas: sim, mas esse seria para adicionar comissão ao vendedor, mas não esta funcionando no momento
+‎[06/05/2025, 10:04:34] Ada Sistemas: ‎<anexado: 00000015-PHOTO-2025-05-06-10-04-34.jpg>
+‎[06/05/2025, 10:05:07] Ada Sistemas: ‎<anexado: 00000016-PHOTO-2025-05-06-10-05-07.jpg>
+‎[06/05/2025, 10:05:26] Ada Sistemas: ‎<anexado: 00000017-PHOTO-2025-05-06-10-05-26.jpg>
+[08/05/2025, 08:36:53] Amanda - AVANT: Oi Dilan, bom diaaa
+[08/05/2025, 08:37:04] Amanda - AVANT: como faço para tirar verba de vendedor?
+[08/05/2025, 08:37:08] Ada Sistemas: Bom dia Amanda, tudo joia ?
+[08/05/2025, 08:37:22] Amanda - AVANT: pq tem pedido sendo liberado automatico sem eu ver antes
+[08/05/2025, 08:37:28] Ada Sistemas: beleza
+‎[08/05/2025, 08:39:06] Ada Sistemas: ‎<anexado: 00000023-PHOTO-2025-05-08-08-39-06.jpg>
+‎[08/05/2025, 08:39:52] Ada Sistemas: ‎<anexado: 00000024-PHOTO-2025-05-08-08-39-52.jpg>
+[08/05/2025, 08:54:45] Ada Sistemas: conseguiu ?
+[08/05/2025, 08:55:05] Amanda - AVANT: To liberando os pedidos e ja vou fazer...te aviso
+‎[08/05/2025, 08:56:18] Ada Sistemas: ‎<anexado: 00000027-PHOTO-2025-05-08-08-56-18.jpg>

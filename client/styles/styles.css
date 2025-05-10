@@ -1,0 +1,234 @@
+/* Estilos gerais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Estilos para o container de chat */
+.chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilos para o cabeçalho */
+.chat-header {
+    background-color: #2E8B57; /* Verde */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-container {
+    margin-right: 15px;
+}
+
+.avatar-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.header-text {
+    text-align: left;
+}
+
+/* Estilos para as mensagens */
+.chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #e9ecef; /* Cinza claro */
+    margin-left: auto;
+    text-align: right;
+}
+
+.assistant-message {
+    background-color: #d4edda; /* Verde claro */
+}
+
+/* Estilos para elementos Markdown dentro das mensagens do assistente */
+.assistant-message ul,
+.assistant-message ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.assistant-message p {
+    margin-bottom: 0.5rem;
+}
+
+.assistant-message a {
+    color: #2E8B57;
+    text-decoration: underline;
+}
+
+.assistant-message a:hover {
+    color: #1d5c38;
+}
+
+.assistant-message code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.assistant-message pre {
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    overflow-x: auto;
+}
+
+.assistant-message blockquote {
+    border-left: 3px solid #2E8B57;
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    color: #666;
+}
+
+.system-message {
+    background-color: #ffeeba;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.chat-input {
+    padding: 15px;
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+/* Estilos para fontes de informação */
+.sources-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.source-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border-left: 3px solid #2E8B57;
+}
+
+/* Estilos para o indicador de digitação */
+.typing-indicator {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+    background-color: #2E8B57;
+    border-radius: 50%;
+    animation: typing 1s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Estilos específicos para iframe */
+.iframe-body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.iframe-chat-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.iframe-chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px 10px 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.iframe-chat-input {
+    padding: 10px;
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.iframe-message-input {
+    flex-grow: 1;
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+    padding: 8px 15px;
+    margin-right: 10px;
+}
+
+.iframe-send-button {
+    background-color: #2E8B57;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+}
+
+.iframe-connection-status {
+    font-size: 0.8rem;
+}

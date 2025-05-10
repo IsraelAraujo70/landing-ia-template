@@ -1,0 +1,3 @@
+"""
+Ada Assistant application package.
+"""

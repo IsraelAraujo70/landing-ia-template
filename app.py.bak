@@ -1,0 +1,716 @@
+import os
+import json
+import pdfplumber
+import asyncio
+import uvicorn
+import time
+import tiktoken
+import numpy as np
+import logging
+from fastapi import FastAPI, UploadFile, File, WebSocket, WebSocketDisconnect, HTTPException, Depends
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from typing import List, Dict, Any, Optional
+from pydantic import BaseModel
+from dotenv import load_dotenv
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import FAISS
+from langchain.docstore.document import Document
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.messages import SystemMessage, HumanMessage
+
+# Configuração de logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler("app.log")
+    ]
+)
+logger = logging.getLogger("ada-assistente")
+
+# Constantes
+UPLOADS_DIR = "uploads"
+FAISS_INDEX_PATH = os.path.abspath("faiss_index")
+
+# Carregar variáveis de ambiente
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY não está definido no arquivo .env")
+
+# Inicializar tokenizer para divisão de texto
+tokenizer = tiktoken.get_encoding("cl100k_base")
+
+# Inicializar modelo de embeddings da OpenAI
+embeddings_model = OpenAIEmbeddings(
+    model="text-embedding-3-small",
+    openai_api_key=OPENAI_API_KEY
+)
+
+# Inicializar o cliente OpenAI para o chat
+chat_model = ChatOpenAI(
+    model_name="gpt-4o",
+    temperature=0.7,
+    api_key=OPENAI_API_KEY
+)
+
+# Variável global para o banco de dados de vetores
+vector_db = None
+
+# WebSocket connection manager
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: Dict[str, WebSocket] = {}  # Usando dict para identificar conexões por ID
+        self.chat_history: Dict[str, List[Dict[str, Any]]] = {}  # Histórico de chat por ID de sessão
+
+    async def connect(self, websocket: WebSocket, session_id: str):
+        await websocket.accept()
+        self.active_connections[session_id] = websocket
+        if session_id not in self.chat_history:
+            self.chat_history[session_id] = []
+        logger.info(f"Nova conexão WebSocket estabelecida: {session_id}")
+
+    def disconnect(self, session_id: str):
+        if session_id in self.active_connections:
+            del self.active_connections[session_id]
+            logger.info(f"Conexão WebSocket encerrada: {session_id}")
+
+    async def send_personal_message(self, message: Dict[str, Any], session_id: str):
+        if session_id in self.active_connections:
+            websocket = self.active_connections[session_id]
+            await websocket.send_text(json.dumps(message))
+            # Adicionar mensagem ao histórico
+            if message.get("role") and message.get("content"):
+                self.chat_history[session_id].append({
+                    "role": message["role"],
+                    "content": message["content"],
+                    "timestamp": time.time()
+                })
+
+    def get_chat_history(self, session_id: str) -> List[Dict[str, Any]]:
+        return self.chat_history.get(session_id, [])
+
+manager = ConnectionManager()
+
+# Pydantic models for API requests and responses
+class QuestionRequest(BaseModel):
+    question: str
+    session_id: str
+    top_k: int = 5
+    file_paths: List[str] = []
+
+class QuestionResponse(BaseModel):
+    answer: str
+    sources: List[Dict[str, Any]] = []
+    session_id: str
+
+class DocumentInfo(BaseModel):
+    filename: str
+    upload_time: str
+    file_path: str
+    size: int
+    type: str  # Tipo de documento (PDF, TXT, MD, etc.)
+
+# Initialize FastAPI app
+app = FastAPI(
+    title="Assistente IA Ada Sistemas",
+    description="API para o assistente de IA da Ada Sistemas",
+    version="1.0.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, substituir por origens específicas
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Montar diretório de arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Montar diretório do cliente
+app.mount("/client", StaticFiles(directory="client"), name="client")
+
+# Endpoint para verificar status da API
+@app.get("/api/status")
+async def api_status():
+    return {
+        "status": "online",
+        "version": "1.0.0",
+        "message": "Assistente IA Ada Sistemas está funcionando corretamente"
+    }
+
+# Endpoint para servir a página inicial do cliente
+@app.get("/")
+async def serve_client():
+    return FileResponse("client/index.html")
+
+# Endpoint para listar documentos carregados
+@app.get("/documents", response_model=List[DocumentInfo])
+async def list_documents():
+    """Lista todos os documentos carregados."""
+    try:
+        if not os.path.exists(UPLOADS_DIR):
+            os.makedirs(UPLOADS_DIR, exist_ok=True)
+            return []
+        
+        documents = []
+        for filename in os.listdir(UPLOADS_DIR):
+            file_path = os.path.join(UPLOADS_DIR, filename)
+            if os.path.isfile(file_path):
+                # Obter estatísticas do arquivo
+                stats = os.stat(file_path)
+                # Formatar o tempo de upload do nome do arquivo (assumindo formato: timestamp_filename)
+                parts = filename.split('_', 1)
+                upload_time = "Desconhecido"
+                original_filename = filename
+                
+                if len(parts) > 1 and parts[0].isdigit():
+                    timestamp = int(parts[0])
+                    upload_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp))
+                    original_filename = parts[1]  # Nome original sem o timestamp
+                
+                # Determinar o tipo de arquivo
+                file_extension = os.path.splitext(original_filename)[1].lower()
+                file_type = file_extension.replace(".", "").upper()
+                
+                # Criar informações do documento
+                doc_info = DocumentInfo(
+                    filename=original_filename,
+                    upload_time=upload_time,
+                    file_path=file_path,
+                    size=stats.st_size,
+                    type=file_type
+                )
+                documents.append(doc_info)
+        
+        # Ordenar por tempo de upload (mais recente primeiro)
+        documents.sort(key=lambda x: x.upload_time, reverse=True)
+        return documents
+    except Exception as e:
+        logger.error(f"Erro ao listar documentos: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Erro ao listar documentos: {str(e)}")
+
+# Função para extrair texto de um arquivo
+def extract_text(file_path: str) -> str:
+    """Extrai texto de um arquivo com base em sua extensão."""
+    try:
+        file_extension = os.path.splitext(file_path)[1].lower()
+        
+        if file_extension == '.pdf':
+            # Extrair texto do PDF
+            text = ""
+            with pdfplumber.open(file_path) as pdf:
+                for page in pdf.pages:
+                    page_text = page.extract_text() or ""
+                    text += page_text + "\n\n"
+            return text
+        
+        elif file_extension == '.txt':
+            # Extrair texto do TXT
+            with open(file_path, 'r', encoding='utf-8') as file:
+                return file.read()
+        
+        elif file_extension == '.md':
+            # Extrair texto do Markdown
+            with open(file_path, 'r', encoding='utf-8') as file:
+                return file.read()
+        
+        else:
+            # Tipo de arquivo não suportado
+            raise ValueError(f"Tipo de arquivo não suportado: {file_extension}")
+    
+    except Exception as e:
+        logger.error(f"Erro ao extrair texto de {file_path}: {str(e)}", exc_info=True)
+        return ""
+
+# Função para dividir texto em chunks
+def split_text(text: str, chunk_size: int = 1000, chunk_overlap: int = 200) -> List[Document]:
+    """Divide o texto em chunks com uma contagem máxima de tokens."""
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        length_function=lambda text: len(tokenizer.encode(text)),
+    )
+    texts = text_splitter.split_text(text)
+    return [Document(page_content=t, metadata={"source": "document"}) for t in texts]
+
+# Função para criar um banco de dados de vetores
+def create_vector_db(documents: List[Document]) -> FAISS:
+    """Cria um banco de dados FAISS a partir de documentos."""
+    try:
+        logger.info(f"Criando banco de dados de vetores com {len(documents)} documentos")
+        db = FAISS.from_documents(documents, embeddings_model)
+        return db
+    except Exception as e:
+        logger.error(f"Erro ao criar banco de dados de vetores: {str(e)}", exc_info=True)
+        raise ValueError(f"Erro ao criar banco de dados de vetores: {str(e)}")
+
+# Função para salvar o banco de dados de vetores
+def save_vector_db(db: FAISS) -> None:
+    """Salva o banco de dados de vetores em disco."""
+    try:
+        # Garantir que o diretório existe
+        os.makedirs(FAISS_INDEX_PATH, exist_ok=True)
+        
+        # Salvar o banco de dados de vetores
+        db.save_local(FAISS_INDEX_PATH)
+        logger.info(f"Banco de dados de vetores salvo em {FAISS_INDEX_PATH}")
+    except Exception as e:
+        logger.error(f"Erro ao salvar banco de dados de vetores: {str(e)}", exc_info=True)
+        raise ValueError(f"Erro ao salvar banco de dados de vetores: {str(e)}")
+
+# Função para carregar o banco de dados de vetores
+def load_vector_db() -> Optional[FAISS]:
+    """Carrega o banco de dados de vetores do disco."""
+    try:
+        # Verificar se o arquivo de índice existe
+        if not os.path.exists(os.path.join(FAISS_INDEX_PATH, "index.faiss")):
+            logger.info(f"Arquivo de banco de dados de vetores não encontrado em {FAISS_INDEX_PATH}")
+            return None
+        
+        # Carregar o banco de dados de vetores
+        db = FAISS.load_local(FAISS_INDEX_PATH, embeddings_model)
+        
+        # Monkey patch para o método _embed_query
+        def patched_embed_query(self, text):
+            return embeddings_model.embed_query(text)
+        
+        # Aplicar o monkey patch
+        import types
+        db._embed_query = types.MethodType(patched_embed_query, db)
+        
+        # Também patch para o método _embed_documents
+        def patched_embed_documents(self, texts):
+            return [embeddings_model.embed_query(text) for text in texts]
+        
+        # Aplicar o patch
+        db._embed_documents = types.MethodType(patched_embed_documents, db)
+        
+        logger.info(f"Banco de dados de vetores carregado de {FAISS_INDEX_PATH}")
+        return db
+    except Exception as e:
+        logger.error(f"Erro ao carregar banco de dados de vetores: {str(e)}", exc_info=True)
+        return None
+
+# Função para consultar o banco de dados de vetores
+async def query_vector_db(question: str, top_k: int = 5, file_paths: List[str] = []):
+    """Consulta o banco de dados de vetores para documentos relevantes."""
+    global vector_db
+    
+    if not vector_db:
+        raise ValueError("Banco de dados de vetores não inicializado")
+    
+    logger.info(f"Consultando banco de dados de vetores com pergunta: '{question}'")
+    logger.debug(f"Filtrando por caminhos de arquivo: {file_paths}")
+    
+    try:
+        logger.debug("Gerando embeddings para a pergunta...")
+        # Gerar embeddings para a pergunta usando o método embed_query diretamente
+        embedding = embeddings_model.embed_query(question)
+        logger.debug(f"Embeddings gerados com sucesso de comprimento {len(embedding)}")
+        
+        logger.debug("Realizando busca por similaridade...")
+        # Realizar a busca por similaridade
+        if file_paths and len(file_paths) > 0 and file_paths[0] is not None:
+            logger.debug(f"Filtrando resultados por {len(file_paths)} caminhos de arquivo")
+            # Primeiro, obter todos os documentos relevantes
+            all_docs = vector_db.similarity_search_by_vector(embedding, k=top_k * 3)
+            
+            # Filtrar manualmente os documentos com base nos caminhos de arquivo
+            filtered_docs = [
+                doc for doc in all_docs 
+                if 'source' in doc.metadata and doc.metadata['source'] in file_paths
+            ]
+            
+            # Limitar ao número solicitado
+            docs = filtered_docs[:top_k]
+        else:
+            # Se não houver filtros, retornar todos os documentos relevantes
+            docs = vector_db.similarity_search_by_vector(embedding, k=top_k)
+        
+        logger.info(f"Encontrados {len(docs)} documentos relevantes")
+        return docs
+    
+    except Exception as e:
+        logger.error(f"Erro ao consultar banco de dados de vetores: {str(e)}", exc_info=True)
+        raise ValueError(f"Erro ao consultar banco de dados de vetores: {str(e)}")
+
+# Função para gerar resposta usando OpenAI
+async def generate_answer(question: str, context_docs: List[Document], chat_history: List[Dict[str, Any]] = []) -> str:
+    """Gera uma resposta usando OpenAI com base na pergunta, documentos de contexto e histórico de chat."""
+    # Extrair contexto dos documentos
+    context_text = "\n\n".join([doc.page_content for doc in context_docs])
+    logger.info(f"Comprimento do contexto: {len(context_text)} caracteres")
+    
+    try:
+        logger.debug("Criando prompt...")
+        
+        # Criar mensagens para o modelo de chat
+        system_message = SystemMessage(content="""
+        Você é a assistente de IA oficial da Ada Sistemas, chamada Ada, especializada em responder perguntas com base no contexto fornecido.
+        Você é uma assistente virtual feminina.
+        
+        Diretrizes:
+        1. Use apenas as informações do contexto para responder.
+        2. Formate todas as suas respostas usando Markdown para melhor legibilidade.
+        3. SOMENTE se a informação não estiver no contexto ou você não souber a resposta, informe que não tem informações suficientes e redirecione o usuário para um atendente humano através do link: wa.me/553537217123
+        4. Seja profissional, cordial e útil em todas as interações.
+        5. Mantenha suas respostas concisas e diretas.
+        6. Use formatação Markdown para destacar pontos importantes, como:
+           - Listas com marcadores para enumerar itens
+           - **Negrito** para enfatizar informações importantes
+           - *Itálico* para termos técnicos
+           - Links formatados corretamente: [texto do link](URL)
+        7. Identifique-se como "Assistente Ada" ao iniciar a conversa.
+        8. SOMENTE quando não souber a resposta, redirecione para um atendente humano usando: "Para um atendimento mais personalizado, por favor entre em contato com nosso suporte pelo WhatsApp: [Clique aqui](https://wa.me/553537217123)"
+        9. Mostrar o whatsapp somente quando o atendente pedir atendimento humano ou você não souber MESMO a resposta.
+        Lembre-se que você representa a Ada Sistemas e deve manter o padrão de qualidade da empresa.
+        """)
+        
+        
+        # Preparar histórico de chat para contexto
+        chat_context = ""
+        if chat_history and len(chat_history) > 0:
+            chat_context = "Histórico de conversa recente:\n"
+            # Incluir apenas as últimas 5 mensagens para não sobrecarregar o contexto
+            for msg in chat_history[-5:]:
+                role = "Usuário" if msg["role"] == "user" else "Assistente"
+                chat_context += f"{role}: {msg['content']}\n"
+            chat_context += "\n"
+        
+        user_message = HumanMessage(content=f"""
+        {chat_context}
+        
+        Contexto de documentos:
+        {context_text}
+        
+        Pergunta atual: {question}
+        
+        Responda usando apenas as informações do contexto acima. Se não tiver informações suficientes, informe isso claramente.
+        """)
+        
+        messages = [system_message, user_message]
+        
+        # Enviar requisição para OpenAI
+        logger.debug("Enviando requisição para OpenAI...")
+        response = await chat_model.agenerate([messages])
+        
+        logger.debug("Resposta recebida da OpenAI")
+        return response.generations[0][0].text.strip()
+    
+    except Exception as e:
+        logger.error(f"Erro ao gerar resposta: {str(e)}", exc_info=True)
+        return f"Erro ao gerar resposta: {str(e)}"
+
+# Função para processar um documento
+def process_document(file_path: str, file_name: str, upload_time: str) -> List[Document]:
+    """Processa um documento e o divide em chunks."""
+    logger.info(f"Processando arquivo: {file_path}")
+    
+    # Extrair texto do documento
+    text = extract_text(file_path)
+    if not text:
+        raise ValueError(f"Não foi possível extrair texto do arquivo: {file_name}")
+    
+    logger.info(f"Texto extraído com comprimento: {len(text)} caracteres")
+    
+    # Dividir texto em chunks
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=lambda text: len(tokenizer.encode(text)),
+    )
+    chunks = text_splitter.split_text(text)
+    
+    logger.info(f"Dividido em {len(chunks)} chunks")
+    
+    # Criar documentos com metadados
+    documents = []
+    for i, chunk in enumerate(chunks):
+        metadata = {
+            "source": file_name,
+            "chunk": i,
+            "filename": file_name,
+            "upload_time": upload_time,
+            "file_path": file_path
+        }
+        documents.append(Document(page_content=chunk, metadata=metadata))
+    
+    return documents
+
+# Função para adicionar documentos ao banco de dados de vetores
+def add_documents_to_vector_db(documents: List[Document]) -> None:
+    """Adiciona documentos ao banco de dados de vetores."""
+    global vector_db
+    
+    if not documents:
+        logger.info("Nenhum documento para adicionar")
+        return
+    
+    logger.info(f"Adicionando {len(documents)} documentos ao banco de dados de vetores")
+    
+    try:
+        if vector_db is None:
+            # Criar um novo banco de dados de vetores
+            logger.info("Criando novo banco de dados de vetores")
+            vector_db = create_vector_db(documents)
+        else:
+            # Adicionar ao banco de dados existente
+            logger.info("Adicionando ao banco de dados de vetores existente")
+            
+            # Usar o método from_documents diretamente para adicionar novos documentos
+            new_db = FAISS.from_documents(documents, embeddings_model)
+            
+            # Mesclar com o banco de dados existente
+            vector_db.merge_from(new_db)
+        
+        # Salvar o banco de dados atualizado
+        logger.info("Salvando banco de dados de vetores atualizado em disco")
+        save_vector_db(vector_db)
+        
+    except Exception as e:
+        logger.error(f"Erro ao adicionar documentos ao banco de dados de vetores: {str(e)}", exc_info=True)
+        raise ValueError(f"Erro ao adicionar documentos ao banco de dados de vetores: {str(e)}")
+
+# Endpoint para fazer upload de um documento
+@app.post("/upload")
+async def upload_document(file: UploadFile = File(...)):
+    """Faz upload de um documento e o adiciona ao banco de dados de vetores."""
+    global vector_db
+    
+    # Criar diretório de uploads se não existir
+    uploads_dir = UPLOADS_DIR
+    os.makedirs(uploads_dir, exist_ok=True)
+    
+    # Gerar um timestamp para o nome do arquivo para evitar colisões
+    timestamp = time.time()
+    file_name = f"{int(timestamp)}_{file.filename}"
+    file_path = os.path.join(uploads_dir, file_name)
+    
+    # Salvar o arquivo
+    with open(file_path, "wb") as buffer:
+        buffer.write(await file.read())
+    
+    try:
+        # Processar o documento
+        documents = process_document(file_path, file.filename, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp)))
+        
+        # Adicionar documentos ao banco de dados de vetores
+        add_documents_to_vector_db(documents)
+        
+        return {
+            "message": "Documento processado com sucesso", 
+            "chunks": len(documents), 
+            "file_saved": file_path,
+            "filename": file.filename
+        }
+    
+    except Exception as e:
+        logger.error(f"Erro ao processar documento: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Endpoint HTTP para fazer uma pergunta
+@app.post("/perguntar", response_model=QuestionResponse)
+async def ask_question(request: QuestionRequest):
+    """Faz uma pergunta e obtém uma resposta com base no contexto do documento."""
+    try:
+        # Obter histórico de chat para a sessão
+        chat_history = manager.get_chat_history(request.session_id)
+        
+        # Consultar banco de dados de vetores para documentos relevantes
+        docs = await query_vector_db(request.question, request.top_k, request.file_paths)
+        
+        # Gerar resposta
+        answer = await generate_answer(request.question, docs, chat_history)
+        
+        # Adicionar pergunta e resposta ao histórico
+        if request.session_id not in manager.chat_history:
+            manager.chat_history[request.session_id] = []
+        
+        # Adicionar pergunta ao histórico
+        manager.chat_history[request.session_id].append({
+            "role": "user",
+            "content": request.question,
+            "timestamp": time.time()
+        })
+        
+        # Adicionar resposta ao histórico
+        manager.chat_history[request.session_id].append({
+            "role": "assistant",
+            "content": answer,
+            "timestamp": time.time()
+        })
+        
+        # Preparar informações de fontes
+        sources = [{"content": doc.page_content, "metadata": doc.metadata} for doc in docs]
+        
+        return {"answer": answer, "sources": sources, "session_id": request.session_id}
+    
+    except ValueError as e:
+        logger.error(f"Erro de valor ao processar pergunta: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except Exception as e:
+        logger.error(f"Erro ao gerar resposta: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Erro ao gerar resposta: {str(e)}")
+
+# Endpoint WebSocket para chat
+@app.websocket("/ws/chat/{session_id}")
+async def websocket_endpoint(websocket: WebSocket, session_id: str):
+    """Endpoint WebSocket para chat em tempo real."""
+    await manager.connect(websocket, session_id)
+    try:
+        # Enviar mensagem de boas-vindas
+        await manager.send_personal_message(
+            {
+                "role": "assistant",
+                "content": "Olá! Sou o Assistente Ada. Como posso ajudar você hoje?",
+                "timestamp": time.time()
+            },
+            session_id
+        )
+        
+        while True:
+            # Receber mensagem do cliente
+            data = await websocket.receive_text()
+            logger.info(f"Dados recebidos do cliente na sessão {session_id}")
+            
+            try:
+                data_json = json.loads(data)
+                
+                if "question" not in data_json:
+                    await manager.send_personal_message(
+                        {
+                            "role": "system",
+                            "content": "Erro: A pergunta é obrigatória",
+                            "error": True
+                        },
+                        session_id
+                    )
+                    continue
+                
+                question = data_json["question"]
+                top_k = data_json.get("top_k", 5)
+                file_paths = data_json.get("file_paths", [])
+                
+                logger.info(f"Processando pergunta: '{question}' com top_k={top_k}")
+                
+                # Adicionar pergunta ao histórico sem enviar de volta para o cliente
+                if session_id not in manager.chat_history:
+                    manager.chat_history[session_id] = []
+                
+                # Apenas adicionar ao histórico interno, sem enviar via WebSocket
+                manager.chat_history[session_id].append({
+                    "role": "user",
+                    "content": question,
+                    "timestamp": time.time()
+                })
+                
+                # Enviar mensagem de digitação
+                await manager.send_personal_message(
+                    {
+                        "role": "system",
+                        "content": "typing",
+                        "typing": True
+                    },
+                    session_id
+                )
+                
+                try:
+                    # Consultar banco de dados de vetores para documentos relevantes
+                    docs = await query_vector_db(question, top_k, file_paths)
+                    
+                    # Obter histórico de chat para a sessão
+                    chat_history = manager.get_chat_history(session_id)
+                    
+                    # Gerar resposta
+                    answer = await generate_answer(question, docs, chat_history)
+                    
+                    # Preparar informações de fontes
+                    sources = [{"content": doc.page_content, "metadata": doc.metadata} for doc in docs]
+                    
+                    # Enviar resposta de volta ao cliente
+                    await manager.send_personal_message(
+                        {
+                            "role": "assistant",
+                            "content": answer,
+                            "sources": sources,
+                            "timestamp": time.time()
+                        },
+                        session_id
+                    )
+                    
+                except ValueError as e:
+                    logger.error(f"Erro de valor durante o processamento: {str(e)}")
+                    await manager.send_personal_message(
+                        {
+                            "role": "system",
+                            "content": str(e),
+                            "error": True
+                        },
+                        session_id
+                    )
+                    
+                except Exception as e:
+                    logger.error(f"Exceção durante o processamento: {str(e)}", exc_info=True)
+                    await manager.send_personal_message(
+                        {
+                            "role": "system",
+                            "content": f"Erro ao gerar resposta: {str(e)}",
+                            "error": True
+                        },
+                        session_id
+                    )
+            
+            except json.JSONDecodeError as e:
+                logger.error(f"Erro de decodificação JSON: {str(e)}")
+                await manager.send_personal_message(
+                    {
+                        "role": "system",
+                        "content": f"Formato JSON inválido: {str(e)}",
+                        "error": True
+                    },
+                    session_id
+                )
+                
+            except Exception as e:
+                logger.error(f"Erro inesperado: {str(e)}", exc_info=True)
+                await manager.send_personal_message(
+                    {
+                        "role": "system",
+                        "content": f"Erro inesperado: {str(e)}",
+                        "error": True
+                    },
+                    session_id
+                )
+    
+    except WebSocketDisconnect:
+        logger.info(f"WebSocket desconectado para a sessão {session_id}")
+        manager.disconnect(session_id)
+
+# Função para carregar o banco de dados de vetores na inicialização
+@app.on_event("startup")
+async def startup_db_client():
+    """Carrega o banco de dados de vetores na inicialização."""
+    global vector_db
+    try:
+        logger.info("Carregando banco de dados de vetores...")
+        vector_db = load_vector_db()
+        if vector_db:
+            logger.info("Banco de dados de vetores carregado com sucesso")
+        else:
+            logger.info("Nenhum banco de dados de vetores existente encontrado. Será criado quando documentos forem carregados.")
+    except Exception as e:
+        logger.error(f"Erro ao carregar banco de dados de vetores: {str(e)}", exc_info=True)
+
+# Executar a aplicação
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
