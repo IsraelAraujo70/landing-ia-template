@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     build: .
-    container_name: ada-assistente
+    container_name: ia-suporte
     restart: always
     ports:
       - "8000:80"

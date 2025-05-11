@@ -1,5 +1,5 @@
 """
-Main entry point for the Ada Assistant application.
+Main entry point for the AgiFinance Assistant application.
 """
 import os
 import json
@@ -21,8 +21,8 @@ from app.config.settings import logger, UPLOADS_DIR
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Assistente IA Ada Sistemas",
-    description="API para o assistente de IA da Ada Sistemas",
+    title="Assistente IA AgiFinance",
+    description="API para o assistente de IA do AgiFinance - Seu gerenciador financeiro inteligente",
     version="1.0.0"
 )
 

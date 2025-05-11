@@ -2,6 +2,7 @@
 AI service for generating answers using OpenAI.
 """
 from typing import List, Dict, Any, Tuple
+import random
 from langchain.docstore.document import Document
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
@@ -121,6 +122,12 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
         Generated answer
     """
     
+    # Importar prompts específicos do AgiFinance
+    try:
+        from app.config.agifinance_prompts import SYSTEM_PROMPT, ANSWER_PROMPT, FINANCIAL_TIPS, FINANCIAL_GLOSSARY
+    except ImportError as e:
+        logger.error(f"Erro ao importar prompts do AgiFinance: {str(e)}")
+    
     # Verificar se o usuário está pedindo para falar com um humano
     question_lower = question.lower()
     human_request_keywords = [
@@ -130,7 +137,7 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
     ]
     
     if any(keyword in question_lower for keyword in human_request_keywords):
-        return "Entendo que você prefere falar com um humano. Você pode entrar em contato com nossa equipe pelo WhatsApp clicando neste link: [Falar com atendente](https://wa.me/553537217123). Estamos disponíveis de segunda a sexta, das 8h às 18h. Posso ajudar com mais alguma coisa?"
+        return "Entendo que você prefere falar com um humano. Você pode entrar em contato com nossa equipe de suporte do AgiFinance pelo email support@agifinance.com.br ou pelo chat no site principal. Estamos disponíveis de segunda a sexta, das 9h às 18h. Posso ajudar com mais alguma coisa?"
     
     try:
         # Extrair as últimas 5 mensagens do histórico de chat (ou menos se não houver tantas)
@@ -169,14 +176,14 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
         combined_answer = ""
         
         # Criar um novo prompt para sintetizar as respostas
-        synthesis_prompt = f"""Você é Ada, uma assistente de IA da Ada Sistemas.
+        synthesis_prompt = f"""Você é o assistente de IA do AgiFinance, uma plataforma moderna de gestão financeira pessoal.
 
 Você recebeu as seguintes respostas parciais para a pergunta: "{question}"
 
 Respostas parciais:
 {' '.join(all_answers)}
 
-Por favor, sintetize essas respostas em uma única resposta coerente e concisa. Remova qualquer redundância e organize as informações de forma lógica.
+Por favor, sintetize essas respostas em uma única resposta coerente e concisa. Remova qualquer redundância e organize as informações de forma lógica. Mantenha o foco em finanças pessoais e no uso da plataforma AgiFinance.
 """
         
         # Criar mensagens para sintetizar
@@ -219,21 +226,21 @@ async def process_single_batch(question: str, batch_docs: List[Document], format
     context_tokens = count_tokens(context_text)
     logger.info(f"Tamanho do contexto: {context_tokens} tokens")
     
-    # Criar o prompt do sistema
-    system_prompt = f"""Você é Ada, uma assistente de IA da Ada Sistemas, especializada em responder perguntas com base em documentos.
+    # Criar o prompt do sistema com base no prompt do AgiFinance
+    try:
+        # Adicionar uma dica financeira aleatória ocasionalmente (1 em cada 3 respostas)
+        financial_tip = f"\n\nDICA FINANCEIRA: {random.choice(FINANCIAL_TIPS)}" if random.random() < 0.3 else ""
+    except Exception as e:
+        logger.error(f"Erro ao gerar dica financeira: {str(e)}")
+        financial_tip = ""
     
-Regras:
-1. Use APENAS as informações fornecidas nos documentos para responder às perguntas.
-2. Se a informação não estiver nos documentos, diga que não pode responder com base no treinamento atual.
-3. Seja concisa e direta em suas respostas.
-4. Não invente informações ou faça suposições além do que está nos documentos.
-5. Não cite as fontes dos documentos.
-6. Mantenha um tom profissional e amigável.
-7. Se o usuário pedir para falar com um humano ou atendente, forneça o link para o WhatsApp https://wa.me/553537217123 e informe que o atendimento está disponível de segunda a sexta, das 8h às 18h.
+    system_prompt = f"""Você é o assistente de IA do AgiFinance, uma plataforma moderna de gestão financeira pessoal.
+Seu objetivo é ajudar os usuários a gerenciar suas finanças e utilizar efetivamente as funcionalidades do AgiFinance.
+
 Histórico de conversa recente:{formatted_history}
 
 Contexto dos documentos:
-{context_text}
+{context_text}{financial_tip}
 """
     
     # Criar o prompt do usuário

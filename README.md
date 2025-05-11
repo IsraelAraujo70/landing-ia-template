@@ -1,6 +1,6 @@
-# Assistente IA Ada Sistemas
+# Assistente IA AgiFinance
 
-Este projeto implementa um assistente de IA para o suporte da Ada Sistemas, utilizando processamento de linguagem natural e recuperação de informações baseada em vetores para responder perguntas com base em documentos carregados.
+Este projeto implementa um assistente de IA para o suporte do AgiFinance, utilizando processamento de linguagem natural e recuperação de informações baseada em vetores para responder perguntas sobre finanças pessoais, gestão financeira e uso da plataforma AgiFinance.
 
 ## Características
 
@@ -10,7 +10,7 @@ Este projeto implementa um assistente de IA para o suporte da Ada Sistemas, util
 - Armazenamento de embeddings usando FAISS
 - Containerização com Docker
 - Configuração para deploy no GOCD
-- Hospedagem na AWS (https://aws.adasistemas.com.br/assistente)
+- Integração com AgiFinance via iframe
 
 ## Requisitos
 
@@ -22,8 +22,8 @@ Este projeto implementa um assistente de IA para o suporte da Ada Sistemas, util
 
 1. Clone o repositório:
    ```
-   git clone https://github.com/adasistemas/ada-assistente.git
-   cd ada-assistente
+   git clone https://github.com/IsraelAraujo70/ia-suporte.git
+   cd ia-suporte
    ```
 
 2. Crie um arquivo `.env` baseado no `.env.example`:
@@ -64,7 +64,7 @@ docker-compose up --build
 
 ## Uso da API
 
-A API estará disponível em `http://localhost:8000` durante o desenvolvimento local ou em `https://aws.adasistemas.com.br/assistente` em produção.
+A API estará disponível em `http://localhost:8000` durante o desenvolvimento local. Em produção, será integrada ao AgiFinance via iframe.
 
 ### Endpoints Principais
 
@@ -78,7 +78,7 @@ A API estará disponível em `http://localhost:8000` durante o desenvolvimento l
 
 ```javascript
 // Conectar ao WebSocket
-const socket = new WebSocket('wss://aws.adasistemas.com.br/assistente/ws/chat/session123');
+const socket = new WebSocket('ws://localhost:8000/ws/chat/session123');
 
 // Receber mensagens
 socket.onmessage = function(event) {
@@ -88,7 +88,7 @@ socket.onmessage = function(event) {
 
 // Enviar uma pergunta
 socket.send(JSON.stringify({
-  question: 'Como posso resetar minha senha?',
+  question: 'Como posso visualizar meus gastos mensais?',
   top_k: 5
 }));
 ```
@@ -96,7 +96,7 @@ socket.send(JSON.stringify({
 ## Estrutura de Diretórios
 
 ```
-ada-assistente/
+agifinance-assistente/
 ├── app.py                # Código principal da aplicação
 ├── Dockerfile            # Configuração do Docker
 ├── docker-compose.yml    # Configuração do Docker Compose
@@ -109,12 +109,11 @@ ada-assistente/
 
 ## Deploy
 
-O deploy é automatizado através do GOCD usando o arquivo `gocd.yaml`. O pipeline inclui:
+O deploy pode ser feito manualmente ou integrado ao pipeline de CI/CD do AgiFinance:
 
 1. Build da imagem Docker
 2. Execução de testes
-3. Deploy na AWS (após aprovação manual)
 
 ## Licença
 
-Proprietário - Ada Sistemas
+Proprietário - Israel Araujo

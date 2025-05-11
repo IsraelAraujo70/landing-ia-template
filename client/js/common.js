@@ -1,6 +1,5 @@
 /**
- * ADA ASSISTENTE - FUNÇÕES JAVASCRIPT COMUNS
- * Última atualização: 09/05/2025
+ * AGIFINANCE ASSISTENTE - FUNÇÕES JAVASCRIPT COMUNS
  * 
  * Este arquivo contém funções compartilhadas entre as diferentes interfaces do chat.
  * Inclui funções para detecção de ambiente, manipulação de mensagens e conexão WebSocket.
@@ -21,8 +20,8 @@ function detectEnvironment(isDev = false) {
         };
     } else {
         return {
-            apiBaseUrl: 'https://aws.adasistemas.com.br/assistente',
-            wsBaseUrl: 'wss://aws.adasistemas.com.br/assistente'
+            apiBaseUrl: '/assistente',
+            wsBaseUrl: 'wss://agifinance.com.br/assistente'
         };
     }
 }
