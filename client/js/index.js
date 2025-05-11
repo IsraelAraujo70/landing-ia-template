@@ -101,15 +101,24 @@ document.addEventListener('DOMContentLoaded', function() {
     function sendMessage() {
         const message = messageInput.value.trim();
 
-        if (message && isConnected) {
+        if (message && isConnected) {            
             // Adicionar mensagem do usuário ao chat
             addUserMessage(message, chatMessages);
 
-            // Enviar mensagem para o servidor
-            socket.send(JSON.stringify({
-                question: message,
+            // Preparar payload para envio
+            const payload = JSON.stringify({
+                role: "user",
+                content: message,
+                question: message, 
                 top_k: 5
-            }));
+            });
+            
+            try {
+                // Enviar mensagem para o servidor
+                socket.send(payload);            
+            } catch (error) {
+                addSystemMessage(`Erro ao enviar mensagem: ${error}`, chatMessages);
+            }
 
             // Limpar campo de entrada
             messageInput.value = '';
@@ -122,7 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carregar lista de documentos
     async function loadDocuments() {
         try {
-            const response = await fetch(`${API_BASE_URL}/documents`);
+            const documentsUrl = `${API_BASE_URL}/documents`;
+            const response = await fetch(documentsUrl);
             const documents = await response.json();
 
             if (documents.length === 0) {
@@ -168,13 +178,15 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('file', file);
 
         uploadStatus.innerHTML = '<p>Enviando documento...</p>';
+        
+        const uploadUrl = `${API_BASE_URL}/upload`;
 
         try {
-            const response = await fetch(`${API_BASE_URL}/upload`, {
+            const response = await fetch(uploadUrl, {
                 method: 'POST',
                 body: formData
             });
-
+            
             const result = await response.json();
 
             if (response.ok) {

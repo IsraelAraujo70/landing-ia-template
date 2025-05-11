@@ -16,11 +16,16 @@ class ConnectionManager:
 
     async def connect(self, websocket: WebSocket, session_id: str):
         """Connect a new WebSocket client."""
-        await websocket.accept()
-        self.active_connections[session_id] = websocket
-        if session_id not in self.chat_history:
-            self.chat_history[session_id] = []
-        logger.info(f"Nova conexão WebSocket estabelecida: {session_id}")
+        logger.info(f"Tentando aceitar conexão WebSocket para sessão: {session_id}")
+        try:
+            await websocket.accept()
+            self.active_connections[session_id] = websocket
+            if session_id not in self.chat_history:
+                self.chat_history[session_id] = []
+            logger.info(f"Nova conexão WebSocket estabelecida com sucesso: {session_id}")
+        except Exception as e:
+            logger.error(f"Erro ao aceitar conexão WebSocket para sessão {session_id}: {str(e)}")
+            raise
 
     def disconnect(self, session_id: str):
         """Disconnect a WebSocket client."""
@@ -32,14 +37,20 @@ class ConnectionManager:
         """Send a message to a specific client and store in chat history."""
         if session_id in self.active_connections:
             websocket = self.active_connections[session_id]
-            await websocket.send_text(json.dumps(message))
-            # Adicionar mensagem ao histórico
-            if message.get("role") and message.get("content"):
-                self.chat_history[session_id].append({
-                    "role": message["role"],
-                    "content": message["content"],
-                    "timestamp": time.time()
-                })
+            try:
+                logger.info(f"Enviando mensagem para sessão {session_id}: {message.get('role', 'unknown')}")
+                await websocket.send_text(json.dumps(message))
+                logger.info(f"Mensagem enviada com sucesso para sessão {session_id}")
+                if message.get("role") and message.get("content"):
+                    self.chat_history[session_id].append({
+                        "role": message["role"],
+                        "content": message["content"],
+                        "timestamp": time.time()
+                    })
+            except Exception as e:
+                logger.error(f"Erro ao enviar mensagem para sessão {session_id}: {str(e)}")
+        else:
+            logger.warning(f"Tentativa de enviar mensagem para sessão inexistente: {session_id}")
 
     def get_chat_history(self, session_id: str) -> List[Dict[str, Any]]:
         """Get chat history for a specific session."""

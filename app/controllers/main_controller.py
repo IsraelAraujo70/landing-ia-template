@@ -16,7 +16,8 @@ async def serve_client():
     Retorna:
         Resposta de arquivo HTML
     """
-    return FileResponse("client/index.html")
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/client/index.html")
 
 @router.get("/status")
 async def api_status():

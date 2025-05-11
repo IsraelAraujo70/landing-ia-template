@@ -7,10 +7,11 @@ from app.services.ai_service import generate_answer
 from app.utils.vector_db import query_vector_db
 from app.config.settings import logger
 
-# Cria o router
-router = APIRouter(prefix="/questions", tags=["questions"])
+# Cria o router - sem prefixo para permitir rotas diretas
+router = APIRouter(tags=["questions"])
 
 @router.post("/ask", response_model=QuestionResponse)
+@router.post("/questions/ask", response_model=QuestionResponse)  # Rota com prefixo /questions
 async def ask_question(request: QuestionRequest) -> QuestionResponse:
     """
     Faz uma pergunta e obtém uma resposta baseada no contexto dos documentos.
@@ -22,23 +23,18 @@ async def ask_question(request: QuestionRequest) -> QuestionResponse:
         Resposta à pergunta com resposta e fontes
     """
     try:
-        # Extrair parâmetros da requisição
         question = request.question
         session_id = request.session_id
         top_k = request.top_k
         file_paths = request.file_paths
         
-        # Verificar se a pergunta foi fornecida
         if not question:
             raise HTTPException(status_code=400, detail="Pergunta não fornecida")
         
-        # Consultar banco de dados de vetores para documentos relevantes
         docs = await query_vector_db(question, top_k, file_paths)
         
-        # Gerar resposta
         answer = await generate_answer(question, docs)
         
-        # Preparar informações de fontes
         sources = [{"content": doc.page_content, "metadata": doc.metadata} for doc in docs]
         
         # Criar resposta

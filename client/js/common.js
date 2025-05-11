@@ -17,11 +17,11 @@ function detectEnvironment(isDev = false) {
         return {
             apiBaseUrl: 'http://localhost:8000',
             wsBaseUrl: 'ws://localhost:8000'
-        };
+        };  
     } else {
         return {
-            apiBaseUrl: '/assistente',
-            wsBaseUrl: 'wss://agifinance.com.br/assistente'
+            apiBaseUrl: 'https://agifinance.com.br',  
+            wsBaseUrl: 'wss://agifinance.com.br'
         };
     }
 }
@@ -106,7 +106,9 @@ function formatFileSize(bytes) {
 
 // Conectar ao WebSocket
 function connectWebSocket(wsBaseUrl, sessionId, handlers) {
-    const socket = new WebSocket(`${wsBaseUrl}/ws/chat/${sessionId}`);
+    const wsUrl = `${wsBaseUrl}/ws/chat/${sessionId}`;
+    
+    const socket = new WebSocket(wsUrl);
     
     socket.onopen = function() {
         if (handlers.onOpen) handlers.onOpen();
@@ -116,8 +118,8 @@ function connectWebSocket(wsBaseUrl, sessionId, handlers) {
         if (handlers.onMessage) handlers.onMessage(event);
     };
     
-    socket.onclose = function() {
-        if (handlers.onClose) handlers.onClose();
+    socket.onclose = function(event) {
+        if (handlers.onClose) handlers.onClose(event);
     };
     
     socket.onerror = function(error) {

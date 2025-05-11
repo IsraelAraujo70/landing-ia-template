@@ -22,13 +22,9 @@ async def process_document(file_path: str, file_name: str, upload_time: str) -> 
         Lista de objetos Document
     """
     try:
-        # Extrair texto do documento
         text = extract_text(file_path)
-        
-        # Dividir o texto em chunks
         chunks = split_text(text)
         
-        # Adicionar metadados aos chunks
         for chunk in chunks:
             chunk.metadata["source"] = file_path
             chunk.metadata["filename"] = file_name
@@ -52,25 +48,19 @@ async def upload_and_process_document(file_content: bytes, file_name: str) -> st
     Retorna:
         Caminho para o arquivo salvo
     """
-    # Criar diretório de uploads se não existir
     os.makedirs(UPLOADS_DIR, exist_ok=True)
     
-    # Gerar timestamp para o upload
     upload_time = datetime.datetime.now().isoformat()
     
-    # Criar caminho para o arquivo
     file_path = os.path.join(UPLOADS_DIR, file_name)
     
-    # Salvar o arquivo
     with open(file_path, "wb") as f:
         f.write(file_content)
     
     logger.info(f"Arquivo salvo: {file_path}")
     
-    # Processar o documento
     chunks = await process_document(file_path, file_name, upload_time)
     
-    # Adicionar chunks ao banco de dados de vetores
     add_documents_to_vector_db(chunks)
     
     return file_path

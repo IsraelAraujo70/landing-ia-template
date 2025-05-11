@@ -24,24 +24,37 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
         websocket: Conexão WebSocket
         session_id: ID da sessão
     """
-    await manager.connect(websocket, session_id)
+    logger.info(f"Tentativa de conexão WebSocket em /ws/{session_id}")
+    try:
+        await manager.connect(websocket, session_id)
+        logger.info(f"Conexão WebSocket estabelecida com sucesso em /ws/{session_id}")
+    except Exception as e:
+        logger.error(f"Erro ao conectar WebSocket em /ws/{session_id}: {str(e)}")
+        raise
     
     try:
         while True:
-            # Receber mensagem do cliente
             data = await websocket.receive_text()
             
             try:
-                # Decodificar mensagem JSON
                 message = json.loads(data)
                 
-                # Verificar se é uma pergunta
+                question = None
+                top_k = 5
+                file_paths = []
+                
+                # Suportar ambos os formatos de mensagem
                 if message.get("role") == "user" and message.get("content"):
                     question = message["content"]
                     top_k = message.get("top_k", 5)
                     file_paths = message.get("file_paths", [])
+                elif message.get("question"):
+                    question = message["question"]
+                    top_k = message.get("top_k", 5)
+                    file_paths = message.get("file_paths", [])
                     
-                    # Adicionar mensagem ao histórico
+                if question:
+                    
                     await manager.send_personal_message(
                         {
                             "role": "user",
@@ -51,7 +64,6 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                         session_id
                     )
                     
-                    # Enviar mensagem de digitação
                     await manager.send_personal_message(
                         {
                             "role": "system",
@@ -62,19 +74,14 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                     )
                     
                     try:
-                        # Consultar banco de dados de vetores para documentos relevantes
                         docs = await query_vector_db(question, top_k, file_paths)
                         
-                        # Obter histórico de chat para a sessão
                         chat_history = manager.get_chat_history(session_id)
                         
-                        # Gerar resposta
                         answer = await generate_answer(question, docs, chat_history)
                         
-                        # Preparar informações de fontes
                         sources = [{"content": doc.page_content, "metadata": doc.metadata} for doc in docs]
                         
-                        # Enviar resposta de volta ao cliente
                         await manager.send_personal_message(
                             {
                                 "role": "assistant",
@@ -132,3 +139,19 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
     except WebSocketDisconnect:
         logger.info(f"WebSocket desconectado para a sessão {session_id}")
         manager.disconnect(session_id)
+
+@router.websocket("/ws/chat/{session_id}")
+async def websocket_chat_endpoint(websocket: WebSocket, session_id: str):
+    """
+    Endpoint WebSocket para chat em tempo real (rota compatível com o frontend).
+    
+    Args:
+        websocket: Conexão WebSocket
+        session_id: ID da sessão
+    """
+    logger.info(f"Tentativa de conexão WebSocket em /ws/chat/{session_id}")
+    try:
+        await websocket_endpoint(websocket, session_id)
+    except Exception as e:
+        logger.error(f"Erro ao conectar WebSocket em /ws/chat/{session_id}: {str(e)}")
+        raise

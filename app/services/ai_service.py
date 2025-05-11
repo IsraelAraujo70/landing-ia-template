@@ -122,13 +122,11 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
         Resposta gerada
     """
     
-    # Importar prompts específicos do AgiFinance
     try:
         from app.config.agifinance_prompts import SYSTEM_PROMPT, ANSWER_PROMPT, FINANCIAL_TIPS, FINANCIAL_GLOSSARY
     except ImportError as e:
         logger.error(f"Erro ao importar prompts do AgiFinance: {str(e)}")
     
-    # Verificar se o usuário está pedindo para falar com um humano
     question_lower = question.lower()
     human_request_keywords = [
         "falar com humano", "falar com uma pessoa", "falar com atendente",
@@ -140,10 +138,8 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
         return "Entendo que você prefere falar com um humano. Você pode entrar em contato com nossa equipe de suporte do AgiFinance pelo email support@agifinance.com.br ou pelo chat no site principal. Estamos disponíveis de segunda a sexta, das 9h às 18h. Posso ajudar com mais alguma coisa?"
     
     try:
-        # Extrair as últimas 5 mensagens do histórico de chat (ou menos se não houver tantas)
         recent_history = chat_history[-5:] if len(chat_history) > 5 else chat_history
         
-        # Formatar o histórico de chat para o prompt
         formatted_history = ""
         for msg in recent_history:
             role = msg.get("role", "")
@@ -151,7 +147,6 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
             if role and content:
                 formatted_history += f"\n{role.capitalize()}: {content}"
         
-        # Dividir os documentos em lotes para não exceder o limite de tokens
         MAX_TOKENS_PER_REQUEST = 250000  # Limite seguro abaixo do máximo de 300.000
         batches = split_context_by_tokens(context_docs, MAX_TOKENS_PER_REQUEST)
         
@@ -159,11 +154,9 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
             logger.warning("Nenhum documento de contexto disponível para a pergunta.")
             return "Não encontrei informações relevantes para responder à sua pergunta. Por favor, tente reformular ou forneça mais detalhes."
         
-        # Se houver apenas um lote, processe normalmente
         if len(batches) == 1:
             return await process_single_batch(question, batches[0], formatted_history)
         
-        # Se houver múltiplos lotes, processe cada um e combine as respostas
         logger.info(f"Dividindo contexto em {len(batches)} lotes devido ao tamanho do documento")
         
         all_answers = []
@@ -172,10 +165,8 @@ async def generate_answer(question: str, context_docs: List[Document], chat_hist
             batch_answer = await process_single_batch(question, batch, formatted_history)
             all_answers.append(batch_answer)
         
-        # Combinar as respostas dos diferentes lotes
         combined_answer = ""
         
-        # Criar um novo prompt para sintetizar as respostas
         synthesis_prompt = f"""Você é o assistente de IA do AgiFinance, uma plataforma moderna de gestão financeira pessoal.
 
 Você recebeu as seguintes respostas parciais para a pergunta: "{question}"
@@ -186,12 +177,10 @@ Respostas parciais:
 Por favor, sintetize essas respostas em uma única resposta coerente e concisa. Remova qualquer redundância e organize as informações de forma lógica. Mantenha o foco em finanças pessoais e no uso da plataforma AgiFinance.
 """
         
-        # Criar mensagens para sintetizar
         synthesis_messages = [
             {"role": "system", "content": synthesis_prompt}
         ]
         
-        # Gerar resposta sintetizada
         synthesis_response = chat_model.invoke(synthesis_messages)
         final_answer = synthesis_response.content
         
@@ -214,21 +203,16 @@ async def process_single_batch(question: str, batch_docs: List[Document], format
     Retorna:
         Resposta gerada para este lote
     """
-    # Preparar o contexto a partir dos documentos do lote
     context_text = ""
     for i, doc in enumerate(batch_docs):
-        # Adicionar metadados e conteúdo do documento
         source = doc.metadata.get("source", "Desconhecido")
         page = doc.metadata.get("page", "N/A")
         context_text += f"\n\nDocumento {i+1} (Fonte: {source}, Página: {page}):\n{doc.page_content}"
     
-    # Verificar o tamanho do contexto em tokens
     context_tokens = count_tokens(context_text)
     logger.info(f"Tamanho do contexto: {context_tokens} tokens")
     
-    # Criar o prompt do sistema com base no prompt do AgiFinance
     try:
-        # Adicionar uma dica financeira aleatória ocasionalmente (1 em cada 3 respostas)
         financial_tip = f"\n\nDICA FINANCEIRA: {random.choice(FINANCIAL_TIPS)}" if random.random() < 0.3 else ""
     except Exception as e:
         logger.error(f"Erro ao gerar dica financeira: {str(e)}")
@@ -243,10 +227,8 @@ Contexto dos documentos:
 {context_text}{financial_tip}
 """
     
-    # Criar o prompt do usuário
     user_prompt = f"Pergunta: {question}"
     
-    # Criar mensagens diretamente sem usar ChatPromptTemplate
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}

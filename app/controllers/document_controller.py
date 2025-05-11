@@ -9,10 +9,11 @@ from app.models.schemas import DocumentInfo
 from app.services.document_service import upload_and_process_document
 from app.config.settings import UPLOADS_DIR, logger
 
-# Cria o router
-router = APIRouter(prefix="/documents", tags=["documents"])
+# Cria o router - sem prefixo para permitir rotas diretas
+router = APIRouter(tags=["documents"])
 
 @router.post("/upload", response_model=DocumentInfo)
+@router.post("/documents/upload", response_model=DocumentInfo)
 async def upload_document(file: UploadFile = File(...)) -> DocumentInfo:
     """
     Faz upload de um documento e o adiciona ao banco de dados vetorial.
@@ -59,7 +60,8 @@ async def upload_document(file: UploadFile = File(...)) -> DocumentInfo:
         logger.error(f"Erro ao fazer upload do documento: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erro ao processar o documento: {str(e)}")
 
-@router.get("/list", response_model=List[DocumentInfo])
+@router.get("/documents", response_model=List[DocumentInfo])  # Rota principal que o frontend está usando
+@router.get("/documents/list", response_model=List[DocumentInfo])  # Rota com prefixo /documents
 async def list_documents() -> List[DocumentInfo]:
     """
     Lista todos os documentos enviados.

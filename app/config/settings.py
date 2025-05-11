@@ -31,4 +31,4 @@ logging.basicConfig(
         logging.FileHandler("app.log")
     ]
 )
-logger = logging.getLogger("ada-assistente")
+logger = logging.getLogger("agifinance-assistente")
