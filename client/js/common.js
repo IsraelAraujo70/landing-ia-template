@@ -13,12 +13,22 @@ function detectEnvironment(isDev = false) {
     // Verificar se devemos usar ambiente de desenvolvimento
     const useDev = urlParams.get('useDev') === 'true' || isDev;
     
+    // Ambiente de desenvolvimento (localhost)
     if (useDev || hostname === 'localhost' || hostname === '127.0.0.1') {
         return {
             apiBaseUrl: 'http://localhost:8000',
             wsBaseUrl: 'ws://localhost:8000'
         };  
-    } else {
+    } 
+    // Ambiente de produção no Render
+    else if (hostname.includes('onrender.com')) {
+        return {
+            apiBaseUrl: `https://${hostname}`,
+            wsBaseUrl: `wss://${hostname}`
+        };
+    } 
+    // Ambiente de produção no domínio AgiFinance
+    else {
         return {
             apiBaseUrl: 'https://agifinance.com.br',  
             wsBaseUrl: 'wss://agifinance.com.br'
