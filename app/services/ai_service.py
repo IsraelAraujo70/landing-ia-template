@@ -1,5 +1,5 @@
 """
-AI service for generating answers using OpenAI.
+Serviço de IA para geração de respostas usando OpenAI.
 """
 from typing import List, Dict, Any, Tuple
 import random
@@ -10,39 +10,39 @@ from langchain_core.messages import SystemMessage, HumanMessage
 import tiktoken
 from app.config.settings import OPENAI_API_KEY, CHAT_MODEL, TEMPERATURE, logger
 
-# Initialize OpenAI chat model
+# Inicializa o modelo de chat OpenAI
 chat_model = ChatOpenAI(
     model_name=CHAT_MODEL,
     temperature=TEMPERATURE,
     api_key=OPENAI_API_KEY
 )
 
-# Initialize tokenizer
+# Inicializa o tokenizador
 tokenizer = tiktoken.get_encoding("cl100k_base")
 
 def count_tokens(text: str) -> int:
     """
-    Count the number of tokens in a text.
+    Conta o número de tokens em um texto.
     
     Args:
-        text: Text to count tokens
+        text: Texto para contar tokens
         
-    Returns:
-        Number of tokens
+    Retorna:
+        Número de tokens
     """
     tokens = tokenizer.encode(text)
     return len(tokens)
 
 def split_context_by_tokens(context_docs: List[Document], max_tokens: int = 250000) -> List[List[Document]]:
     """
-    Split context documents into batches that don't exceed the token limit.
+    Divide documentos de contexto em lotes que não excedam o limite de tokens.
     
     Args:
-        context_docs: List of context Document objects
-        max_tokens: Maximum number of tokens per batch
+        context_docs: Lista de objetos Document de contexto
+        max_tokens: Número máximo de tokens por lote
         
-    Returns:
-        List of batches of Document objects
+    Retorna:
+        Lista de lotes de objetos Document
     """
     batches = []
     current_batch = []
@@ -111,15 +111,15 @@ def split_context_by_tokens(context_docs: List[Document], max_tokens: int = 2500
 
 async def generate_answer(question: str, context_docs: List[Document], chat_history: List[Dict[str, Any]] = []) -> str:
     """
-    Generate an answer using OpenAI based on the question, context documents, and chat history.
+    Gera uma resposta usando OpenAI com base na pergunta, documentos de contexto e histórico de chat.
     
     Args:
-        question: User's question
-        context_docs: List of context Document objects
-        chat_history: Chat history
+        question: Pergunta do usuário
+        context_docs: Lista de objetos Document de contexto
+        chat_history: Histórico de chat
         
-    Returns:
-        Generated answer
+    Retorna:
+        Resposta gerada
     """
     
     # Importar prompts específicos do AgiFinance
@@ -204,15 +204,15 @@ Por favor, sintetize essas respostas em uma única resposta coerente e concisa. 
 
 async def process_single_batch(question: str, batch_docs: List[Document], formatted_history: str) -> str:
     """
-    Process a single batch of documents to generate an answer.
+    Processa um único lote de documentos para gerar uma resposta.
     
     Args:
-        question: User's question
-        batch_docs: Batch of Document objects
-        formatted_history: Formatted chat history
+        question: Pergunta do usuário
+        batch_docs: Lote de objetos Document
+        formatted_history: Histórico de chat formatado
         
-    Returns:
-        Generated answer for this batch
+    Retorna:
+        Resposta gerada para este lote
     """
     # Preparar o contexto a partir dos documentos do lote
     context_text = ""

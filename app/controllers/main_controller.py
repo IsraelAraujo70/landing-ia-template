@@ -1,30 +1,30 @@
 """
-Main controller for handling basic endpoints.
+Controlador principal para manipulação de endpoints básicos.
 """
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from app.config.settings import logger
 
-# Create router
+# Cria o router
 router = APIRouter(tags=["main"])
 
 @router.get("/")
 async def serve_client():
     """
-    Serve the client's main page.
+    Serve a página principal do cliente.
     
-    Returns:
-        HTML file response
+    Retorna:
+        Resposta de arquivo HTML
     """
     return FileResponse("client/index.html")
 
 @router.get("/status")
 async def api_status():
     """
-    Check API status.
+    Verifica o status da API.
     
-    Returns:
-        Status information
+    Retorna:
+        Informações de status
     """
     try:
         return {

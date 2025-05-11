@@ -1,5 +1,5 @@
 """
-WebSocket controller for handling real-time chat.
+Controlador WebSocket para manipulação de chat em tempo real.
 """
 import json
 import time
@@ -9,20 +9,20 @@ from app.services.ai_service import generate_answer
 from app.utils.vector_db import query_vector_db
 from app.config.settings import logger
 
-# Create router
+# Cria o router
 router = APIRouter(tags=["websocket"])
 
-# Create connection manager
+# Cria o gerenciador de conexões
 manager = ConnectionManager()
 
 @router.websocket("/ws/{session_id}")
 async def websocket_endpoint(websocket: WebSocket, session_id: str):
     """
-    WebSocket endpoint for real-time chat.
+    Endpoint WebSocket para chat em tempo real.
     
     Args:
-        websocket: WebSocket connection
-        session_id: Session ID
+        websocket: Conexão WebSocket
+        session_id: ID da sessão
     """
     await manager.connect(websocket, session_id)
     

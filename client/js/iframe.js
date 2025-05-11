@@ -1,4 +1,4 @@
-// Script específico para a página iframe do assistente Ada
+// Script específico para a página iframe do assistente AgiFinance
 
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar parâmetros da URL

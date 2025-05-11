@@ -1,4 +1,4 @@
-// Script específico para a página principal do assistente Ada
+// Script específico para a página principal do assistente AgiFinance
 
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar se estamos no modo de desenvolvimento

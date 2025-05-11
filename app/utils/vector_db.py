@@ -1,5 +1,5 @@
 """
-Vector database utilities for the Ada Assistant application.
+Utilitários de banco de dados vetorial para a aplicação do Assistente AgiFinance.
 """
 import os
 import numpy as np
@@ -10,41 +10,41 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from app.config.settings import OPENAI_API_KEY, FAISS_INDEX_PATH, EMBEDDINGS_MODEL, logger
 
-# Initialize embeddings model
+# Inicializa o modelo de embeddings
 embeddings_model = OpenAIEmbeddings(
     model=EMBEDDINGS_MODEL,
     openai_api_key=OPENAI_API_KEY
 )
 
-# Initialize tokenizer for token counting
+# Inicializa o tokenizador para contagem de tokens
 tokenizer = tiktoken.get_encoding("cl100k_base")
 
-# Global vector database instance
+# Instância global do banco de dados vetorial
 vector_db = None
 
 def count_tokens(text: str) -> int:
     """
-    Count the number of tokens in a text.
+    Conta o número de tokens em um texto.
     
     Args:
-        text: Text to count tokens
+        text: Texto para contar tokens
         
-    Returns:
-        Number of tokens
+    Retorna:
+        Número de tokens
     """
     tokens = tokenizer.encode(text)
     return len(tokens)
 
 def batch_documents_by_tokens(documents: List[Document], max_tokens_per_batch: int = 250000) -> List[List[Document]]:
     """
-    Divide documents into batches based on token count.
+    Divide documentos em lotes com base na contagem de tokens.
     
     Args:
-        documents: List of Document objects
-        max_tokens_per_batch: Maximum tokens per batch
+        documents: Lista de objetos Document
+        max_tokens_per_batch: Máximo de tokens por lote
         
-    Returns:
-        List of document batches
+    Retorna:
+        Lista de lotes de documentos
     """
     batches = []
     current_batch = []
@@ -115,23 +115,23 @@ def batch_documents_by_tokens(documents: List[Document], max_tokens_per_batch: i
 
 def create_vector_db(documents: List[Document]) -> FAISS:
     """
-    Create a FAISS vector database from documents.
+    Cria um banco de dados vetorial FAISS a partir de documentos.
     
     Args:
-        documents: List of Document objects
+        documents: Lista de objetos Document
         
-    Returns:
-        FAISS vector database
+    Retorna:
+        Banco de dados vetorial FAISS
     """
     db = FAISS.from_documents(documents, embeddings_model)
     return db
 
 def save_vector_db(db: FAISS) -> None:
     """
-    Save the vector database to disk.
+    Salva o banco de dados vetorial no disco.
     
     Args:
-        db: FAISS vector database
+        db: Banco de dados vetorial FAISS
     """
     os.makedirs(FAISS_INDEX_PATH, exist_ok=True)
     db.save_local(FAISS_INDEX_PATH)
@@ -139,10 +139,10 @@ def save_vector_db(db: FAISS) -> None:
 
 def load_vector_db() -> Optional[FAISS]:
     """
-    Load the vector database from disk.
+    Carrega o banco de dados vetorial do disco.
     
-    Returns:
-        FAISS vector database or None if not found
+    Retorna:
+        Banco de dados vetorial FAISS ou None se não for encontrado
     """
     global vector_db
     
@@ -162,18 +162,18 @@ def load_vector_db() -> Optional[FAISS]:
 
 async def query_vector_db(question: str, top_k: int = 5, file_paths: List[str] = []) -> List[Document]:
     """
-    Query the vector database for relevant documents.
+    Consulta o banco de dados vetorial para documentos relevantes.
     
     Args:
-        question: Query string
-        top_k: Number of documents to return
-        file_paths: List of file paths to filter by
+        question: String de consulta
+        top_k: Número de documentos a retornar
+        file_paths: Lista de caminhos de arquivo para filtrar
         
-    Returns:
-        List of relevant Document objects
+    Retorna:
+        Lista de objetos Document relevantes
     
-    Raises:
-        ValueError: If the vector database is not loaded
+    Levanta:
+        ValueError: Se o banco de dados vetorial não estiver carregado
     """
     global vector_db
     
@@ -203,10 +203,10 @@ async def query_vector_db(question: str, top_k: int = 5, file_paths: List[str] =
 
 def add_documents_to_vector_db(documents: List[Document]) -> None:
     """
-    Add documents to the vector database.
+    Adiciona documentos ao banco de dados vetorial.
     
     Args:
-        documents: List of Document objects
+        documents: Lista de objetos Document
     """
     global vector_db
     

@@ -1,24 +1,24 @@
 """
-Pydantic models for request and response schemas.
+Modelos Pydantic para esquemas de requisição e resposta.
 """
 from typing import List, Dict, Any
 from pydantic import BaseModel
 
 class QuestionRequest(BaseModel):
-    """Request model for asking questions."""
+    """Modelo de requisição para fazer perguntas."""
     question: str
     session_id: str
     top_k: int = 5
     file_paths: List[str] = []
 
 class QuestionResponse(BaseModel):
-    """Response model for question answers."""
+    """Modelo de resposta para respostas de perguntas."""
     answer: str
     sources: List[Dict[str, Any]] = []
     session_id: str
 
 class DocumentInfo(BaseModel):
-    """Model for document information."""
+    """Modelo para informações de documentos."""
     filename: str
     upload_time: str
     file_path: str

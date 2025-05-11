@@ -1,5 +1,5 @@
 """
-Document controller for handling document-related endpoints.
+Controlador de documentos para manipulação de endpoints relacionados a documentos.
 """
 import os
 import datetime
@@ -9,19 +9,19 @@ from app.models.schemas import DocumentInfo
 from app.services.document_service import upload_and_process_document
 from app.config.settings import UPLOADS_DIR, logger
 
-# Create router
+# Cria o router
 router = APIRouter(prefix="/documents", tags=["documents"])
 
 @router.post("/upload", response_model=DocumentInfo)
 async def upload_document(file: UploadFile = File(...)) -> DocumentInfo:
     """
-    Upload a document and add it to the vector database.
+    Faz upload de um documento e o adiciona ao banco de dados vetorial.
     
     Args:
-        file: Uploaded file
+        file: Arquivo enviado
         
-    Returns:
-        Document information
+    Retorna:
+        Informações do documento
     """
     try:
         # Verificar se o arquivo foi enviado
@@ -62,10 +62,10 @@ async def upload_document(file: UploadFile = File(...)) -> DocumentInfo:
 @router.get("/list", response_model=List[DocumentInfo])
 async def list_documents() -> List[DocumentInfo]:
     """
-    List all uploaded documents.
+    Lista todos os documentos enviados.
     
-    Returns:
-        List of document information
+    Retorna:
+        Lista de informações dos documentos
     """
     try:
         # Verificar se o diretório de uploads existe

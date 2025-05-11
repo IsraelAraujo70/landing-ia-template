@@ -1,5 +1,5 @@
 """
-Document processing service.
+Serviço de processamento de documentos.
 """
 import os
 import datetime
@@ -11,15 +11,15 @@ from app.config.settings import UPLOADS_DIR, logger
 
 async def process_document(file_path: str, file_name: str, upload_time: str) -> List[Document]:
     """
-    Process a document and split it into chunks.
+    Processa um documento e o divide em pedaços (chunks).
     
     Args:
-        file_path: Path to the document
-        file_name: Name of the document
-        upload_time: Upload timestamp
+        file_path: Caminho para o documento
+        file_name: Nome do documento
+        upload_time: Timestamp de upload
         
-    Returns:
-        List of Document objects
+    Retorna:
+        Lista de objetos Document
     """
     try:
         # Extrair texto do documento
@@ -43,14 +43,14 @@ async def process_document(file_path: str, file_name: str, upload_time: str) -> 
 
 async def upload_and_process_document(file_content: bytes, file_name: str) -> str:
     """
-    Save an uploaded file and process it.
+    Salva um arquivo enviado e o processa.
     
     Args:
-        file_content: File content bytes
-        file_name: Name of the file
+        file_content: Bytes do conteúdo do arquivo
+        file_name: Nome do arquivo
         
-    Returns:
-        Path to the saved file
+    Retorna:
+        Caminho para o arquivo salvo
     """
     # Criar diretório de uploads se não existir
     os.makedirs(UPLOADS_DIR, exist_ok=True)

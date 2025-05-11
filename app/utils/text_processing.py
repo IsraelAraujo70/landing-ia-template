@@ -1,5 +1,5 @@
 """
-Text processing utilities for the Ada Assistant application.
+Utilitários de processamento de texto para a aplicação do Assistente AgiFinance.
 """
 import pdfplumber
 import tiktoken
@@ -9,21 +9,21 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
 from app.config.settings import logger
 
-# Initialize tokenizer for text splitting
+# Inicializa o tokenizador para divisão de texto
 tokenizer = tiktoken.get_encoding("cl100k_base")
 
 def extract_text(file_path: str) -> str:
     """
-    Extract text from a file based on its extension.
+    Extrai texto de um arquivo com base em sua extensão.
     
     Args:
-        file_path: Path to the file
+        file_path: Caminho para o arquivo
         
-    Returns:
-        Extracted text content
+    Retorna:
+        Conteúdo de texto extraído
     
-    Raises:
-        ValueError: If the file format is not supported
+    Levanta:
+        ValueError: Se o formato do arquivo não for suportado
     """
     file_extension = os.path.splitext(file_path)[1].lower()
     
@@ -44,15 +44,15 @@ def extract_text(file_path: str) -> str:
 
 def split_text(text: str, chunk_size: int = 1000, chunk_overlap: int = 200) -> List[Document]:
     """
-    Split text into chunks with a maximum token count.
+    Divide o texto em pedaços (chunks) com uma contagem máxima de tokens.
     
     Args:
-        text: Text to split
-        chunk_size: Maximum number of tokens per chunk
-        chunk_overlap: Number of overlapping tokens between chunks
+        text: Texto a ser dividido
+        chunk_size: Número máximo de tokens por pedaço
+        chunk_overlap: Número de tokens sobrepostos entre pedaços
         
-    Returns:
-        List of Document objects
+    Retorna:
+        Lista de objetos Document
     """
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         chunk_size=chunk_size,

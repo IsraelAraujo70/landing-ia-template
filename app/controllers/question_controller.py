@@ -1,5 +1,5 @@
 """
-Question controller for handling question-related endpoints.
+Controlador de perguntas para manipulação de endpoints relacionados a perguntas.
 """
 from fastapi import APIRouter, HTTPException
 from app.models.schemas import QuestionRequest, QuestionResponse
@@ -7,19 +7,19 @@ from app.services.ai_service import generate_answer
 from app.utils.vector_db import query_vector_db
 from app.config.settings import logger
 
-# Create router
+# Cria o router
 router = APIRouter(prefix="/questions", tags=["questions"])
 
 @router.post("/ask", response_model=QuestionResponse)
 async def ask_question(request: QuestionRequest) -> QuestionResponse:
     """
-    Ask a question and get an answer based on document context.
+    Faz uma pergunta e obtém uma resposta baseada no contexto dos documentos.
     
     Args:
-        request: Question request
+        request: Requisição de pergunta
         
-    Returns:
-        Question response with answer and sources
+    Retorna:
+        Resposta à pergunta com resposta e fontes
     """
     try:
         # Extrair parâmetros da requisição
