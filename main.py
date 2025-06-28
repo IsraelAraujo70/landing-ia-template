@@ -52,4 +52,6 @@ async def startup_db_client():
         logger.error(f"Erro ao carregar banco de dados de vetores: {str(e)}", exc_info=True)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    import os
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
