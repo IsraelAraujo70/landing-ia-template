@@ -10,8 +10,8 @@ load_dotenv()
 
 # Chaves de API
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY não está definido no arquivo .env")
+if not OPENAI_API_KEY or OPENAI_API_KEY == "your-openai-api-key-here":
+    raise ValueError("OPENAI_API_KEY não está definido ou está usando valor placeholder. Configure com sua chave real da OpenAI.")
 
 # Caminhos
 UPLOADS_DIR = "uploads"
