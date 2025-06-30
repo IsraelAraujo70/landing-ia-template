@@ -10,9 +10,11 @@ from app.controllers.main_controller import router as main_router
 from app.controllers.document_controller import router as document_router
 from app.controllers.question_controller import router as question_router
 from app.controllers.websocket_controller import router as websocket_router
+from app.controllers.auth_controller import router as auth_router
 
 from app.utils.vector_db import load_vector_db
 from app.config.settings import logger
+from app.middleware.auth_middleware import IframeAuthMiddleware
 
 app = FastAPI(
     title="Assistente IA AgiFinance",
@@ -28,6 +30,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Adiciona middleware de autenticação para o iframe
+app.add_middleware(IframeAuthMiddleware)
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/client", StaticFiles(directory="client"), name="client")
 
@@ -36,6 +41,7 @@ app.include_router(main_router)
 app.include_router(document_router)
 app.include_router(question_router)
 app.include_router(websocket_router)
+app.include_router(auth_router)
 
 
 @app.on_event("startup")

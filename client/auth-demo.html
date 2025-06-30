@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Sistema de Autenticação - AgiFinance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mulish', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .demo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .btn-auth {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+        .btn-auth:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+        .session-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .iframe-container {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .log-area {
+            background: #2d3748;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="demo-container">
+            <h1 class="text-center mb-4">🔒 Demo Sistema de Autenticação</h1>
+            <p class="text-center text-muted mb-4">
+                Este sistema demonstra como funciona a autenticação por session ID para o iframe.
+            </p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>📋 Controles</h3>
+                    <div class="d-grid gap-2">
+                        <button id="createSession" class="btn btn-auth">
+                            Criar Nova Session
+                        </button>
+                        <button id="openIframe" class="btn btn-outline-primary" disabled>
+                            Abrir Iframe com Session
+                        </button>
+                        <button id="tryInvalidAccess" class="btn btn-outline-warning">
+                            Tentar Acesso Inválido
+                        </button>
+                        <button id="checkStatus" class="btn btn-outline-info">
+                            Verificar Status das Sessions
+                        </button>
+                        <button id="clearSessions" class="btn btn-outline-danger">
+                            Limpar Sessions Expiradas
+                        </button>
+                    </div>
+                    
+                    <div id="sessionInfo" class="session-info" style="display: none;">
+                        <h5>ℹ️ Informações da Session</h5>
+                        <p><strong>Session ID:</strong> <span id="sessionId"></span></p>
+                        <p><strong>Status:</strong> <span id="sessionStatus" class="status-badge"></span></p>
+                        <p><strong>URL do Iframe:</strong></p>
+                        <input type="text" id="iframeUrl" class="form-control" readonly>
+                        <small class="text-muted">Clique no botão "Abrir Iframe" para usar esta session</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h3>📊 Status do Sistema</h3>
+                    <div id="systemStatus">
+                        <p>Clique em "Verificar Status" para ver informações</p>
+                    </div>
+                    
+                    <h5>📝 Log de Atividades</h5>
+                    <div id="logArea" class="log-area"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-container">
+            <h3>🖼️ Área do Iframe</h3>
+            <p class="text-muted">O iframe aparecerá aqui quando você clicar em "Abrir Iframe"</p>
+            <div id="iframeContainer" style="min-height: 400px;">
+                <div class="text-center p-5 text-muted">
+                    Nenhum iframe carregado
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+        
+        function log(message) {
+            const logArea = document.getElementById('logArea');
+            const timestamp = new Date().toLocaleTimeString();
+            logArea.innerHTML += `[${timestamp}] ${message}\n`;
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+        
+        function showSessionInfo(sessionData) {
+            currentSessionId = sessionData.session_id;
+            document.getElementById('sessionId').textContent = sessionData.session_id;
+            document.getElementById('sessionStatus').textContent = 'Ativa';
+            document.getElementById('sessionStatus').className = 'status-badge status-success';
+            document.getElementById('iframeUrl').value = window.location.origin + sessionData.iframe_url;
+            document.getElementById('sessionInfo').style.display = 'block';
+            document.getElementById('openIframe').disabled = false;
+        }
+        
+        function hideSessionInfo() {
+            document.getElementById('sessionInfo').style.display = 'none';
+            document.getElementById('openIframe').disabled = true;
+            currentSessionId = null;
+        }
+        
+        async function createSession() {
+            try {
+                log('Criando nova session...');
+                const response = await fetch('/auth/create-session', {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showSessionInfo(data);
+                    log(`✅ Session criada: ${data.session_id}`);
+                } else {
+                    const error = await response.json();
+                    log(`❌ Erro ao criar session: ${error.detail}`);
+                }
+            } catch (error) {
+                log(`❌ Erro de rede: ${error.message}`);
+            }
+        }
+        
+        function openIframe() {
+            if (!currentSessionId) {
+                log('❌ Nenhuma session ativa');
+                return;
+            }
+            
+            log(`📖 Abrindo iframe com session: ${currentSessionId}`);
+            const iframeUrl = `/client/iframe.html?session_id=${currentSessionId}`;
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = iframeUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '8px';
+            
+            iframe.onload = function() {
+                log('✅ Iframe carregado com sucesso');
+                document.getElementById('sessionStatus').textContent = 'Usada';
+                document.getElementById('sessionStatus').className = 'status-badge status-error';
+                document.getElementById('openIframe').disabled = true;
+            };
+            
+            iframe.onerror = function() {
+                log('❌ Erro ao carregar iframe');
+            };
+            
+            document.getElementById('iframeContainer').innerHTML = '';
+            document.getElementById('iframeContainer').appendChild(iframe);
+        }
+        
+        function tryInvalidAccess() {
+            log('🚫 Tentando acesso inválido ao iframe...');
+            const iframe = document.createElement('iframe');
+            iframe.src = '/client/iframe.html'; // Sem session ID
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '8px';
+            
+            iframe.onload = function() {
+                log('❌ Iframe carregou (não deveria!)');
+            };
+            
+            document.getElementById('iframeContainer').innerHTML = '';
+            document.getElementById('iframeContainer').appendChild(iframe);
+        }
+        
+        async function checkStatus() {
+            try {
+                log('📊 Verificando status das sessions...');
+                const response = await fetch('/auth/session-status');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('systemStatus').innerHTML = `
+                        <div class="row text-center">
+                            <div class="col-3">
+                                <h4 class="text-primary">${data.total_sessions}</h4>
+                                <small>Total</small>
+                            </div>
+                            <div class="col-3">
+                                <h4 class="text-success">${data.active_sessions}</h4>
+                                <small>Ativas</small>
+                            </div>
+                            <div class="col-3">
+                                <h4 class="text-danger">${data.used_sessions}</h4>
+                                <small>Usadas</small>
+                            </div>
+                            <div class="col-3">
+                                <h4 class="text-muted">${data.max_sessions}</h4>
+                                <small>Máximo</small>
+                            </div>
+                        </div>
+                    `;
+                    log('✅ Status atualizado');
+                } else {
+                    log('❌ Erro ao obter status');
+                }
+            } catch (error) {
+                log(`❌ Erro de rede: ${error.message}`);
+            }
+        }
+        
+        async function clearSessions() {
+            try {
+                log('🧹 Limpando sessions expiradas...');
+                const response = await fetch('/auth/cleanup-sessions', {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log(`✅ ${data.sessions_removed} sessions removidas`);
+                    checkStatus();
+                } else {
+                    log('❌ Erro ao limpar sessions');
+                }
+            } catch (error) {
+                log(`❌ Erro de rede: ${error.message}`);
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('createSession').addEventListener('click', createSession);
+        document.getElementById('openIframe').addEventListener('click', openIframe);
+        document.getElementById('tryInvalidAccess').addEventListener('click', tryInvalidAccess);
+        document.getElementById('checkStatus').addEventListener('click', checkStatus);
+        document.getElementById('clearSessions').addEventListener('click', clearSessions);
+        
+        // Inicialização
+        log('🚀 Sistema de demonstração iniciado');
+        checkStatus();
+    </script>
+</body>
+</html>

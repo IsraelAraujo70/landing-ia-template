@@ -19,6 +19,17 @@ async def serve_client():
     from fastapi.responses import RedirectResponse
     return RedirectResponse(url="/client/index.html")
 
+@router.get("/auth-demo")
+async def auth_demo():
+    """
+    Serve a página de demonstração do sistema de autenticação.
+    
+    Retorna:
+        Página HTML de demonstração
+    """
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/client/auth-demo.html")
+
 @router.get("/status")
 async def api_status():
     """
