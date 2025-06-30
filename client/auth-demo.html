@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Sistema de Autenticação Redis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mulish', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .demo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-weight: 500;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+        }
+        .btn-success-custom {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border: none;
+            color: white;
+        }
+        .btn-danger-custom {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+            border: none;
+            color: white;
+        }
+        .btn-warning-custom {
+            background: linear-gradient(135deg, #ff9800 0%, #e68900 100%);
+            border: none;
+            color: white;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .log-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #e9ecef;
+        }
+        .status-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .status-value {
+            font-weight: 600;
+            color: #333;
+        }
+        .log-timestamp {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .log-info { color: #0066cc; }
+        .log-success { color: #28a745; }
+        .log-warning { color: #ffc107; }
+        .log-error { color: #dc3545; }
+        .redis-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .redis-connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        .redis-disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .iframe-container {
+            margin-top: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="demo-container text-center">
+                    <h1 class="mb-4">� Demo - Sistema de Autenticação Redis</h1>
+                    <p class="lead">Sistema de sessions únicas para iframe com Redis backend</p>
+                    <div class="badge bg-info mb-3">
+                        <span id="environment">Carregando ambiente...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="demo-container">
+                    <h3>🎮 Controles</h3>
+                    <div class="d-grid gap-2">
+                        <button id="createSession" class="btn btn-primary-custom btn-custom">
+                            🆕 Criar Nova Session
+                        </button>
+                        <button id="validateLast" class="btn btn-success-custom btn-custom" disabled>
+                            ✅ Validar Última Session
+                        </button>
+                        <button id="openIframe" class="btn btn-warning-custom btn-custom" disabled>
+                            📱 Abrir Iframe
+                        </button>
+                        <button id="testInvalid" class="btn btn-danger-custom btn-custom">
+                            ❌ Testar Session Inválida
+                        </button>
+                        <button id="refreshStatus" class="btn btn-outline-primary btn-custom">
+                            🔄 Atualizar Status
+                        </button>
+                        <button id="clearLogs" class="btn btn-outline-secondary btn-custom">
+                            🧹 Limpar Logs
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="demo-container">
+                    <h3>📊 Status Redis</h3>
+                    <div class="status-card">
+                        <div class="status-item">
+                            <span>🔗 Conexão:</span>
+                            <span id="redisStatus" class="redis-status redis-disconnected">Verificando...</span>
+                        </div>
+                        <div class="status-item">
+                            <span>📈 Total Sessions:</span>
+                            <span id="totalSessions" class="status-value">-</span>
+                        </div>
+                        <div class="status-item">
+                            <span>🟢 Sessions Ativas:</span>
+                            <span id="activeSessions" class="status-value">-</span>
+                        </div>
+                        <div class="status-item">
+                            <span>🔴 Sessions Usadas:</span>
+                            <span id="usedSessions" class="status-value">-</span>
+                        </div>
+                        <div class="status-item">
+                            <span>📊 Total Criadas:</span>
+                            <span id="totalCreated" class="status-value">-</span>
+                        </div>
+                        <div class="status-item">
+                            <span>✅ Total Utilizadas:</span>
+                            <span id="totalUsed" class="status-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="demo-container">
+                    <h3>📝 Log de Atividades</h3>
+                    <div id="logArea" class="log-area">
+                        <div class="log-info">
+                            <span class="log-timestamp">[Iniciando]</span> Sistema de demo carregado
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="demo-container">
+                    <h3>🖼️ Iframe de Teste</h3>
+                    <div id="iframeContainer" class="iframe-container" style="display: none;">
+                        <iframe id="testIframe" width="100%" height="400" frameborder="0"></iframe>
+                    </div>
+                    <div id="iframePlaceholder" class="text-center text-muted">
+                        Clique em "Abrir Iframe" para testar o sistema de autenticação
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração da API - detecta automaticamente o ambiente
+        const getApiBaseUrl = () => {
+            // Em produção (Railway), usar a URL atual
+            if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                return window.location.origin;
+            }
+            // Em desenvolvimento, usar localhost:8000
+            return 'http://localhost:8000';
+        };
+
+        const API_BASE_URL = getApiBaseUrl();
+        
+        // Estado da aplicação
+        let lastSessionId = null;
+        
+        // Elementos DOM
+        const elements = {
+            createSession: document.getElementById('createSession'),
+            validateLast: document.getElementById('validateLast'),
+            openIframe: document.getElementById('openIframe'),
+            testInvalid: document.getElementById('testInvalid'),
+            refreshStatus: document.getElementById('refreshStatus'),
+            clearLogs: document.getElementById('clearLogs'),
+            logArea: document.getElementById('logArea'),
+            redisStatus: document.getElementById('redisStatus'),
+            totalSessions: document.getElementById('totalSessions'),
+            activeSessions: document.getElementById('activeSessions'),
+            usedSessions: document.getElementById('usedSessions'),
+            totalCreated: document.getElementById('totalCreated'),
+            totalUsed: document.getElementById('totalUsed'),
+            testIframe: document.getElementById('testIframe'),
+            iframeContainer: document.getElementById('iframeContainer'),
+            iframePlaceholder: document.getElementById('iframePlaceholder'),
+            environment: document.getElementById('environment')
+        };
+
+        // Função para log
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-${type}`;
+            logEntry.innerHTML = `<span class="log-timestamp">[${timestamp}]</span> ${message}`;
+            elements.logArea.appendChild(logEntry);
+            elements.logArea.scrollTop = elements.logArea.scrollHeight;
+        }
+
+        // Função para fazer requisições com tratamento de erro
+        async function apiRequest(endpoint, options = {}) {
+            try {
+                const url = `${API_BASE_URL}${endpoint}`;
+                log(`Fazendo requisição para: ${endpoint}`, 'info');
+                
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                log(`Erro na requisição ${endpoint}: ${error.message}`, 'error');
+                throw error;
+            }
+        }
+
+        // Função para criar nova session
+        async function createSession() {
+            try {
+                elements.createSession.disabled = true;
+                log('Criando nova session...', 'info');
+                
+                const response = await apiRequest('/auth/create-session', { method: 'POST' });
+                
+                lastSessionId = response.session_id;
+                elements.validateLast.disabled = false;
+                elements.openIframe.disabled = false;
+                
+                log(`✅ Session criada: ${response.session_id.substring(0, 8)}...`, 'success');
+                log(`🔗 URL do iframe: ${response.iframe_url}`, 'info');
+                log(`⏰ Expira em: ${response.expires_in_minutes} minutos`, 'info');
+                
+                await updateStatus();
+            } catch (error) {
+                log(`❌ Erro ao criar session: ${error.message}`, 'error');
+            } finally {
+                elements.createSession.disabled = false;
+            }
+        }
+
+        // Função para validar session
+        async function validateSession(sessionId) {
+            try {
+                log(`Validando session: ${sessionId.substring(0, 8)}...`, 'info');
+                
+                const response = await apiRequest(`/auth/validate-session?session_id=${sessionId}`);
+                
+                log(`✅ Session validada com sucesso!`, 'success');
+                elements.validateLast.disabled = true;
+                
+                await updateStatus();
+                return true;
+            } catch (error) {
+                log(`❌ Falha na validação: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Função para abrir iframe
+        function openIframe() {
+            if (!lastSessionId) {
+                log('❌ Nenhuma session disponível', 'error');
+                return;
+            }
+
+            const iframeUrl = `${API_BASE_URL}/client/iframe.html?session_id=${lastSessionId}`;
+            elements.testIframe.src = iframeUrl;
+            elements.iframeContainer.style.display = 'block';
+            elements.iframePlaceholder.style.display = 'none';
+            
+            log(`📱 Abrindo iframe com session: ${lastSessionId.substring(0, 8)}...`, 'info');
+            
+            // Desabilitar botões relacionados à session
+            elements.validateLast.disabled = true;
+            elements.openIframe.disabled = true;
+            
+            // Atualizar status após um tempo
+            setTimeout(updateStatus, 2000);
+        }
+
+        // Função para testar session inválida
+        async function testInvalidSession() {
+            try {
+                log('Testando session inválida...', 'warning');
+                await validateSession('invalid-session-id');
+            } catch (error) {
+                log(`✅ Comportamento esperado: ${error.message}`, 'warning');
+            }
+        }
+
+        // Função para atualizar status
+        async function updateStatus() {
+            try {
+                // Verificar health do sistema
+                const health = await apiRequest('/health');
+                
+                // Atualizar status Redis
+                const redisConnected = health.redis === 'connected';
+                elements.redisStatus.textContent = redisConnected ? 'Conectado' : 'Desconectado';
+                elements.redisStatus.className = `redis-status ${redisConnected ? 'redis-connected' : 'redis-disconnected'}`;
+                
+                // Atualizar ambiente
+                elements.environment.textContent = health.environment || 'development';
+                
+                // Buscar estatísticas das sessions
+                const stats = await apiRequest('/auth/session-status');
+                
+                elements.totalSessions.textContent = stats.total_sessions;
+                elements.activeSessions.textContent = stats.active_sessions;
+                elements.usedSessions.textContent = stats.used_sessions;
+                elements.totalCreated.textContent = stats.total_created;
+                elements.totalUsed.textContent = stats.total_used;
+                
+                log('📊 Status atualizado', 'info');
+            } catch (error) {
+                log(`❌ Erro ao atualizar status: ${error.message}`, 'error');
+            }
+        }
+
+        // Event listeners
+        elements.createSession.addEventListener('click', createSession);
+        elements.validateLast.addEventListener('click', () => {
+            if (lastSessionId) {
+                validateSession(lastSessionId);
+            }
+        });
+        elements.openIframe.addEventListener('click', openIframe);
+        elements.testInvalid.addEventListener('click', testInvalidSession);
+        elements.refreshStatus.addEventListener('click', updateStatus);
+        elements.clearLogs.addEventListener('click', () => {
+            elements.logArea.innerHTML = '<div class="log-info"><span class="log-timestamp">[Limpo]</span> Logs limpos</div>';
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            log(`🚀 Sistema carregado - API: ${API_BASE_URL}`, 'success');
+            updateStatus();
+        });
+
+        // Atualizar status a cada 30 segundos
+        setInterval(updateStatus, 30000);
+    </script>
+</body>
+</html>
