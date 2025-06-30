@@ -1,5 +1,6 @@
 """
 Configuração do Redis para armazenamento de sessions.
+Configurado para Railway com fallback gracioso.
 """
 import redis
 import json
@@ -9,42 +10,110 @@ from typing import Optional, Dict
 from app.config.settings import logger
 
 class RedisSessionManager:
-    """Gerenciador de sessions usando Redis."""
+    """Gerenciador de sessions usando Redis com fallback para Railway."""
     
     def __init__(self):
         """Inicializa a conexão com Redis."""
-        # Configurações do Redis a partir de variáveis de ambiente
-        self.redis_host = os.getenv('REDIS_HOST', 'localhost')
-        self.redis_port = int(os.getenv('REDIS_PORT', 6379))
+        # Configurações do Redis - Railway pode fornecer diferentes variáveis
+        self.redis_host = os.getenv('REDIS_HOST') or os.getenv('REDISHOST', 'localhost')
+        self.redis_port = int(os.getenv('REDIS_PORT') or os.getenv('REDISPORT', 6379))
         self.redis_db = int(os.getenv('REDIS_DB', 0))
-        self.redis_password = os.getenv('REDIS_PASSWORD', None)
+        self.redis_password = os.getenv('REDIS_PASSWORD') or os.getenv('REDISPASSWORD', None)
+        
+        # Railway pode fornecer URL completa do Redis
+        redis_url = os.getenv('REDIS_URL')
         
         # Prefixo para chaves das sessions
         self.session_prefix = "auth_session:"
         self.stats_key = "auth_stats"
         
+        # Flag para indicar se Redis está disponível
+        self.redis_available = False
+        self.redis_client = None
+        
         try:
-            # Conecta ao Redis
-            self.redis_client = redis.Redis(
-                host=self.redis_host,
-                port=self.redis_port,
-                db=self.redis_db,
-                password=self.redis_password,
-                decode_responses=True,
-                socket_connect_timeout=5,
-                socket_timeout=5
-            )
+            if redis_url:
+                # Usar URL completa do Redis (Railway padrão)
+                self.redis_client = redis.from_url(
+                    redis_url,
+                    decode_responses=True,
+                    socket_connect_timeout=10,
+                    socket_timeout=10,
+                    retry_on_timeout=True,
+                    retry_on_error=[redis.ConnectionError, redis.TimeoutError],
+                    max_connections=20
+                )
+                logger.info(f"Conectando ao Redis via URL: {redis_url[:20]}...")
+            else:
+                # Conectar usando parâmetros individuais
+                self.redis_client = redis.Redis(
+                    host=self.redis_host,
+                    port=self.redis_port,
+                    db=self.redis_db,
+                    password=self.redis_password,
+                    decode_responses=True,
+                    socket_connect_timeout=10,
+                    socket_timeout=10,
+                    retry_on_timeout=True,
+                    retry_on_error=[redis.ConnectionError, redis.TimeoutError],
+                    max_connections=20
+                )
+                logger.info(f"Conectando ao Redis em {self.redis_host}:{self.redis_port}")
             
             # Testa a conexão
             self.redis_client.ping()
-            logger.info(f"Conectado ao Redis em {self.redis_host}:{self.redis_port}")
+            self.redis_available = True
+            logger.info("✅ Redis conectado com sucesso")
             
         except redis.ConnectionError as e:
-            logger.error(f"Erro ao conectar ao Redis: {e}")
-            raise
+            logger.warning(f"⚠️ Redis não disponível: {e}")
+            logger.info("Sistema funcionará sem cache de sessions (modo degradado)")
+            self.redis_available = False
+            self.redis_client = None
         except Exception as e:
-            logger.error(f"Erro inesperado ao configurar Redis: {e}")
-            raise
+            logger.error(f"❌ Erro inesperado ao configurar Redis: {e}")
+            self.redis_available = False
+            self.redis_client = None
+    
+    def _ensure_redis_connection(self) -> bool:
+        """Verifica e reconecta ao Redis se necessário."""
+        if not self.redis_client:
+            return False
+        
+        try:
+            self.redis_client.ping()
+            self.redis_available = True
+            return True
+        except (redis.ConnectionError, redis.TimeoutError):
+            logger.warning("⚠️ Conexão Redis perdida, tentando reconectar...")
+            self.redis_available = False
+            
+            # Tentar reconectar
+            try:
+                redis_url = os.getenv('REDIS_URL')
+                if redis_url:
+                    self.redis_client = redis.from_url(redis_url, decode_responses=True)
+                else:
+                    self.redis_client = redis.Redis(
+                        host=self.redis_host,
+                        port=self.redis_port,
+                        db=self.redis_db,
+                        password=self.redis_password,
+                        decode_responses=True
+                    )
+                
+                self.redis_client.ping()
+                self.redis_available = True
+                logger.info("✅ Redis reconectado")
+                return True
+            except Exception as e:
+                logger.error(f"❌ Falha na reconexão Redis: {e}")
+                self.redis_available = False
+                return False
+        except Exception as e:
+            logger.error(f"❌ Erro na verificação Redis: {e}")
+            self.redis_available = False
+            return False
     
     def _get_session_key(self, session_id: str) -> str:
         """Gera a chave Redis para uma session."""
@@ -61,6 +130,10 @@ class RedisSessionManager:
         Returns:
             True se criada com sucesso, False caso contrário
         """
+        if not self._ensure_redis_connection():
+            logger.warning("Redis indisponível - session não persistida")
+            return False
+        
         try:
             session_data = {
                 'session_id': session_id,
@@ -99,6 +172,9 @@ class RedisSessionManager:
         Returns:
             Dados da session ou None se não encontrada
         """
+        if not self._ensure_redis_connection():
+            return None
+        
         try:
             session_key = self._get_session_key(session_id)
             session_data = self.redis_client.get(session_key)
@@ -121,6 +197,9 @@ class RedisSessionManager:
         Returns:
             True se marcada com sucesso, False caso contrário
         """
+        if not self._ensure_redis_connection():
+            return False
+        
         try:
             session_data = self.get_session(session_id)
             if not session_data:
@@ -161,6 +240,9 @@ class RedisSessionManager:
         Returns:
             True se removida com sucesso, False caso contrário
         """
+        if not self._ensure_redis_connection():
+            return False
+        
         try:
             session_key = self._get_session_key(session_id)
             result = self.redis_client.delete(session_key)
@@ -181,12 +263,15 @@ class RedisSessionManager:
         Returns:
             Número de sessions ativas
         """
+        if not self._ensure_redis_connection():
+            return 0
+        
         try:
             pattern = f"{self.session_prefix}*"
             active_sessions = 0
             
             # Usa SCAN para evitar bloquear o Redis com KEYS
-            for key in self.redis_client.scan_iter(match=pattern):
+            for key in self.redis_client.scan_iter(match=pattern, count=100):
                 session_data = self.redis_client.get(key)
                 if session_data:
                     data = json.loads(session_data)
@@ -206,11 +291,14 @@ class RedisSessionManager:
         Returns:
             Número total de sessions
         """
+        if not self._ensure_redis_connection():
+            return 0
+        
         try:
             pattern = f"{self.session_prefix}*"
             # Conta todas as keys que correspondem ao padrão
             count = 0
-            for _ in self.redis_client.scan_iter(match=pattern):
+            for _ in self.redis_client.scan_iter(match=pattern, count=100):
                 count += 1
             return count
             
@@ -225,11 +313,14 @@ class RedisSessionManager:
         Returns:
             Número de sessions usadas
         """
+        if not self._ensure_redis_connection():
+            return 0
+        
         try:
             pattern = f"{self.session_prefix}*"
             used_sessions = 0
             
-            for key in self.redis_client.scan_iter(match=pattern):
+            for key in self.redis_client.scan_iter(match=pattern, count=100):
                 session_data = self.redis_client.get(key)
                 if session_data:
                     data = json.loads(session_data)
@@ -249,12 +340,15 @@ class RedisSessionManager:
         Returns:
             Número de sessions removidas
         """
+        if not self._ensure_redis_connection():
+            return 0
+        
         try:
             pattern = f"{self.session_prefix}*"
             expired_count = 0
             current_time = datetime.now()
             
-            for key in self.redis_client.scan_iter(match=pattern):
+            for key in self.redis_client.scan_iter(match=pattern, count=100):
                 session_data = self.redis_client.get(key)
                 if session_data:
                     data = json.loads(session_data)
@@ -278,6 +372,16 @@ class RedisSessionManager:
         Returns:
             Dicionário com estatísticas
         """
+        if not self._ensure_redis_connection():
+            return {
+                'total_created': 0,
+                'total_used': 0,
+                'active_sessions': 0,
+                'total_sessions': 0,
+                'used_sessions': 0,
+                'redis_available': False
+            }
+        
         try:
             stats = self.redis_client.hgetall(self.stats_key)
             
@@ -286,7 +390,8 @@ class RedisSessionManager:
                 'total_used': int(stats.get('total_used', 0)),
                 'active_sessions': self.get_active_sessions_count(),
                 'total_sessions': self.get_total_sessions_count(),
-                'used_sessions': self.get_used_sessions_count()
+                'used_sessions': self.get_used_sessions_count(),
+                'redis_available': True
             }
             
         except Exception as e:
@@ -296,7 +401,8 @@ class RedisSessionManager:
                 'total_used': 0,
                 'active_sessions': 0,
                 'total_sessions': 0,
-                'used_sessions': 0
+                'used_sessions': 0,
+                'redis_available': False
             }
     
     def health_check(self) -> bool:
@@ -306,12 +412,7 @@ class RedisSessionManager:
         Returns:
             True se saudável, False caso contrário
         """
-        try:
-            self.redis_client.ping()
-            return True
-        except Exception as e:
-            logger.error(f"Health check Redis falhou: {e}")
-            return False
+        return self._ensure_redis_connection()
 
 # Instância global do gerenciador de sessions
 redis_session_manager = None
