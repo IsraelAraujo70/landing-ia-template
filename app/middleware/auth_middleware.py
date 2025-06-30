@@ -1,5 +1,6 @@
 """
 Middleware de autenticação para proteger o acesso ao iframe.
+Agora usando Redis para verificação de sessions.
 """
 from fastapi import Request, HTTPException
 from fastapi.responses import HTMLResponse
@@ -7,16 +8,18 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from urllib.parse import urlparse, parse_qs
 import sys
 import os
+from datetime import datetime
 
-# Adiciona o diretório raiz ao path para importar o auth_controller
+# Adiciona o diretório raiz ao path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from app.config.settings import logger
+from app.config.redis_config import get_redis_session_manager
 
 
 class IframeAuthMiddleware(BaseHTTPMiddleware):
     """
-    Middleware para proteger o acesso ao iframe com session ID.
+    Middleware para proteger o acesso ao iframe com session ID usando Redis.
     """
     
     def __init__(self, app):
@@ -28,56 +31,75 @@ class IframeAuthMiddleware(BaseHTTPMiddleware):
         """
         # Verifica se é uma requisição para o iframe
         if request.url.path == "/client/iframe.html":
-            # Importa localmente para evitar dependência circular
-            from app.controllers.auth_controller import session_store, cleanup_expired_sessions
-            from datetime import datetime
-            
-            # Obtém o session_id da query string
-            session_id = request.query_params.get("session_id")
-            
-            if not session_id:
-                logger.warning("Tentativa de acesso ao iframe sem session ID")
+            try:
+                # Obtém o gerenciador Redis
+                redis_manager = get_redis_session_manager()
+                
+                # Verifica se Redis está disponível
+                if not redis_manager.health_check():
+                    logger.error("Redis indisponível durante verificação de middleware")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Serviço temporariamente indisponível"),
+                        status_code=503
+                    )
+                
+                # Obtém o session_id da query string
+                session_id = request.query_params.get("session_id")
+                
+                if not session_id:
+                    logger.warning("Tentativa de acesso ao iframe sem session ID")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Session ID obrigatório"),
+                        status_code=401
+                    )
+                
+                # Recupera dados da session do Redis
+                session_data = redis_manager.get_session(session_id)
+                
+                # Verifica se session existe
+                if not session_data:
+                    logger.warning(f"Tentativa de acesso com session ID inválido: {session_id}")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Session ID inválido ou expirado"),
+                        status_code=401
+                    )
+                
+                # Verifica se session já foi usada
+                if session_data.get('used', False):
+                    logger.warning(f"Tentativa de reutilizar session ID: {session_id}")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Session ID já foi utilizado"),
+                        status_code=401
+                    )
+                
+                # Verifica se session está expirada (dupla verificação)
+                expires_at = datetime.fromisoformat(session_data['expires_at'])
+                if datetime.now() > expires_at:
+                    redis_manager.delete_session(session_id)
+                    logger.warning(f"Session ID expirado: {session_id}")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Session ID expirado"),
+                        status_code=401
+                    )
+                
+                # Marca session como usada no Redis
+                success = redis_manager.mark_session_used(session_id)
+                
+                if not success:
+                    logger.error(f"Falha ao marcar session como usada: {session_id}")
+                    return HTMLResponse(
+                        content=self._get_unauthorized_html("Erro interno de autenticação"),
+                        status_code=500
+                    )
+                
+                logger.info(f"Acesso autorizado ao iframe com session ID: {session_id}")
+                
+            except Exception as e:
+                logger.error(f"Erro no middleware de autenticação: {str(e)}")
                 return HTMLResponse(
-                    content=self._get_unauthorized_html("Session ID obrigatório"),
-                    status_code=401
+                    content=self._get_unauthorized_html("Erro interno de autenticação"),
+                    status_code=500
                 )
-            
-            # Limpa sessions expiradas
-            cleanup_expired_sessions()
-            
-            # Verifica se session existe
-            if session_id not in session_store:
-                logger.warning(f"Tentativa de acesso com session ID inválido: {session_id}")
-                return HTMLResponse(
-                    content=self._get_unauthorized_html("Session ID inválido ou expirado"),
-                    status_code=401
-                )
-            
-            session_data = session_store[session_id]
-            
-            # Verifica se session já foi usada
-            if session_data['used']:
-                logger.warning(f"Tentativa de reutilizar session ID: {session_id}")
-                return HTMLResponse(
-                    content=self._get_unauthorized_html("Session ID já foi utilizado"),
-                    status_code=401
-                )
-            
-            # Verifica se session está expirada
-            if datetime.now() > session_data['expires_at']:
-                del session_store[session_id]
-                logger.warning(f"Session ID expirado: {session_id}")
-                return HTMLResponse(
-                    content=self._get_unauthorized_html("Session ID expirado"),
-                    status_code=401
-                )
-            
-            # Marca session como usada
-            session_data['used'] = True
-            session_data['iframe_opened'] = True
-            session_data['used_at'] = datetime.now()
-            
-            logger.info(f"Acesso autorizado ao iframe com session ID: {session_id}")
         
         # Continua com a requisição normal
         response = await call_next(request)
@@ -148,6 +170,14 @@ class IframeAuthMiddleware(BaseHTTPMiddleware):
                     color: white;
                     text-decoration: none;
                 }}
+                .storage-info {{
+                    color: #888;
+                    font-size: 0.9rem;
+                    margin-top: 1rem;
+                    padding: 10px;
+                    background: #f8f9fa;
+                    border-radius: 8px;
+                }}
             </style>
         </head>
         <body>
@@ -156,6 +186,9 @@ class IframeAuthMiddleware(BaseHTTPMiddleware):
                 <h1 class="error-title">Acesso Negado</h1>
                 <p class="error-message">{message}</p>
                 <p class="error-message">Para acessar o iframe, você precisa de um session ID válido.</p>
+                <div class="storage-info">
+                    ⚡ Autenticação baseada em Redis para melhor performance e escalabilidade
+                </div>
                 <a href="/" class="btn-home">Voltar ao Início</a>
             </div>
         </body>
